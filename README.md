@@ -2,7 +2,7 @@
 
 Team:
 
-* Person 1 - Which microservice?
+* Daniel Hernandez -Sales
 * Kevin - Services
 
 ## Design
