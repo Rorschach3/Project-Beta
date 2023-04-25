@@ -22,55 +22,31 @@ function AutomobileForm(props) {
         }
     }
     const [color, setColor] = useState('');
-        const handlColorChange = (event) => {
-            const value = event.target.value;
-            setColor(value)
-        }
+        const handleColorChange = (event) => {
+			const value = event.target.value
+			setColor(value)
+		}
 	return (
-		<div className="row">
-			<div className="offset-3 col-6">
-				<div className="shadow p-4 mt-4">
-					<h1>Create an automobile</h1>
-					<form onSubmit={handleSubmit} id="create-automobile-form">
-						<div className="form-floating mb-3">
-							<input
-								onChange={(e) => {
-									setColor(e.target.value)
-								}}
-								onFocus={() => {
-									setErrorMessage('')
-								}}
-								value={color}
-								placeholder="Color"
-								required
-								type="text"
-								name="color"
-								id="color"
-								className="form-control"
-							/>
-							<label htmlFor="color">Color</label>
-						</div>
-						<div className="form-floating mb-3">
-							<input
-								onChange={(e) => {
-									setYear(e.target.value)
-								}}
-								onFocus={() => {
-									setErrorMessage('')
-								}}
-								value={year}
-								placeholder="Year"
-								required
-								type="number"
-								name="year"
-								id="year"
-								className="form-control"
-							/>
-							<label htmlFor="year">Year</label>
-						</div>
-						<button className="btn btn-primary">Create</button>
-					</form>
-				</div>
+		<div className="shadow p-4 mt-4">
+			<h1>Create an automobile</h1>
+			<div>
+				{' '}
+				className="form-floating-mb-3"
+				<form onSubmit={handleSubmit} id="create-automobile-form">
+					<div className="form-floating mb-3">
+						<input
+							onChange={handleColorChange}
+							placeholder="Color"
+							required
+							type="text"
+							name="color"
+							id="color"
+							className="form-control"
+						/>
+						<label htmlFor="color">Color</label>
+					</div>
+					<button className="btn btn-primary">Create</button>
+				</form>
 			</div>
 		</div>
 	)
