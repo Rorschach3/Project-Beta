@@ -23,6 +23,7 @@ function App(props) {
             <Route path="" element={<AutomobileList automobiles={props.automobiles} />} />
             <Route path="new" element={<AutomobileForm />} />
         </Route>
+        <Route path="vehicles"></Route>
       </Routes>
       </div>
     </BrowserRouter>
