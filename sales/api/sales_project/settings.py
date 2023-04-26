@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-=0#lozw6m8fg901fvz9(b-$@y*_3)v9tgbo9x2se(ezga0)(mj
 DEBUG = True
 
 INSTALLED_APPS = [
+    'sales_rest.apps.SalesRestConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,7 +45,7 @@ MIDDLEWARE = [
 ]
 
 ALLOWED_HOSTS = [
-    "localhost",
+    "localhost","127.0.0.1",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
