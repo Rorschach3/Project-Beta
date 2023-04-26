@@ -23,10 +23,10 @@ function App(props) {
           <Route path="automobiles">
             <Route path="" element={<AutomobileList automobiles={props.automobiles} />} />
             <Route path="new" element={<AutomobileForm />} />
-        </Route>
-        <Route path="models">
-        <Route path="" element={<ModelList models={props.models} />} />
-        </Route>
+          </Route>
+          <Route path="models">
+         <Route path="" element={<ModelList models={props.models} />} />
+          </Route>
 
       </Routes>
       </div>
