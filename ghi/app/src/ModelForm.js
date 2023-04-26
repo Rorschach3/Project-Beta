@@ -44,20 +44,17 @@ return (
         <header> Create A Vehicle</header>
             <form onSubmit={handleSubmit} id="create-manufacturer-form">
             <div className="form-floating mb-3">
-            <h1>
                 <label htmlFor="name">Name</label>
                 <input onChange={handleName} placeholder="Name" required type="text" name="name" id="name" className="form-control"/>
-            </h1>
-                <h2>
+                </div>
+                <div className="form-floating mb-3">
                 <label htmlFor="picture_url">Picture Url</label>
                 <input onChange={handlePictureUrl} placeholder="Picture Url" required type="text" name="picture_url" id="picture_url" className="form-control"/>
-                </h2>
-                <h3>
+                </div>
+                <div className="form-floating mb-3">
                 <label htmlFor="manufacturer">Manufacturer</label>
                 <input onChange={handleManufacturer} placeholder="Manufacturer" required type="text" name="picture_url" id="picture_url" className="form-control"/>
-                
-                </h3>
-            </div>
+                </div>
             <button className="btn btn-primary">Create</button>
             </form>
         </div>
