@@ -3,8 +3,13 @@ import React, { useState } from 'react'
 function AutomobileForm(props) {
 	const handleSubmit = async (event) => {
 		event.preventDefault()
-		const data = {}
-		data.color = color
+		const data = {
+		data.color = color,
+		data.year = year,
+		data.vin = vin,
+		model_id: model
+	}
+
 
 		const url = 'http://localhost:8100/api/automobiles/'
 		const fetchConfig = {
@@ -31,6 +36,7 @@ function AutomobileForm(props) {
 			<form onSubmit={handleSubmit} id="create automobile form">
 				<div className="form-floating mb-3">
 					{' '}
+					<div>
 					<button className="btn btn-primary">Create</button>
 					<input
 						onChange={handleColorChange}
