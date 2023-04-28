@@ -26,6 +26,9 @@ function AutomobileForm(props) {
 		setColor(value)
 	}
 	return (
+		<div className="ror">
+			div className
+		</div>
 		<div className="shadow p-4 mt-4">
 			<h1>Create an automobile</h1>
 			<form onSubmit={handleSubmit} id="create automobile form">

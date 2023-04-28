@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import AutomobileVO, Sale, SalesPerson, Customer
+from .models import AutomobileVO, Sale, Salesperson, Customer
 import json
 from common.json import ModelEncoder
 from django.http import JsonResponse
@@ -19,12 +19,13 @@ class AutomobileVOEncoder(ModelEncoder):
     ]
 
 
-class SalesPersonEncoder(ModelEncoder):
-    model = SalesPerson
+class SalespersonEncoder(ModelEncoder):
+    model = Salesperson
     properties = [
         "id",
-        "name",
-        "employee_number",
+        "first_name",
+        "last_name",
+        "employee_id",
     ]
 
 
@@ -48,7 +49,7 @@ class SalesEncoder(ModelEncoder):
         "customer",
     ]
     encoders = {
-        "sales_person": SalesPersonEncoder(),
+        "sales_person": SalespersonEncoder(),
         "customer": CustomerEncoder(),
         "automobile": AutomobileVOEncoder(),
     }
@@ -57,14 +58,14 @@ class SalesEncoder(ModelEncoder):
 @require_http_methods(["GET", "DELETE"])
 def api_sales_person(request, id):
     if request.method == "GET":
-        sales_person = SalesPerson.objects.get(id=id)
+        salesperson = Salesperson.objects.get(id=id)
         return JsonResponse(
-            sales_person,
-            encoder=SalesPersonEncoder,
+            salesperson,
+            encoder=SalespersonEncoder,
             safe=False,
         )
     else:  # DELETE Request
-        count, _ = SalesPerson.objects.filter(id=id).delete()
+        count, _ = Salesperson.objects.filter(id=id).delete()
         return JsonResponse(
             {"delete": count > 0}
         )
@@ -73,21 +74,21 @@ def api_sales_person(request, id):
 @require_http_methods(["GET", "POST"])
 def api_sales_persons(request):
     if request.method == "GET":
-        sales_person = SalesPerson.objects.all()
+        sales_person = Salesperson.objects.all()
         return JsonResponse(
             {"sales_person": sales_person},
-            encoder=SalesPersonEncoder
+            encoder=SalespersonEncoder
         )
     else:
         try:
             content = json.loads(request.body)
-            sales_person = SalesPerson.objects.create(**content)
+            sales_person = Salesperson.objects.create(**content)
             return JsonResponse(
                 sales_person,
-                encoder=SalesPersonEncoder,
+                encoder=SalespersonEncoder,
                 safe=False,
             )
-        except SalesPerson.DoesNotExist:
+        except Salesperson.DoesNotExist:
             return JsonResponse(
                 {"message": "Invalid sales person id"},
                 status=400,
@@ -97,9 +98,9 @@ def api_sales_persons(request):
 @require_http_methods(["GET", "DELETE"])
 def api_customer(request, id):
     if request.method == "GET":
-        customer = Customer.objects.get(id=id)
+        customers = Customer.objects.get(id=id)
         return JsonResponse(
-            customer,
+            customers,
             encoder=CustomerEncoder,
             safe=False,
         )
@@ -133,7 +134,7 @@ def api_customers(request):
 
 
 @require_http_methods(["GET", "DELETE"])
-def api_sales(request, id):
+def api_sale(request, id):
     if request.method == "GET":
         sale = Sale.objects.get(id=id)
         return JsonResponse(
