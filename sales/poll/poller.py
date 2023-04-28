@@ -16,7 +16,7 @@ from sales_rest.models import AutomobileVO
 
 
 def get_data():
-    response = requests.get("inventory-api:8000/api/automobiles/")  # Filler URL
+    response = requests.get("inventory-api:8000/api/automobiles/")  #  URL?
     content = json.loads(response.content)
     for i in content['autos']:
         AutomobileVO.objects.updates_or_create(
