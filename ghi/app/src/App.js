@@ -29,13 +29,11 @@ function App(props) {
           <Route path="models">
          <Route path="" element={<ModelList models={props.models} />} />
          <Route path="new" element={<ModelForm />} />
+         </Route>
          <Route path="technicians">
-						<Route index element={<TechnicianList />} />
+						<Route path="" element={<TechnicianList />} />
 						<Route path="new" element={<TechnicianForm />} />
 					</Route>
-
-          </Route>
-
       </Routes>
       </div>
     </BrowserRouter>
