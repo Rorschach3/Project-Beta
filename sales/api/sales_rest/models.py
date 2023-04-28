@@ -13,9 +13,10 @@ class AutomobileVO(models.Model):
         return self.vin
 
 
-class SalesPerson(models.Model):
-    name = models.CharField(max_length=200)
-    employee_number = models.PositiveSmallIntegerField(unique=True)
+class Salesperson(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    employee_id = models.PositiveSmallIntegerField(unique=True)
 
     def get_api_url(self):
         return reverse("api_sales_person", kwargs={"pk": self.pk})
@@ -25,9 +26,10 @@ class SalesPerson(models.Model):
 
 
 class Customer(models.Model):
-    name = models.CharField(max_length=200)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
     address = models.CharField(max_length=200)
-    phone = models.CharField(max_length=20)
+    phone_number = models.CharField(max_length=20)
 
     def __str__(self):
         return self.name
@@ -48,8 +50,8 @@ class Sale(models.Model):
         on_delete=models.PROTECT,
     )
 
-    sales_person = models.ForeignKey(
-        SalesPerson,
+    salesperson = models.ForeignKey(
+        Salesperson,
         related_name="sales",
         on_delete=models.PROTECT,
     )
@@ -58,4 +60,4 @@ class Sale(models.Model):
         return reverse("api_sales", kwargs={"pk": self.pk})
 
     def __str__(self):
-        return f"{self.sales_person} {self.automobile} ${self.price}"
+        return f"{self.salesperson} {self.automobile} ${self.price}"
