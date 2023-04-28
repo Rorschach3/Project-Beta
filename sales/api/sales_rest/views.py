@@ -100,9 +100,8 @@ def api_customer(request, id):
     if request.method == "GET":
         customers = Customer.objects.get(id=id)
         return JsonResponse(
-            customers,
+            {"customers": customers},
             encoder=CustomerEncoder,
-            safe=False,
         )
     else:
         count, _ = Customer.objects.filter(id=id).delete()
