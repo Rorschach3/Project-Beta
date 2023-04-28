@@ -3,6 +3,7 @@ from .models import AutomobileVO
 
 # Register your models here.
 
+
 @admin.register(AutomobileVO)
 class AutomobileVOAdmin(admin.ModelAdmin):
-    list_display = ['id', 'year', 'vin', 'color', 'href']
+    list_display = ['vin']
