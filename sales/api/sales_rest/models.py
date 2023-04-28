@@ -19,7 +19,7 @@ class Salesperson(models.Model):
     employee_id = models.PositiveSmallIntegerField(unique=True)
 
     def get_api_url(self):
-        return reverse("api_sales_person", kwargs={"pk": self.pk})
+        return reverse("api_salesperson", kwargs={"pk": self.pk})
 
     def __str__(self):
         return self.name

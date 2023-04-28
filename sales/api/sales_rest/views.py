@@ -56,7 +56,7 @@ class SalesEncoder(ModelEncoder):
 
 
 @require_http_methods(["GET", "DELETE"])
-def api_sales_person(request, id):
+def api_salesperson(request, id):
     if request.method == "GET":
         salesperson = Salesperson.objects.get(id=id)
         return JsonResponse(
@@ -72,7 +72,7 @@ def api_sales_person(request, id):
 
 
 @require_http_methods(["GET", "POST"])
-def api_sales_persons(request):
+def api_salespersons(request):
     if request.method == "GET":
         sales_person = Salesperson.objects.all()
         return JsonResponse(
