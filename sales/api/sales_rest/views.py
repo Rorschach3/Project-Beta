@@ -33,7 +33,8 @@ class CustomerEncoder(ModelEncoder):
     model = Customer
     properties = [
         "id",
-        "name",
+        "first_name",
+        "last_name",
         "address",
         "phone",
     ]
@@ -100,8 +101,9 @@ def api_customer(request, id):
     if request.method == "GET":
         customers = Customer.objects.get(id=id)
         return JsonResponse(
-            {"customers": customers},
+            customers,
             encoder=CustomerEncoder,
+            safe=False,
         )
     else:
         count, _ = Customer.objects.filter(id=id).delete()
@@ -116,7 +118,7 @@ def api_customers(request):
             {"customers": customers},
             encoder=CustomerEncoder
         )
-    else:
+    else:  # POST Request
         try:
             content = json.loads(request.body)
             customer = Customer.objects.create(**content)
