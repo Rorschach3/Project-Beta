@@ -53,6 +53,12 @@ function Nav() {
 								Create Models
 							</NavLink>
 						</li>
+						<li className="nav-item">
+              				<NavLink className="nav-link" to="/technicians">Technicians</NavLink>
+							 </li>
+            			<li className="nav-item">
+              			<NavLink className="nav-link"  to="/technicians/new">Create Technician</NavLink>
+            </li>
 					</ul>
 				</div>
 			</div>
