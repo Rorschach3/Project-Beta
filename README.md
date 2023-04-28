@@ -1,5 +1,4 @@
-
-## CarCar
+# CarCar
 
 
 CarCar, an application for managing aspects of an automobile dealership—specifically its inventory, service center, and sales.
@@ -100,8 +99,8 @@ Salespeople
 
 
 ```http
-  Customers
-  ```
+Customers
+```
 
 | Action         | Request  | Endpoint               |
 | :-----------     | :------- | :--------------------- |
@@ -115,11 +114,10 @@ Salespeople
 sales
 ```
 
-
 | Action         | Request  | Endpoint               |
 | :-----------     | :------- | :--------------------- |
 | List sales |  `GET`   |  `/api/sales/`   |
-| Create sale |  `POST`   |  `/api/sales/`   |
+| Record new sale |  `POST`   |  `/api/sales/`   |
 | Delete sale |  `DELETE`   |  `/api/sales/id/` |
 
 

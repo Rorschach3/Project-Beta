@@ -51,4 +51,4 @@ class Sale(models.Model):
     )
     
     def __str__(self):
-        return f"Sale #{self.pk} - {self.automobile.vin} by {self.salesperson} to {self.customer}"
+        return f"{self.salesperson} {self.automobile} ${self.price}"
