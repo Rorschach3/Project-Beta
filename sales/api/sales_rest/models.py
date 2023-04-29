@@ -26,7 +26,7 @@ class Salesperson(models.Model):
     employee_id = models.PositiveSmallIntegerField(unique=True)
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"first name: {self.first_name} last name: {self.last_name} employee id: {self.employee_id}"
 
 
 class Sale(models.Model):
@@ -50,6 +50,6 @@ class Sale(models.Model):
         on_delete=models.CASCADE,
         null=True
     )
-    
+
     def __str__(self):
         return f"{self.salesperson} {self.automobile} ${self.price}"

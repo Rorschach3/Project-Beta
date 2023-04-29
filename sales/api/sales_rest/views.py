@@ -10,47 +10,38 @@ from django.views.decorators.http import require_http_methods
 
 class AutomobileVOEncoder(ModelEncoder):
     model = AutomobileVO
-    properties = [
-        "href",
-        "id",
-        "vin",
-        "year",
-        "color",
-    ]
+    properties = ["vin", "import_href"]
 
 
 class SalespersonEncoder(ModelEncoder):
     model = Salesperson
     properties = [
-        "id",
         "first_name",
         "last_name",
-        "employee_id",
+        "employee_id"
     ]
 
 
 class CustomerEncoder(ModelEncoder):
     model = Customer
     properties = [
-        "id",
         "first_name",
         "last_name",
         "address",
-        "phone",
+        "phone_number"
     ]
 
 
 class SalesEncoder(ModelEncoder):
     model = Sale
     properties = [
-        "id",
-        "sales_person",
+        "salesperson",
         "automobile",
         "price",
         "customer",
     ]
     encoders = {
-        "sales_person": SalespersonEncoder(),
+        "salesperson": SalespersonEncoder(),
         "customer": CustomerEncoder(),
         "automobile": AutomobileVOEncoder(),
     }
@@ -75,25 +66,19 @@ def api_salesperson(request, id):
 @require_http_methods(["GET", "POST"])
 def api_salespersons(request):
     if request.method == "GET":
-        sales_person = Salesperson.objects.all()
+        salesperson = Salesperson.objects.all()
         return JsonResponse(
-            {"sales_person": sales_person},
-            encoder=SalespersonEncoder
+            {"salesperson": salesperson},
+            encoder=SalespersonEncoder,
         )
     else:
-        try:
-            content = json.loads(request.body)
-            sales_person = Salesperson.objects.create(**content)
-            return JsonResponse(
-                sales_person,
-                encoder=SalespersonEncoder,
-                safe=False,
-            )
-        except Salesperson.DoesNotExist:
-            return JsonResponse(
-                {"message": "Invalid sales person id"},
-                status=400,
-            )
+        content = json.loads(request.body)
+        salesperson = Salesperson.objects.create(**content)
+        return JsonResponse(
+            salesperson,
+            encoder=SalespersonEncoder,
+            safe=False,
+        )
 
 
 @require_http_methods(["GET", "DELETE"])
@@ -157,16 +142,45 @@ def api_sales(request):
             encoder=SalesEncoder
         )
     else:
+        content = json.loads(request.body)
+
         try:
-            content = json.loads(request.body)
-            sales = content["sales"]
-            sales = Sale.objects.get(id=id)
-            content["sales"] = sales
-        except Sale.DoesNotExist:
+            automobile = AutomobileVO.objects.get(vin=content["automobile"])
+            content["automobile"] = automobile
+
+        except AutomobileVO.DoesNotExist:
             return JsonResponse(
-                {"message": "Invalid sales id"},
+                {"message": "No Vin or Vin does not exist."},
+                status=404,
+            )
+        try:
+
+            salesperson = Salesperson.objects.get(employee_id=content["salesperson"])
+            content["salesperson"] = salesperson
+
+        except Salesperson.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invalid salesperson employee ID."},
                 status=400,
             )
+
+        try:
+            customer = Customer.objects.get(id=content["customer"])
+            content["customer"] = customer
+
+        except Customer.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invalid customer id."},
+                status=400,
+            )
+
+        sale = Sale.objects.create(**content)
+        return JsonResponse(
+            sale,
+            encoder=SalesEncoder,
+            safe=False,
+        )
+
 
 # @require_http_methods(["GET", "POST"])
 # def api_sales(request, sales_person_id=None):
