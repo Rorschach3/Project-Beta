@@ -99,9 +99,9 @@ Salespeople
 
 
 
-![List Salespeople](images\images\List Salespeople.png)
-![Create Salespeople](images\images\Create Salesperson.png)
-![Delete Salespeople](images\images\Delete Salesperson.png)
+![List Salespeople](images/List Salespeople.png)
+![Create Salespeople](images/Create Salesperson.png)
+![Delete Salespeople](images/Delete Salesperson.png)
 
 
 ```http
@@ -120,9 +120,9 @@ Customers
 | Delete customer |  `DELETE`   |  `8090/api/automobiles/id/` |
 
 
-![List Customers](images\images\List Customers.png)
-![Create Customer](images\images\Create Customer.png)
-![Delete Customer](images\images\Delete Customer.png)
+![List Customers](images/List Customers.png)
+![Create Customer](images/Create Customer.png)
+![Delete Customer](images/Delete Customer.png)
 
 ```http
 Return Response:
@@ -138,9 +138,9 @@ sales
 | Record new sale |  `POST`   |  `8090/api/sales/`   |
 | Delete sale |  `DELETE`   |  `8090/api/sales/id/` |
 
-![Show Sale](images\images\Record New Sale.png)
-![Create Sales](images\images\Create Sales.png)
-![Delete Sale](images\images\Delete Salepng)
+![Show Sale](images/Record New Sale.png)
+![Create Sales](images/Create Sales.png)
+![Delete Sale](images/Delete Salepng)
 
 ```http
 Return Response:
