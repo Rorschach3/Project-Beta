@@ -106,7 +106,8 @@ Salespeople
 
 ```http
 return Response:
-"Firsname", "LastName", "Employee ID"```
+"Firsname", "LastName", "Employee ID"
+```
 
 
 ```http
@@ -126,7 +127,8 @@ Customers
 
 ```http
 Return Response:
-"First Namne", "Last Name", "Phone Number", "Address"```
+"First Namne", "Last Name", "Phone Number", "Address"
+```
 
 ```http
 sales
@@ -144,4 +146,5 @@ sales
 
 ```http
 Return Response:
-Automobile VIN, Salersperson, Customer, Price```
+Automobile VIN, Salersperson, Customer, Price
+```
