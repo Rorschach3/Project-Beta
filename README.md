@@ -9,7 +9,7 @@ CarCar, an application for managing aspects of an automobile dealership—specif
 * Kevin C. - Services
 ## Design
 
-![CarCar Excalidraw](images\Excalidraw CarCar.png "Excalidraw CarCar")
+![CarCar Excalidraw](images/Excalidraw CarCar.png)
 
 
 ## API Reference
