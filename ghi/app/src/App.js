@@ -9,7 +9,8 @@ import ModelList from './ModelList';
 import ModelForm from './ModelForm';
 import TechnicianForm from './TechnicianForm';
 import TechnicianList from './TechnicianList';
-import CustomerForm from './CustomerForm'
+import ServiceAppointmentForm from './AppointmentForm';
+import ServiceList from "./ServiceList";import CustomerForm from './CustomerForm'
 import CustomerList from './CustomerList'
 import SalesPersonForm from './SalesPersonForm'
 import SalesPersonHistory from './SalespersonHistory'
@@ -17,78 +18,38 @@ import SaleForm from './SalesForm'
 import SaleList from './SalesList'
 
 function App(props) {
-	return (
-		<BrowserRouter>
-			<Nav />
-			<div className="container">
-				<Route>
-					<Route path="/" element={<MainPage />} />
-					<Route path="manufacturers">
-						<Route
-							path=""
-							element={
-								<ManufacturerList
-									manufacturers={props.manufacturers}
-								/>
-							}
-						/>
-						<Route path="new" element={<ManufacturerForm />} />
+  return (
+
+    <BrowserRouter>
+      <Nav />
+      <div className="container">
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="manufacturers">
+            <Route path="" element={<ManufacturerList manufacturers={props.manufacturers} />} />
+            <Route path="new" element={<ManufacturerForm />} />
+            </Route>
+          <Route path="automobiles">
+            <Route path="" element={<AutomobileList automobiles={props.automobiles} />} />
+            <Route path="new" element={<AutomobileForm />} />
+          </Route>
+          <Route path="models">
+         <Route path="" element={<ModelList models={props.models} />} />
+         <Route path="new" element={<ModelForm />} />
+         </Route>
+         <Route path="technicians">
+						<Route path="" element={<TechnicianList />} />
+						<Route path="new" element={<TechnicianForm />} />
 					</Route>
-					<Route path="automobiles">
-						<Route
-							path=""
-							element={
-								<AutomobileList
-									automobiles={props.automobiles}
-								/>
-							}
-						/>
-						<Route path="new" element={<AutomobileForm />} />
-						<Route path="models">
-							<Route
-								path=""
-								element={<ModelList models={props.models} />}
-							/>
-							<Route path="new" element={<ModelForm />} />
-							<Route path="technicians">
-								<Route index element={<TechnicianList />} />
-								<Route
-									path="new"
-									element={<TechnicianForm />}
-								/>
-							</Route>
-							<Route path="customers">
-								<Route index element={<CustomerList />} />
-								<Route
-									path="customers"
-									element={<CustomerForm />}
-								/>
-							</Route>
-							<Route path="sales">
-								<Route index element={<SalesList />} />
-								<Route path="sales" element={<SalesForm />} />
-							</Route>
-							<Route path="new" element={<CustomerForm />} />
-							<Route path="salespeople">
-								<Route
-									index
-									element={
-										<SalesPersonHistory
-											models={props.sales}
-										/>
-									}
-								/>
-								<Route
-									path="new"
-									element={<SalespersonForm />}
-								/>
-							</Route>
-						</Route>
+          <Route path="appointments">
+          <Route path="" element={<ServiceList />} />
+          {/* <Route path="history" element={<ServiceHistoryList />} /> */}
+						<Route path="new" element={<ServiceAppointmentForm />} />
 					</Route>
-				</Route>
-			</div>
-		</BrowserRouter>
-	)
+      </Routes>
+      </div>
+    </BrowserRouter>
+  );
 }
 
 export default App;
