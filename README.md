@@ -99,16 +99,6 @@ Salespeople
 
 
 
-![List Salespeople](images\List Salespeople.png)
-![Create Salespeople](images\Create Salesperson.png)
-![Delete Salespeople](images\Delete Salesperson.png)
-
-
-```http
-return Response:
-"Firsname", "LastName", "Employee ID"```
-
-
 ```http
 Customers
 ```
@@ -120,13 +110,6 @@ Customers
 | Delete customer |  `DELETE`   |  `8090/api/automobiles/id/` |
 
 
-![List Customers](images\List Customers.png)
-![Create Customer](images\Create Customer.png)
-![Delete Customer](images\Delete Customer.png)
-
-```http
-Return Response:
-"First Namne", "Last Name", "Phone Number", "Address"```
 
 ```http
 sales
@@ -138,10 +121,5 @@ sales
 | Record new sale |  `POST`   |  `8090/api/sales/`   |
 | Delete sale |  `DELETE`   |  `8090/api/sales/id/` |
 
-![Show Sale](images\Record New Sale.png)
-![Create Sales](images\Create Sales.png)
-![Delete Sale](images\Delete Salepng)
 
-```http
-Return Response:
-Automobile VIN, Salersperson, Customer, Price```
+
