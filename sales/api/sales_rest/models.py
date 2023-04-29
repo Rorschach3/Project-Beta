@@ -7,21 +7,22 @@ class AutomobileVO(models.Model):
     vin = models.CharField(max_length=17, unique=True)
 
     def __str__(self):
-        return self.vin
+        return self.vinA
 
 
 class Customer(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    address = models.CharField(max_length=200)
-    phone_number = models.CharField(max_length=10)
+    first_name = models.CharField(max_length=50, null=True)
+    last_name = models.CharField(max_length=50, null=True)
+    address = models.CharField(max_length=200, null=True)
+    phone_number = models.CharField(max_length=20, null=True)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
+
 class Salesperson(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
+    first_name = models.CharField(max_length=50, null=True)
+    last_name = models.CharField(max_length=50, null=True)
     employee_id = models.PositiveSmallIntegerField(unique=True)
 
     def __str__(self):
@@ -46,7 +47,8 @@ class Sale(models.Model):
     salesperson = models.ForeignKey(
         Salesperson,
         related_name="sales",
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        null=True
     )
     
     def __str__(self):

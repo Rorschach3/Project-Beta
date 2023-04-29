@@ -21,11 +21,11 @@ Automobiles
 
 | Action         | Request  | Endpoint               |
 | :-----------     | :------- | :--------------------- |
-| List Automobiles |  `GET`   |  `/api/automobiles/`   |
-| Create Automobile |  `POST`   |  `/api/automobiles`   |
-| Get Automobile | `PUT` | `/api/automobiles/id/`|
-| Update VehicleModel |  `PUT`   |  `/api/models/id/` |
-| Delete VehicleModel |  `DELETE`   |  `/api/models/id/` |
+| List Automobiles |  `GET`   |  `8100/api/automobiles/`   |
+| Create Automobile |  `POST`   |  `8100/api/automobiles`   |
+| Get Automobile    | `PUT`   | `8100/api/automobiles/vin/`|
+| Update Automobile |  `PUT`   |  `8100/api/automobiles/vin/` |
+| Delete Automobile |  `DELETE` |  `8100/api/automobiles/vin/` |
 
 
 
@@ -36,11 +36,11 @@ Manufacturers
 
 | Action         | Request  | Endpoint               |
 | :-----------     | :------- | :--------------------- |
-| List Manufacturers |  `GET`   |  `/api/manufacturers/`   |
-| Create Manufacturer |  `POST`   |  `/api/manufacturers`   |
-| Get Manufacturer |  `GET`   |  `/api/manufacturers/id/` |
-| Update Manufacturer |  `PUT` | `/api/manufacturers/id/` |
-| Delete Manufacturer |  `DELETE`   |  `/api/manufacturers/id/` |
+| List Manufacturers |  `GET`   |  `8100/api/manufacturers/`   |
+| Create Manufacturer |  `POST`   |  `8100/api/manufacturers`   |
+| Get Manufacturer |  `GET`   |  `8100/api/manufacturers/id/` |
+| Update Manufacturer |  `PUT` | `8100/api/manufacturers/id/` |
+| Delete Manufacturer |  `DELETE`   |  `8100/api/manufacturers/id/` |
 
 
 ```http
@@ -50,11 +50,11 @@ VehicleModels
 
 | Action         | Request  | Endpoint               |
 | :-----------  | :------- | :--------------------- |
-| List VehicleModels    |  `GET`   |  `/api/models/`   |
-| Create VehicleModel |  `POST`   |  `/api/models`   |
-| GET VehicleModel |  `GET`   |  `/api/models/id/` |
-| Update VehicleModel |  `PUT`   |  `/api/models/id/` |
-| Delete VehicleModel |  `DELETE`   |  `/api/models/id/` |
+| List VehicleModels    |  `GET`   |  `8100/api/models/`   |
+| Create VehicleModel |  `POST`   |  `8100/api/models`   |
+| GET VehicleModel |  `GET`   |  `8100/api/models/id/` |
+| Update VehicleModel |  `PUT`   |  `8100/api/models/id/` |
+| Delete VehicleModel |  `DELETE`   |  `8100/api/models/id/` |
 
 
 Automobile Services
@@ -92,9 +92,9 @@ Salespeople
 
 | Action       | Request  |Endpoint  |
 | :--------   | :------- | :-------------------------------- |
-| List salespeople | `GET` | `/api/salespeople/` |
-| Create salespoeple| `POST` |`api/salespeople/` |
-| Delete salespeople| `DELETE` | `api/salespeople/id/` |
+| List salespeople | `GET` | `8090/api/salespeople/` |
+| Create salespoeple| `POST` |`809api/salespeople/` |
+| Delete salespeople| `DELETE` | `8090/api/salespeople/id/` |
 
 
 
@@ -104,9 +104,9 @@ Customers
 
 | Action         | Request  | Endpoint               |
 | :-----------     | :------- | :--------------------- |
-| List customers |  `GET`   |  `/api/automobiles/`   |
-| Create customer |  `POST`   |  `/api/automobiles`   |
-| Delete customer |  `DELETE`   |  `/api/automobiles/id/` |
+| List customers |  `GET`   |  `8090/api/automobiles/`   |
+| Create customer |  `POST`   |  `8090/api/automobiles`   |
+| Delete customer |  `DELETE`   |  `8090/api/automobiles/id/` |
 
 
 
@@ -116,9 +116,9 @@ sales
 
 | Action         | Request  | Endpoint               |
 | :-----------     | :------- | :--------------------- |
-| List sales |  `GET`   |  `/api/sales/`   |
-| Record new sale |  `POST`   |  `/api/sales/`   |
-| Delete sale |  `DELETE`   |  `/api/sales/id/` |
+| List sales |  `GET`   |  `8090/api/sales/`   |
+| Record new sale |  `POST`   |  `8090/api/sales/`   |
+| Delete sale |  `DELETE`   |  `8090/api/sales/id/` |
 
 
 
