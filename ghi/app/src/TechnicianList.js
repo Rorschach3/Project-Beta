@@ -23,12 +23,12 @@ function TechnicianList() {
           }
       
           try {
-            let response = await fetch(url, fetchConfig);
+            let response1 = await fetch(url, fetchConfig);
       
-            response = await fetch("http://localhost:8080/api/technicians");
+            response1 = await fetch("http://localhost:8080/api/technicians");
       
-            if (response.ok) {
-              const data = await response.json()
+            if (response1.ok) {
+              const data = await response1.json()
               setTechnicians(data.technicians);
             }
           } catch (e) {

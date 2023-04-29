@@ -9,7 +9,8 @@ import ModelList from './ModelList';
 import ModelForm from './ModelForm';
 import TechnicianForm from './TechnicianForm';
 import TechnicianList from './TechnicianList';
-
+import ServiceAppointmentForm from './AppointmentForm';
+import ServiceList from "./ServiceList";
 function App(props) {
   return (
 
@@ -33,6 +34,11 @@ function App(props) {
          <Route path="technicians">
 						<Route path="" element={<TechnicianList />} />
 						<Route path="new" element={<TechnicianForm />} />
+					</Route>
+          <Route path="appointments">
+          <Route path="" element={<ServiceList />} />
+          {/* <Route path="history" element={<ServiceHistoryList />} /> */}
+						<Route path="new" element={<ServiceAppointmentForm />} />
 					</Route>
       </Routes>
       </div>
