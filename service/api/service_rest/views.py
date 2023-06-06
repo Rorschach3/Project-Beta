@@ -42,12 +42,18 @@ def api_list_technicians(request):
         )
     else:
         content = json.loads(request.body)
-        technician = Technician.objects.create(**content)
-        return JsonResponse(
-            technician,
-            encoder=TechnicianEncoder,
-            safe=False,
-        )
+        try:
+            technician = Technician.objects.create(**content)
+            return JsonResponse(
+                technician,
+                encoder=TechnicianEncoder,
+                safe=False,
+            )
+        except Technician.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invalid Technician Details"},
+                status=400,
+            )
 
 @require_http_methods(["DELETE"])
 def api_show_technician(request, id):
