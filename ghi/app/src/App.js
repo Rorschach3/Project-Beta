@@ -2,11 +2,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
 import Nav from './Nav';
 import AutoForm from './AutomobileForm';
-import AutosList from './AutomobileList';
+import AutosList from './AutomobilesList';
 import ManufacturerList from './ManufacturerList';
 import ManufacturerForm from './ManufacturerForm';
 import ModelForm from './ModelForm';
-import ModelsList from './AutomobileList';
+import ModelsList from './ModelsList';
 
 function App(props) {
   return (

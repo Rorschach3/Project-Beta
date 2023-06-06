@@ -1,15 +1,15 @@
 import { useEffect, useState} from 'react';
 
-function AutosList () {
-    const [autos, setAutos] = useState([]);
+function ModelsList () {
+    const [models, setModels] = useState([]);
 
     const fetchData = async () => {
-        const url = 'http://localhost:8100/api/automobiles/'
+        const url = 'http://localhost:8100/api/models/'
         const response = await fetch(url);
 
         if (response.ok) {
             const data = await response.json();
-            setAutos(data.autos)
+            setModels(data.models)
         }
     }
 
@@ -21,20 +21,18 @@ function AutosList () {
         <table className="table table-striped">
             <thead>
                 <tr>
-                    <th>Color</th>
-                    <th>Year</th>
-                    <th>Vin</th>
-                    <th>Model</th>
+                    <th>Manufacturer</th>
+                    <th>Name</th>
+                    <th>Picture</th>
                 </tr>
             </thead>
             <tbody>
-                {autos.map(auto => {
+                {models.map(model => {
                     return (
-                        <tr className='fw-bold' key={auto.id}>
-                            <td className='fs-3'>{ auto.color }</td>
-                            <td className='fs-3'>{ auto.year }</td>
-                            <td className='fs-3'>{ auto.vin }</td>
-                            <td className='fs-3'>{ auto.model.name }</td>
+                        <tr className='fw-bold' key={model.id}>
+                            <td className='fs-3'>{ model.manufacturer.name }</td>
+                            <td className='fs-3'>{ model.name }</td>
+                            <td><img className="img-thumbnail" height="200px" width="200px" src={ model.picture_url }/> </td>
                         </tr>
                     );
                 })}
@@ -44,4 +42,4 @@ function AutosList () {
 
 }
 
-export default AutosList;
+export default ModelsList;
