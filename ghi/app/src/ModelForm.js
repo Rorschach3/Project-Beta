@@ -1,8 +1,8 @@
 import React from 'react';
 import { useEffect, useState} from 'react';
 
-function AutoForm() {
-    const [manufacturers, setmanufacturers] = useState([]);
+function ModelForm() {
+    const [manufacturers, setManufacturers] = useState([]);
     const [name, setName] = useState("");
     const [picture, setPicture] = useState("");
     const [manufacturer, setManufacturer] = useState("");
@@ -22,10 +22,9 @@ function AutoForm() {
         const data = {};
         data.name = name;
         data.picture_url = picture;
-        data.vin = vin;
-        data.model_id = model;
+        data.manufacturer_id = manufacturer;
 
-        const postURL = 'http://localhost:8100/api/automobiles/';
+        const postURL = 'http://localhost:8100/api/models/';
         const fetchOptions = {
             method: "post",
             body: JSON.stringify(data),
@@ -34,55 +33,50 @@ function AutoForm() {
             },
         };
 
-        const autoResponse = await fetch(postURL, fetchOptions);
-        if (autoResponse.ok){
-            setColor('');
-            setYear('');
-            setVin('');
-            setModel('');
+        const modelResponse = await fetch(postURL, fetchOptions);
+        if (modelResponse.ok){
+            setName('');
+            setPicture('');
+            setManufacturer('');
         }
     }
 
-    const fetchModels = async () => {
-        const url = 'http://localhost:8100/api/models/';
-        const modelResponse = await fetch(url);
-        if (modelResponse.ok){
-            const modelData = await modelResponse.json();
-            setModels(modelData.models)
+    const fetchManufacturers = async () => {
+        const url = 'http://localhost:8100/api/manufacturers/';
+        const manufacturerResponse = await fetch(url);
+        if (manufacturerResponse.ok){
+            const manufacturerData = await manufacturerResponse.json();
+            setManufacturers(manufacturerData.manufacturers)
         } else {
             console.log("error")
         }
     }
 
     useEffect(() => {
-        fetchModels();
+        fetchManufacturers();
     }, []);
 
     return (
         <div className="row">
             <div className="offset-3 col-6">
                 <div className="shadow p-4 mt-4">
-                    <h1>Create a Automobile</h1>
-                    <form onSubmit={handleSubmit} id="create-shoe-form">
+                    <h1>Create a Vehicle Model</h1>
+                    <form onSubmit={handleSubmit} id="create-model-form">
                         <div className="form-floating mb-3">
-                            <input value={color} onChange={handleColor} placeholder="Color" required type="text" name="color" id="color" className="form-control" />
-                            <label htmlFor="color">Color</label>
+                            <input value={name} onChange={handleName} placeholder="Name" required type="text" name="name" id="name" className="form-control" />
+                            <label htmlFor="name">Name</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input value={year} onChange={handleYear} placeholder="Year" required type="number" name="year" id="year" className="form-control" />
-                            <label htmlFor="year">Year</label>
-                        </div>
-                        <div className="form-floating mb-3">
-                            <input value={vin} onChange={handleVin} placeholder="Vin" required type="number" name="vin" id="vin" className="form-control" />
-                            <label htmlFor="vin">Vin</label>
+                            <input value={picture} onChange={handlePicture} placeholder="Url" required type="url" name="picture" id="picture" className="form-control" />
+                            <label htmlFor="picture">Picture</label>
                         </div>
                         <div className="mb-3">
-                            <select value={model} onChange={handleModel} required name="model" id="model" className="form-select">
-                                <option value="">Choose a Model</option>
-                                {models.map(model => {
+                            <select value={manufacturer} onChange={handleManufacturer} required name="manufacturer" id="manufacturer" className="form-select">
+                                <option value="">Choose a Manufacturer</option>
+                                {manufacturers.map(manufacturer => {
                                     return (
-                                        <option value={model.id} key={model.id}>
-                                            {model.name}
+                                        <option value={manufacturer.id} key={manufacturer.id}>
+                                            {manufacturer.name}
                                         </option>
                                     );
                                 })}
@@ -96,4 +90,4 @@ function AutoForm() {
     )
 }
 
-export default AutoForm;
+export default ModelForm;
