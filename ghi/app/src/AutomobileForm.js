@@ -67,7 +67,7 @@ function AutoForm() {
             <div className="offset-3 col-6">
                 <div className="shadow p-4 mt-4">
                     <h1>Create a Automobile</h1>
-                    <form onSubmit={handleSubmit} id="create-shoe-form">
+                    <form onSubmit={handleSubmit} id="create-auto-form">
                         <div className="form-floating mb-3">
                             <input value={color} onChange={handleColor} placeholder="Color" required type="text" name="color" id="color" className="form-control" />
                             <label htmlFor="color">Color</label>

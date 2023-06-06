@@ -22,6 +22,8 @@ function Nav() {
                 <li><NavLink className="dropdown-item" aria-current="page" to="inventory/automobiles/new">Automobiles Form</NavLink></li>
                 <li><NavLink className="dropdown-item" aria-current="page" to="inventory/manufacturers">Manufacturer List</NavLink></li>
                 <li><NavLink className="dropdown-item" aria-current="page" to="inventory/manufacturers/new">Manufacturer Form</NavLink></li>
+                <li><NavLink className="dropdown-item" aria-current="page" to="inventory/models">Models List</NavLink></li>
+                <li><NavLink className="dropdown-item" aria-current="page" to="inventory/models/new">Model Form</NavLink></li>
               </ul>
             </li>
           </ul>
