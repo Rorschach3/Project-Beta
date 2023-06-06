@@ -25,8 +25,10 @@ class TechnicianEncoder(ModelEncoder):
 class AppointmentEncoder(ModelEncoder):
     model = Appointment
     properties = [
+        "id",
         "date_time",
         "reason",
+        "status",
         "vin",
         "customer",
         "technician",
@@ -81,7 +83,7 @@ def api_list_appointments(request):
             content["technician"] = technician
         except Technician.DoesNotExist:
             return JsonResponse(
-                {"message": "Invalid Technician name"},
+                {"message": "Invalid Technician ID"},
                 status=400
             )
         appointment = Appointment.objects.create(**content)
@@ -90,3 +92,40 @@ def api_list_appointments(request):
             encoder=AppointmentEncoder,
             safe=False,
         )
+
+@require_http_methods(["DELETE"])
+def api_list_appointment(request, id):
+    if request.method == "DELETE":
+        count, _ = Appointment.objects.filter(id=id).delete()
+        return JsonResponse({"deleted": count > 0})
+
+@require_http_methods({"PUT"})
+def api__cancel_appointment(request, id):
+    content = json.loads(request.body)
+    # try:
+    #     if "technician" in content:
+    #         technician = Technician.objects.get(id=content["technician"])
+    #         content["technician"] = technician
+    # except Technician.DoesNotExist:
+    #     return JsonResponse(
+    #         {"message": "Invalid Technician ID"},
+    #         status=400,
+    #     )
+    Appointment.objects.filter(id=id).update(**content)
+    appointment = Appointment.objects.get(id=id)
+    return JsonResponse(
+        appointment,
+        encoder=AppointmentEncoder,
+        safe=False
+    )
+
+@require_http_methods(["PUT"])
+def api_finish_appointment(request, id):
+    content = json.loads(request.body)
+    Appointment.objects.filter(id=id).update(**content)
+    appointment = Appointment.objects.get(id=id)
+    return JsonResponse(
+        appointment,
+        encoder=AppointmentEncoder,
+        safe=False
+    )

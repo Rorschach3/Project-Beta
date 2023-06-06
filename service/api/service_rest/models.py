@@ -17,10 +17,14 @@ class Technician(models.Model):
     def get_api_url(self):
         return reverse("api_list_technician", kwargs={"pk": self.pk})
 
+class StatusChoices(models.TextChoices):
+    finished = 'finished'
+    canceled = 'cancelled'
+
 class Appointment(models.Model):
     date_time = models.DateField(null=True)
     reason = models.TextField(max_length=100)
-    status = models.BooleanField(default=False)
+    status = models.CharField(default=False, max_length=100, choices=StatusChoices.choices)
     vin = models.CharField(max_length=17)
     customer = models.CharField(max_length=100)
 
