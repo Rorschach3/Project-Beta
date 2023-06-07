@@ -62,15 +62,15 @@ function AppointmentList () {
             <table className="table table-striped">
                 <thead>
                     <tr>
-                        <th>Customer</th>
-                        <th>Vin</th>
-                        <th>Reason</th>
-                        <th>Status</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>VIP Status</th>
-                        <th>Technician</th>
-                        <th>Change Status</th>
+                        <th className='fs-3'>Customer</th>
+                        <th className='fs-3'>Vin</th>
+                        <th className='fs-3'>Reason</th>
+                        <th className='fs-3'>Status</th>
+                        <th className='fs-3'>Date</th>
+                        <th className='fs-3'>Time</th>
+                        <th className='fs-3'>VIP Status</th>
+                        <th className='fs-3'>Technician</th>
+                        <th className='fs-3'>Change Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -79,16 +79,16 @@ function AppointmentList () {
                         const date = dateTime.toLocaleDateString()
                         const time = dateTime.toLocaleTimeString()
                         return (
-                            <tr className='fw-bold' key={appointment.id}>
-                                <td className='fs-3'>{ appointment.customer }</td>
-                                <td className='fs-3'>{ appointment.vin }</td>
-                                <td className='fs-3'>{ appointment.reason }</td>
-                                <td className='fs-3'>{ appointment.status }</td>
-                                <td className='fs-3'>{ time }</td>
-                                <td className='fs-3'>{ date }</td>
-                                <td className='fs-3'>{ appointment.is_vip ? 'Yes' : 'No' }</td>
+                            <tr className='fw-normal' key={appointment.id}>
+                                <td className='fs-4'>{ appointment.customer }</td>
+                                <td className='fs-4'>{ appointment.vin }</td>
+                                <td className='fs-4'>{ appointment.reason }</td>
+                                <td className='fs-4'>{ appointment.status }</td>
+                                <td className='fs-4'>{ time }</td>
+                                <td className='fs-4'>{ date }</td>
+                                <td className='fs-4'>{ appointment.is_vip ? 'Yes' : 'No' }</td>
                                 <td>
-                                    <div className='fs-3'></div>
+                                    <div className='fs-4'></div>
                                     <div>{appointment.technician.first_name}</div>
                                     <div>{appointment.technician.last_name}</div>
                                 </td>

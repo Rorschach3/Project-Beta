@@ -23,16 +23,16 @@ function TechnicianList () {
             <table className="table table-striped">
                 <thead>
                     <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Employee Id</th>
-                        <th>Technician Id</th>
+                        <th className='fs-3'>First Name</th>
+                        <th className='fs-3'>Last Name</th>
+                        <th className='fs-3'>Employee Id</th>
+                        <th className='fs-3'>Technician Id</th>
                     </tr>
                 </thead>
                 <tbody>
                     {technicians.map(technician => {
                         return (
-                            <tr className='fw-bold' key={technician.id}>
+                            <tr className='fw-normal' key={technician.id}>
                                 <td className='fs-3'>{ technician.first_name }</td>
                                 <td className='fs-3'>{ technician.last_name }</td>
                                 <td className='fs-3'>{ technician.employee_id }</td>
