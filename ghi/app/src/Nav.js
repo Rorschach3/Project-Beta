@@ -35,21 +35,22 @@ function Nav() {
                 <li><NavLink className="dropdown-item" aria-current="page" to="service/technician">Technicians List</NavLink></li>
                 <li><NavLink className="dropdown-item" aria-current="page" to="service/appointment/new">Create A Appointment</NavLink></li>
                 <li><NavLink className="dropdown-item" aria-current="page" to="service/appointment">Appointments List</NavLink></li>
-							</ul>
-						</li>								
-						<li className="nav-item dropdown">
-							<a className="nav-link dropdown-toggle" id="navbarInventoryDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-								Sales
-							</a>
-								<ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarInventoryDropdownMenuLink">
-								<li><NavLink className="dropdown-item" aria-current="page" to="sales/sales">Sales List</NavLink></li>
+              </ul>
+            </li>
+            <li className="nav-item dropdown">
+              <a className="nav-link dropdown-toggle" id="navbarInventoryDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Sales
+              </a>
+              <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarInventoryDropdownMenuLink">
+                <li><NavLink className="dropdown-item" aria-current="page" to="inventory/models/new">Model Form</NavLink></li>
+                <li><NavLink className="dropdown-item" aria-current="page" to="sales/sales">Sales List</NavLink></li>
                 <li><NavLink className="dropdown-item" aria-current="page" to="sales/sales/new">Sales Form</NavLink></li>
                 <li><NavLink className="dropdown-item" aria-current="page" to="sales/customer">Customer List</NavLink></li>
                 <li><NavLink className="dropdown-item" aria-current="page" to="sales/customer/new">Customer Form</NavLink></li>
                 <li><NavLink className="dropdown-item" aria-current="page" to="sales/salesperson">Salesperson List</NavLink></li>
                 <li><NavLink className="dropdown-item" aria-current="page" to="sales/salesperson/new">Salesperson Form</NavLink></li>
-							</ul>
-						</li>
+              </ul>
+            </li>
           </ul>
         </div>
       </div>

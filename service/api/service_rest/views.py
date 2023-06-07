@@ -25,8 +25,11 @@ class TechnicianEncoder(ModelEncoder):
 class AppointmentEncoder(ModelEncoder):
     model = Appointment
     properties = [
+        "id",
+        "is_vip",
         "date_time",
         "reason",
+        "status",
         "vin",
         "customer",
         "technician",
@@ -76,17 +79,50 @@ def api_list_appointments(request):
             )
     else:
         content = json.loads(request.body)
+        technician = Technician.objects.get(id=content["technician"])
+        content["technician"] = technician
         try:
-            technician = Technician.objects.get(id=content["technician"])
-            content["technician"] = technician
+            vin_new = content["vin"]
+            AutomobileVO.objects.get(vin=vin_new)
+            content["is_vip"] = True
         except Technician.DoesNotExist:
             return JsonResponse(
-                {"message": "Invalid Technician name"},
+                {"message": "Invalid Technician ID"},
                 status=400
             )
+        except AutomobileVO.DoesNotExist:
+            content["is_vip"] = False
         appointment = Appointment.objects.create(**content)
         return JsonResponse(
             appointment,
             encoder=AppointmentEncoder,
             safe=False,
         )
+
+@require_http_methods(["DELETE"])
+def api_list_appointment(request, id):
+    if request.method == "DELETE":
+        count, _ = Appointment.objects.filter(id=id).delete()
+        return JsonResponse({"deleted": count > 0})
+
+@require_http_methods({"PUT"})
+def api__cancel_appointment(request, id):
+    content = json.loads(request.body)
+    Appointment.objects.filter(id=id).update(**content)
+    appointment = Appointment.objects.get(id=id)
+    return JsonResponse(
+        appointment,
+        encoder=AppointmentEncoder,
+        safe=False
+    )
+
+@require_http_methods(["PUT"])
+def api_finish_appointment(request, id):
+    content = json.loads(request.body)
+    Appointment.objects.filter(id=id).update(**content)
+    appointment = Appointment.objects.get(id=id)
+    return JsonResponse(
+        appointment,
+        encoder=AppointmentEncoder,
+        safe=False
+    )

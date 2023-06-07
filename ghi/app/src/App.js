@@ -7,6 +7,10 @@ import ManufacturerList from './ManufacturerList';
 import ManufacturerForm from './ManufacturerForm';
 import ModelForm from './ModelForm';
 import ModelsList from './ModelsList';
+import TechnicianForm from './TechnicianForm';
+import TechnicianList from './TechnicianList';
+import AppointmentForm from './AppointmentForm';
+import AppointmentList from './AppointmentList';
 import CustomerList from './CustomerList';
 import CustomerForm from './CustomerForm';
 import Salespeople from './Salespeople';
@@ -27,6 +31,10 @@ function App(props) {
           <Route path="inventory/manufacturers/new" element={<ManufacturerForm />} />
           <Route path="inventory/models" element={<ModelsList />} />
           <Route path="inventory/models/new" element={<ModelForm />} />
+          <Route path="service/technician/new" element={<TechnicianForm />} />
+          <Route path="service/technician" element={<TechnicianList />} />
+          <Route path="service/appointment/new" element={<AppointmentForm />} />
+          <Route path="service/appointment" element={<AppointmentList />} />
           <Route path="sales/customers" element={<CustomerList/>} />
           <Route path="sales/customers/new" element={<CustomerForm />} />
           <Route path="sales/salespeople" element={<Salespeople/>} />

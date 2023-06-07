@@ -18,28 +18,31 @@ function AutosList () {
     }, []);
 
     return (
-        <table className="table table-striped">
-            <thead>
-                <tr>
-                    <th>Color</th>
-                    <th>Year</th>
-                    <th>Vin</th>
-                    <th>Model</th>
-                </tr>
-            </thead>
-            <tbody>
-                {autos.map(auto => {
-                    return (
-                        <tr className='fw-bold' key={auto.id}>
-                            <td className='fs-3'>{ auto.color }</td>
-                            <td className='fs-3'>{ auto.year }</td>
-                            <td className='fs-3'>{ auto.vin }</td>
-                            <td className='fs-3'>{ auto.model.name }</td>
-                        </tr>
-                    );
-                })}
-            </tbody>
-        </table>
+        <div>
+            <h1>Automobiles</h1>
+            <table className="table table-striped">
+                <thead>
+                    <tr>
+                        <th className='fs-3'>Color</th>
+                        <th className='fs-3'>Year</th>
+                        <th className='fs-3'>Vin</th>
+                        <th className='fs-3'>Model</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {autos.map(auto => {
+                        return (
+                            <tr className='fw-normal' key={auto.id}>
+                                <td className='fs-3'>{ auto.color }</td>
+                                <td className='fs-3'>{ auto.year }</td>
+                                <td className='fs-3'>{ auto.vin }</td>
+                                <td className='fs-3'>{ auto.model.name }</td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
+        </div>
     )
 
 }
