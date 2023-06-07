@@ -7,6 +7,12 @@ import ManufacturerList from './ManufacturerList';
 import ManufacturerForm from './ManufacturerForm';
 import ModelForm from './ModelForm';
 import ModelsList from './ModelsList';
+import CustomerList from './CustomerList';
+import CustomerForm from './CustomerForm';
+import Salespeople from './Salespeople';
+import SalespeopleForm from './SalespeopleForm';
+import SalesList from './SalesList';
+import SalesForm from './SalesForm';
 
 function App(props) {
   return (
@@ -21,6 +27,16 @@ function App(props) {
           <Route path="inventory/manufacturers/new" element={<ManufacturerForm />} />
           <Route path="inventory/models" element={<ModelsList />} />
           <Route path="inventory/models/new" element={<ModelForm />} />
+        </Routes>
+        </div>
+        <div className="container">
+        <Routes>
+          <Route path="sales/customers" element={<CustomerList/>} />
+          <Route path="sales/customers/new" element={<CustomerForm />} />
+          <Route path="sales/salespeople" element={<Salespeople/>} />
+          <Route path="sales/salespeople/new" element={<SalespeopleForm />} />
+          <Route path="sales/sales" element={<SalesList/>} />
+          <Route path="sales/sales/new" element={<SalesForm />} />
         </Routes>
       </div>
     </BrowserRouter>
