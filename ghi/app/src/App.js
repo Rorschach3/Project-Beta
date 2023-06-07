@@ -22,8 +22,8 @@ import ServiceHistory from './ServiceHistory';
 function App(props) {
   return (
     <BrowserRouter>
-      <Nav />
-      <div className="container">
+    <Nav />
+    <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="inventory/automobiles" element={<AutosList />} />

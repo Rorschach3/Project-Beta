@@ -5,15 +5,55 @@ CarCar, an application for managing aspects of an automobile dealership—specif
 ### Team:
 
 ##### * [Jorge Laderos De Santiago](https://gitlab.com/landerosjorge) - Services microservice
+
 ##### * [Daniel Hernandez](https://gitlab.com/Rorschach3)- Sales microservice
+
+## Install and Run Locally
+
+Fork the repository using this link 
+`https://gitlab.com/landerosjorge/project-beta`
+
+
+
+Then clone the project
+
+```bash
+  git clone https://gitlab.com/landerosjorge/project-beta.git
+```
+
+Go to the project directory
+
+```bash
+  cd project-beta
+```
+
+Install database
+
+```bash
+  docker volume create beta-data
+```
+
+Build the Docker containers
+Wait until the process is completely finished before running the next command.
+
+```bash
+ docker-compose build
+```
+Start up Docker containers
+
+```bash
+ docker-compose up
+```
+
+
 
 ## Design
 
-![CarCar Excalidraw](images/Excalidraw CarCar.png)
+![CarCar Landing Page](images/CarCarLandingPage.png)
 
 ### Sales
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+The Sales functionality needs to keep track of automobile sales that come from the inventory. A person cannot sell a car that is not listed in the inventory, nor can a person sell a car that has already been sold.
 
 ### Service
 

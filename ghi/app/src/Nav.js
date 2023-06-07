@@ -16,8 +16,8 @@ function Nav() {
             <li className="nav-item dropdown">
               <a className="nav-link dropdown-toggle" id="navbarInventoryDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Inventory
-                </a>
-                <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarInventoryDropdownMenuLink">
+              </a>
+              <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarInventoryDropdownMenuLink">
                 <li><NavLink className="dropdown-item" aria-current="page" to="inventory/automobiles">Automobiles List</NavLink></li>
                 <li><NavLink className="dropdown-item" aria-current="page" to="inventory/automobiles/new">Create A Automobile</NavLink></li>
                 <li><NavLink className="dropdown-item" aria-current="page" to="inventory/manufacturers">Manufacturer List</NavLink></li>
