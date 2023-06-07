@@ -5,7 +5,7 @@ from .models import Sale, Salesperson, Customer, AutomobileVO
 
 
 @admin.register(AutomobileVO)
-class AutomobileAdmin(admin.ModelAdmin):
+class AutomobileVOAdmin(admin.ModelAdmin):
     pass
 
 
