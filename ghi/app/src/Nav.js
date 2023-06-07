@@ -35,6 +35,7 @@ function Nav() {
                 <li><NavLink className="dropdown-item" aria-current="page" to="service/technician">Technicians List</NavLink></li>
                 <li><NavLink className="dropdown-item" aria-current="page" to="service/appointment/new">Create A Appointment</NavLink></li>
                 <li><NavLink className="dropdown-item" aria-current="page" to="service/appointment">Appointments List</NavLink></li>
+                <li><NavLink className="dropdown-item" aria-current="page" to="service/history">Service History</NavLink></li>
               </ul>
             </li>
             <li className="nav-item dropdown">

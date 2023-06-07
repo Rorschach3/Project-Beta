@@ -1,7 +1,6 @@
 import { useEffect, useState} from 'react';
-import { Link } from 'react-router-dom';
 
-function AppointmentList () {
+function ServiceHistory () {
     const [appointments, setAppointments] = useState([]);
 
     const fetchData = async () => {
@@ -14,51 +13,19 @@ function AppointmentList () {
         }
     }
 
-    const finishAppointment = async (appointmentId) => {
-        const data = {
-            "status": "finished"
-        };
-        const appointmentUrl = `http://localhost:8080/api/appointments/${appointmentId}/finish/`
-        const fetchConfig = {
-            method: "put",
-            body: JSON.stringify(data),
-            headers: {
-                "Content-Type" : "application/json",
-            }
-        }
-
-        const response = await fetch(appointmentUrl, fetchConfig);
-        if (response.ok) {
-            fetchData();
-        }
-    }
-
-    const cancelAppointment = async (appointmentId) => {
-        const data = {
-            "status": "cancelled"
-        };
-        const cancelUrl = `http://localhost:8080/api/appointments/${appointmentId}/cancel/`
-        const fetchConfig = {
-            method: "put",
-            body: JSON.stringify(data),
-            headers: {
-                "Content-Type" : "application/json",
-            }
-        }
-
-        const response = await fetch(cancelUrl, fetchConfig);
-        if (response.ok) {
-            fetchData();
-        }
-    }
-
     useEffect(() => {
         fetchData();
     }, []);
 
     return (
         <div>
-            <h1>Service Appointments</h1>
+            <h1>Service History</h1>
+            <div className="input-group mb-3">
+                <input type="text" className="form-control" placeholder="Search By Vin..." aria-label="Search By Vin..." aria-describedby="basic-addon2"></input>
+                <div className="input-group-append">
+                    <button className="btn btn-outline-secondary" type="button">Search</button>
+                </div>
+            </div>
             <table className="table table-striped">
                 <thead>
                     <tr>
@@ -68,9 +35,8 @@ function AppointmentList () {
                         <th className='fs-3'>Status</th>
                         <th className='fs-3'>Date</th>
                         <th className='fs-3'>Time</th>
-                        <th className='fs-3'>VIP Status</th>
+                        <th className='fs-3'>VIP</th>
                         <th className='fs-3'>Technician</th>
-                        <th className='fs-3'>Change Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -92,10 +58,6 @@ function AppointmentList () {
                                     <div>{appointment.technician.first_name}</div>
                                     <div>{appointment.technician.last_name}</div>
                                 </td>
-                                <td>
-                                    <Link to="" className="btn btn-success btn-sm px-4 gap-3" onClick={() => finishAppointment(appointment.id)}>Finish</Link>
-                                    <Link to="" className="btn btn-danger btn-sm px-4 gap-3" onClick={() => cancelAppointment(appointment.id)}>Cancel</Link>
-                                </td>
                             </tr>
                         );
                     })}
@@ -106,4 +68,4 @@ function AppointmentList () {
 
 }
 
-export default AppointmentList;
+export default ServiceHistory;
