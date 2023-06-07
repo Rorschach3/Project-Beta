@@ -26,6 +26,7 @@ class AppointmentEncoder(ModelEncoder):
     model = Appointment
     properties = [
         "id",
+        "is_vip",
         "date_time",
         "reason",
         "status",
@@ -78,14 +79,19 @@ def api_list_appointments(request):
             )
     else:
         content = json.loads(request.body)
+        technician = Technician.objects.get(id=content["technician"])
+        content["technician"] = technician
         try:
-            technician = Technician.objects.get(id=content["technician"])
-            content["technician"] = technician
+            vin_new = content["vin"]
+            AutomobileVO.objects.get(vin=vin_new)
+            content["is_vip"] = True
         except Technician.DoesNotExist:
             return JsonResponse(
                 {"message": "Invalid Technician ID"},
                 status=400
             )
+        except AutomobileVO.DoesNotExist:
+            content["is_vip"] = False
         appointment = Appointment.objects.create(**content)
         return JsonResponse(
             appointment,
@@ -102,15 +108,6 @@ def api_list_appointment(request, id):
 @require_http_methods({"PUT"})
 def api__cancel_appointment(request, id):
     content = json.loads(request.body)
-    # try:
-    #     if "technician" in content:
-    #         technician = Technician.objects.get(id=content["technician"])
-    #         content["technician"] = technician
-    # except Technician.DoesNotExist:
-    #     return JsonResponse(
-    #         {"message": "Invalid Technician ID"},
-    #         status=400,
-    #     )
     Appointment.objects.filter(id=id).update(**content)
     appointment = Appointment.objects.get(id=id)
     return JsonResponse(

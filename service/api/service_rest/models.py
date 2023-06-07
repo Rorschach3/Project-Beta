@@ -18,15 +18,17 @@ class Technician(models.Model):
         return reverse("api_list_technician", kwargs={"pk": self.pk})
 
 class StatusChoices(models.TextChoices):
+    current = 'current'
     finished = 'finished'
     canceled = 'cancelled'
 
 class Appointment(models.Model):
-    date_time = models.DateField(null=True)
+    date_time = models.DateTimeField(null=True)
     reason = models.TextField(max_length=100)
-    status = models.CharField(default=False, max_length=100, choices=StatusChoices.choices)
+    status = models.CharField(default='current', max_length=100, choices=StatusChoices.choices)
     vin = models.CharField(max_length=17)
     customer = models.CharField(max_length=100)
+    is_vip = models.BooleanField(default=False)
 
     technician = models.ForeignKey(
         Technician,
