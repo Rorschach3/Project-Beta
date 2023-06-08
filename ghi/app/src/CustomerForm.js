@@ -61,7 +61,6 @@ export default function CustomerForm({ getCustomer }) {
   };
 
   return (
-    <> // Creates the customer form
       <div className="row">
         <div className="offset-3 col-6">
           <div className="shadow p-4 mt-4">
@@ -124,7 +123,6 @@ export default function CustomerForm({ getCustomer }) {
 						</div>
 					</div>
 				</div>
-			</>
 )}
 ;
 
