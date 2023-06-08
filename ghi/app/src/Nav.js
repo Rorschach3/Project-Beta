@@ -31,10 +31,10 @@ function Nav() {
                 Service
               </a>
               <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                <li><NavLink className="dropdown-item" aria-current="page" to="service/technician/new">Create A Technician</NavLink></li>
-                <li><NavLink className="dropdown-item" aria-current="page" to="service/technician">Technicians List</NavLink></li>
-                <li><NavLink className="dropdown-item" aria-current="page" to="service/appointment/new">Create A Appointment</NavLink></li>
-                <li><NavLink className="dropdown-item" aria-current="page" to="service/appointment">Appointments List</NavLink></li>
+                <li><NavLink className="dropdown-item" aria-current="page" to="service/technician/new">Add A Technician</NavLink></li>
+                <li><NavLink className="dropdown-item" aria-current="page" to="service/technician">List all Technicians</NavLink></li>
+                <li><NavLink className="dropdown-item" aria-current="page" to="service/appointment/new">Create A Service Appointment</NavLink></li>
+                <li><NavLink className="dropdown-item" aria-current="page" to="service/appointment">List all service appointments</NavLink></li>
                 <li><NavLink className="dropdown-item" aria-current="page" to="service/history">Service History</NavLink></li>
               </ul>
             </li>

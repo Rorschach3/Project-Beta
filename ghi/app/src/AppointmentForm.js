@@ -72,7 +72,7 @@ function AppointmentForm() {
         <div className="row">
             <div className="offset-3 col-6">
                 <div className="shadow p-4 mt-4">
-                    <h1>Create an appointment</h1>
+                    <h1>Create a service appointment</h1>
                     <form onSubmit={handleSubmit} id="create-appointment-form">
                         <div className="form-floating mb-3">
                             <input value={dateTime} onChange={handleDate} placeholder="Date Time" required type="datetime-local" name="dateTime" id="dateTime" className="form-control" />

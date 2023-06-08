@@ -1,7 +1,12 @@
 import { useEffect, useState} from 'react';
 
 function ServiceHistory () {
-    const [appointments, setAppointments] = useState([]);
+    const [search, setSearch] = useState("");
+    const [filteredAppointments, setFilteredAppointments] = useState([]);
+
+    const handleSearch = event => {
+        setSearch(event.target.value);
+    }
 
     const fetchData = async () => {
         const url = 'http://localhost:8080/api/appointments/'
@@ -9,9 +14,18 @@ function ServiceHistory () {
 
         if (response.ok) {
             const data = await response.json();
-            setAppointments(data.appointments)
+            setFilteredAppointments(data.appointments);
         }
     }
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const results = filteredAppointments.filter((appointment) => {
+            return appointment.vin === search
+        });
+        console.log(results);
+        setFilteredAppointments(results);
+        }
 
     useEffect(() => {
         fetchData();
@@ -20,12 +34,14 @@ function ServiceHistory () {
     return (
         <div>
             <h1>Service History</h1>
-            <div className="input-group mb-3">
-                <input type="text" className="form-control" placeholder="Search By Vin..." aria-label="Search By Vin..." aria-describedby="basic-addon2"></input>
-                <div className="input-group-append">
-                    <button className="btn btn-outline-secondary" type="button">Search</button>
+            <form onSubmit={handleSubmit}>
+                <div className="input-group mb-3">
+                    <input type="search" className="form-control" name="searchInput" placeholder="Search By Vin..." aria-label="Search By Vin..." aria-describedby="submit-button" value={search} onChange={handleSearch}></input>
+                    <div className="input-group-append">
+                        <button className="btn btn-outline-secondary" type="submit" id="submit-button">Search</button>
+                    </div>
                 </div>
-            </div>
+            </form>
             <table className="table table-striped">
                 <thead>
                     <tr>
@@ -40,7 +56,7 @@ function ServiceHistory () {
                     </tr>
                 </thead>
                 <tbody>
-                    {appointments.map((appointment) => {
+                    {filteredAppointments.map((appointment) => {
                         const dateTime = new Date(appointment.date_time);
                         const date = dateTime.toLocaleDateString()
                         const time = dateTime.toLocaleTimeString()
@@ -50,8 +66,8 @@ function ServiceHistory () {
                                 <td className='fs-4'>{ appointment.vin }</td>
                                 <td className='fs-4'>{ appointment.reason }</td>
                                 <td className='fs-4'>{ appointment.status }</td>
-                                <td className='fs-4'>{ time }</td>
                                 <td className='fs-4'>{ date }</td>
+                                <td className='fs-4'>{ time }</td>
                                 <td className='fs-4'>{ appointment.is_vip ? 'Yes' : 'No' }</td>
                                 <td>
                                     <div className='fs-4'></div>
