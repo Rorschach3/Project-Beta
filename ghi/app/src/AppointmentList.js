@@ -68,9 +68,9 @@ function AppointmentList () {
                         <th className='fs-3'>Status</th>
                         <th className='fs-3'>Date</th>
                         <th className='fs-3'>Time</th>
-                        <th className='fs-3'>VIP Status</th>
+                        <th className='fs-3'>VIP</th>
                         <th className='fs-3'>Technician</th>
-                        <th className='fs-3'>Change Status</th>
+                        <th className='fs-3'>Status</th>
                     </tr>
                 </thead>
                 <tbody>
