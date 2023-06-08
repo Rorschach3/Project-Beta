@@ -19,7 +19,7 @@ def get_data():
     content = json.loads(response.content)
     for car in content['autos']:
         AutomobileVO.objects.create(
-            import_href=car[imoport_href],
+            import_href=car[import_href],
             defaults={
                 "color": car['color'],
                 "year": car['year'],
