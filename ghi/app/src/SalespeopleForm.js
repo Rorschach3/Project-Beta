@@ -51,7 +51,7 @@ export default function SalesPersonForm(){
             <div className="row">
             <div className="offset-3 col-6">
                     <div className="shadow p-4 mt-4">
-                        <h1>Create A New Sales Person</h1>
+                        <h1>Create A New Salesperson</h1>
                         <form onSubmit={handleSubmit} id="create-employee-form">
                             <div className="form-floating mb-3">
                                 <input onChange={handleFirstNameChange} value={firstName} required type="text" name="firstname" id="firstname" className="form-control" />
@@ -62,8 +62,8 @@ export default function SalesPersonForm(){
                                 <label htmlFor="lastname">Last Name</label>
                             </div>
                             <div className="form-floating mb-3">
-                                <input onChange={handleEmployeeIdChange} value={employeeId} required type="text" name="employeeid" id="employeeid" className="form-control" />
-                                <label htmlFor="employeeId">Employee ID</label>
+                                <input onChange={handleEmployeeIdChange} value={employeeId} required type="text" name="employeeId" id="employeeId" className="-cformontrol" />
+                                <label htmlFor="employeeId">Employee Id</label>
                             </div>
                             <button className="btn btn-primary">Create</button>
                         </form>
