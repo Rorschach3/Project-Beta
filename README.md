@@ -11,8 +11,7 @@ CarCar, an application for managing aspects of an automobile dealership—specif
 ## Install and Run Locally
 
 1. Fork the repository using this link
-    `https://gitlab.com/landerosjorge/project-beta`
-
+   `https://gitlab.com/landerosjorge/project-beta`
 2. Then clone the project
 
 ```bash
@@ -32,7 +31,7 @@ CarCar, an application for managing aspects of an automobile dealership—specif
 ```
 
 5. Build the Docker containers.
-Wait until this process is completely finished before running the next command.
+   Wait until this process is completely finished before running the next command.
 
 ```bash
  docker-compose build
@@ -51,8 +50,6 @@ code .
 ```
 
 ## Diagram
-
-[diagram]
 
 ![CarCar Landing Page](images/CarCarLandingPage.png)
 
@@ -84,11 +81,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 | Update Automobile |  `PUT`   |  `8100/api/automobiles/vin/` |
 | Delete Automobile |  `DELETE` |  `8100/api/automobiles/vin/` |
 
+**Return Response:**
 
-<span style="color:green">**Return Response:**</span>
 ```http
 Color, Year, VIN, Vehicle Model ID
 ```
+
 ---
 
 ***Manufacturers***
@@ -101,10 +99,12 @@ Color, Year, VIN, Vehicle Model ID
 | Update Manufacturer |  `PUT` | `8100/api/manufacturers/id/` |
 | Delete Manufacturer |  `DELETE`   |  `8100/api/manufacturers/id/` |
 
-<span style="color:green">**Return Response:**</span>
+**Return Response:**
+
 ```http
 href, ID, Name
 ```
+
 ---
 
 ***Vehicle Models***
@@ -117,10 +117,12 @@ href, ID, Name
 | Update VehicleModel |  `PUT`   |  `8100/api/models/id/` |
 | Delete VehicleModel |  `DELETE`   |  `8100/api/models/id/` |
 
-<span style="color:green">**Return Response:**</span>
+**Return Response:**
+
 ```http
 Automobile VIN, Salersperson, Customer, Price
 ```
+
 ---
 
 ### Automobile Services
@@ -133,10 +135,12 @@ Automobile VIN, Salersperson, Customer, Price
 | Create Technician |  `POST`   |  `/api/technicians/`   |
 | Delete Technician | `DELETE` | `/api/technicians/id/`|
 
-<span style="color:green">**Return Response:**</span>
+**Return Response:**
+
 ```http
 First Name, Last Name, Employee ID
 ```
+
 ---
 
 ***Appointments***
@@ -149,10 +153,12 @@ First Name, Last Name, Employee ID
 |Set Appointment status to canceled|`PUT`|`/api/appointments/id/cancel`|
 |Set Appointment status to finished|`PUT`|`/api/appointments/id/finish`|
 
-<span style="color:green">**Return Response:**</span>
+**Return Response:**
+
 ```http
 Date/Time, Reason, Status, VIN, Customer, Technician
 ```
+
 ---
 
 ### Automobile Sales
@@ -169,10 +175,12 @@ Date/Time, Reason, Status, VIN, Customer, Technician
 ![Create Salespeople](images/Create Salesperson.png)
 ![Delete Salespeople](images/Delete Salesperson.png)
 
-<span style="color:green">**Return Response:**</span>
+**Return Response:**
+
 ```http
 "Firstname", "LastName", "Employee ID"
 ```
+
 ---
 
 ***Automobile***
@@ -187,13 +195,15 @@ Date/Time, Reason, Status, VIN, Customer, Technician
 ![Create Customer](images/Create Customer.png)
 ![Delete Customer](images/Delete Customer.png)
 
-<span style="color:green">**Return Response:**</span>
+**Return Response:**
+
 ```http
 VIN, Sold
 ```
+
 ---
 
-<span>***Sales***</span>
+***Sales***
 
 | Action         | Request  | Endpoint               |
 | :-----------     | :------- | :--------------------- |
@@ -205,8 +215,10 @@ VIN, Sold
 ![Create Sales](images/Create Sales.png)
 ![Delete Sale](images/Delete Salepng)
 
-<span style="color:green">**Return Response:**</span>
+**Return Response:**
+
 ```http
 Automobile VIN, Salesperson, Customer, Price
 ```
+
 ---

@@ -17,13 +17,13 @@ from sales_rest.models import AutomobileVO
 def get_data():
     response = requests.get("http://project-beta-inventory-api-1:8000/api/automobiles")
     content = json.loads(response.content)
-    for car in content['autos']:
+    for poll in content['autos']:
         AutomobileVO.objects.create(
-            import_href=car[import_href],
+            import_href=poll[import_href],
             defaults={
-                "color": car['color'],
-                "year": car['year'],
-                "vin": car["vin"],
+                "color": poll['color'],
+                "year": poll['year'],
+                "vin": poll["vin"],
                 }
         )
         print(import_href, color, year, vin)
