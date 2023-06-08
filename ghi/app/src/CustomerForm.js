@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 export default function CustomerForm({getCustomer}) {
+
+    // The component uses useState hooks to store the values of the form inputs.
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [address, setAddress] = useState('');
@@ -44,14 +46,18 @@ export default function CustomerForm({getCustomer}) {
             getCustomer();
         }
     }
+    
     return (
         <>
+            {/* This code renders the form that is used to create a new customer. */}
             <div className="row">
                 <div className="offset-3 col-6">
                     <div className="shadow p-4 mt-4">
                         <h1>Create a Customer</h1>
+                        {/* The component uses the handleSubmit function to handle the submission of the form. */}
                         <form onSubmit={handleSubmit} id="create-customer-form">
                             <div className="form-floating mb-3">
+                                {/* The component uses the handleFirstNameChange, handleLastNameChange, handleAddressChange, and handlePhoneNumberChange functions to handle the change events for the form inputs. */}
                                 <input onChange={handleFirstNameChange} value={firstName} required type="text" name="firstname" id="firstname" className="form-control" />
                                 <label htmlFor="firstname">First Name</label>
                             </div>

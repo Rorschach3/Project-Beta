@@ -18,15 +18,15 @@ def get_data():
     response = requests.get("http://project-beta-inventory-api-1:8000/api/automobiles")
     content = json.loads(response.content)
     for car in content['autos']:
-        print(car)
         AutomobileVO.objects.create(
-            import_href=car['import_href'],
+            import_href=car[imoport_href],
             defaults={
                 "color": car['color'],
                 "year": car['year'],
                 "vin": car["vin"],
-            }
+                }
         )
+        print(import_href, color, year, vin)
 
 
 def poll(repeat=True):
@@ -35,14 +35,13 @@ def poll(repeat=True):
         try:
             # Write your polling logic, here
             get_data()
-            pass
         except Exception as e:
             print(e, file=sys.stderr)
 
         if (not repeat):
             break
 
-        time.sleep(6)
+        time.sleep(10)
 
 
 if __name__ == "__main__":

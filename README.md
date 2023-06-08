@@ -10,46 +10,53 @@ CarCar, an application for managing aspects of an automobile dealership—specif
 
 ## Install and Run Locally
 
-Fork the repository using this link 
-`https://gitlab.com/landerosjorge/project-beta`
+1. Fork the repository using this link
+    `https://gitlab.com/landerosjorge/project-beta`
 
-
-
-Then clone the project
+2. Then clone the project
 
 ```bash
   git clone https://gitlab.com/landerosjorge/project-beta.git
 ```
 
-Go to the project directory
+3. Change directories into to the project directory
 
 ```bash
   cd project-beta
 ```
 
-Install database
+4. Create database using Docker command
 
 ```bash
   docker volume create beta-data
 ```
 
-Build the Docker containers
-Wait until the process is completely finished before running the next command.
+5. Build the Docker containers.
+Wait until this process is completely finished before running the next command.
 
 ```bash
  docker-compose build
 ```
-Start up Docker containers
+
+6. Start up Docker containers
 
 ```bash
  docker-compose up
 ```
 
+7. Open project using your favorite code editor VS Code
 
+```bash
+code .
+```
 
-## Design
+## Diagram
+
+[diagram]
 
 ![CarCar Landing Page](images/CarCarLandingPage.png)
+
+## Design
 
 ### Sales
 
@@ -65,11 +72,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ## API Reference
 
-#### Inventory
+### Inventory
 
-```http
-Automobiles
-```
+***Automobiles***
 
 | Action         | Request  | Endpoint               |
 | :-----------     | :------- | :--------------------- |
@@ -79,9 +84,14 @@ Automobiles
 | Update Automobile |  `PUT`   |  `8100/api/automobiles/vin/` |
 | Delete Automobile |  `DELETE` |  `8100/api/automobiles/vin/` |
 
+
+<span style="color:green">**Return Response:**</span>
 ```http
-Manufacturers
+Color, Year, VIN, Vehicle Model ID
 ```
+---
+
+***Manufacturers***
 
 | Action         | Request  | Endpoint               |
 | :-----------     | :------- | :--------------------- |
@@ -91,9 +101,13 @@ Manufacturers
 | Update Manufacturer |  `PUT` | `8100/api/manufacturers/id/` |
 | Delete Manufacturer |  `DELETE`   |  `8100/api/manufacturers/id/` |
 
+<span style="color:green">**Return Response:**</span>
 ```http
-VehicleModels
+href, ID, Name
 ```
+---
+
+***Vehicle Models***
 
 | Action         | Request  | Endpoint               |
 | :-----------  | :------- | :--------------------- |
@@ -103,11 +117,15 @@ VehicleModels
 | Update VehicleModel |  `PUT`   |  `8100/api/models/id/` |
 | Delete VehicleModel |  `DELETE`   |  `8100/api/models/id/` |
 
-#### Automobile Services
-
+<span style="color:green">**Return Response:**</span>
 ```http
-Technicians
+Automobile VIN, Salersperson, Customer, Price
 ```
+---
+
+### Automobile Services
+
+***Technicians***
 
 | Action         | Request  | Endpoint               |
 | :-----------     | :------- | :--------------------- |
@@ -115,42 +133,49 @@ Technicians
 | Create Technician |  `POST`   |  `/api/technicians/`   |
 | Delete Technician | `DELETE` | `/api/technicians/id/`|
 
+<span style="color:green">**Return Response:**</span>
 ```http
-Appointments
+First Name, Last Name, Employee ID
 ```
+---
+
+***Appointments***
 
 | Action         | Request  | Endpoint               |
 | :-----------     | :------- | :--------------------- |
 | List Appointments |  `GET`   |  `/api/appointments/`   |
 | Create Appointments |  `POST`   |  `/api/appointments`   |
-| Get Appointments |  `GET`   |  `/api/appointments/id/` |
+| Delete an appointment |  `DELETE`   |  `/api/appointments/id/` |
 |Set Appointment status to canceled|`PUT`|`/api/appointments/id/cancel`|
 |Set Appointment status to finished|`PUT`|`/api/appointments/id/finish`|
 
-#### Automobile Sales
-
+<span style="color:green">**Return Response:**</span>
 ```http
-Salespeople
+Date/Time, Reason, Status, VIN, Customer, Technician
 ```
+---
+
+### Automobile Sales
+
+***Salespeople***
 
 | Action       | Request  |Endpoint  |
 | :--------   | :------- | :-------------------------------- |
 | List salespeople | `GET` | `8090/api/salespeople/` |
-| Create salespoeple| `POST` |`809api/salespeople/` |
+| Create salespeople| `POST` |`809api/salespeople/` |
 | Delete salespeople| `DELETE` | `8090/api/salespeople/id/` |
 
 ![List Salespeople](images/List Salespeople.png)
 ![Create Salespeople](images/Create Salesperson.png)
 ![Delete Salespeople](images/Delete Salesperson.png)
 
+<span style="color:green">**Return Response:**</span>
 ```http
-return Response:
-"Firsname", "LastName", "Employee ID"
+"Firstname", "LastName", "Employee ID"
 ```
+---
 
-```http
-Customers
-```
+***Automobile***
 
 | Action         | Request  | Endpoint               |
 | :-----------     | :------- | :--------------------- |
@@ -162,14 +187,13 @@ Customers
 ![Create Customer](images/Create Customer.png)
 ![Delete Customer](images/Delete Customer.png)
 
+<span style="color:green">**Return Response:**</span>
 ```http
-Return Response:
-"First Namne", "Last Name", "Phone Number", "Address"
+VIN, Sold
 ```
+---
 
-```http
-sales
-```
+<span>***Sales***</span>
 
 | Action         | Request  | Endpoint               |
 | :-----------     | :------- | :--------------------- |
@@ -181,7 +205,8 @@ sales
 ![Create Sales](images/Create Sales.png)
 ![Delete Sale](images/Delete Salepng)
 
+<span style="color:green">**Return Response:**</span>
 ```http
-Return Response:
-Automobile VIN, Salersperson, Customer, Price
+Automobile VIN, Salesperson, Customer, Price
 ```
+---

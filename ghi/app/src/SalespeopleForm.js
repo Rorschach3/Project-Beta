@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 
-export default function SalesPersonForm(){
+export default function SalespeopleForm(){
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [employeeId, setEmployeeId] = useState('');
@@ -62,8 +62,8 @@ export default function SalesPersonForm(){
                                 <label htmlFor="lastname">Last Name</label>
                             </div>
                             <div className="form-floating mb-3">
-                                <input onChange={handleEmployeeIdChange} value={employeeId} required type="text" name="employeeid" id="employeeid" className="form-control" />
-                                <label htmlFor="employeeId">Employee ID</label>
+                                <input onChange={handleEmployeeIdChange} value={employeeId} required type="text" name="employeeId" id="employeeId" className="form-control" />
+                                <label htmlFor="employeeId">EmployeeId</label>
                             </div>
                             <button className="btn btn-primary">Create</button>
                         </form>

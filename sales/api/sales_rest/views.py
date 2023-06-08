@@ -30,6 +30,41 @@ class SalespersonEncoder(ModelEncoder):
         "last_name",
         "employee_id"
     ]
+    
+
+class SalesDetailEncoder(ModelEncoder):
+    model = Sale
+
+    properties = [
+        "price",
+        "customer",
+        "salesperson",
+        "automobile",
+    ]
+
+    encoders = {
+        "salesperson": SalespersonEncoder(),
+        "customer": CustomerEncoder(),
+        "automobile": AutomobileVOEncoder(),
+    }
+
+    def default(self, obj):
+        if isinstance(obj, Sale):
+            return {
+                "price": obj.price,
+                "customer": {
+                    "first_name": obj.customer.first_name,
+                    "last_name": obj.customer.last_name,
+                },
+                "salesperson": {
+                    "first_name": obj.salesperson.first_name,
+                    "last_name": obj.salesperson.last_name,
+                },
+                "automobile": {
+                    "vin": obj.automobile.vin,
+                },
+            }
+        return super().default(obj)
 
 
 # class SalesEncoder(ModelEncoder):
@@ -105,7 +140,7 @@ def api_customer(request, id):
             encoder=CustomerEncoder,
             safe=False,
         )
-    else:
+    else:  # DELETE Request
         count, _ = Customer.objects.filter(id=id).delete()
         return JsonResponse({"deleted": count > 0})
 
@@ -140,10 +175,10 @@ def api_sale(request, id):
         sale = Sale.objects.get(id=id)
         return JsonResponse(
             sale,
-            encoder=SalesEncoder,
+            encoder=SalesDetailEncoder,
             safe=False
         )
-    else:
+    else:  # DELETE Request
         count, _ = Sale.objects.filter(id=id).delete()
         return JsonResponse({"delete": count > 0})
 
@@ -171,54 +206,6 @@ def api_sales(request):
                 status=400,
             )
 
-# class SalesEncoder(ModelEncoder):
-#     model = Sale
-#     properties = [
-#         "price",
-#         "customer",
-#         "salesperson",
-#         "automobile",
-#     ]
-#     encoders = {
-#         "salesperson": SalespersonEncoder(),
-#         "customer": CustomerEncoder(),
-#         "automobile": AutomobileVOEncoder(),
-#     }
-
-
-# class SalesEncoder(ModelEncoder):
-#     model = Sale
-
-#     properties = [
-#         "price",
-#         "customer",
-#         "salesperson",
-#         "automobile",
-#     ]
-
-    # encoders = {
-    #     "salesperson": SalespersonEncoder(),
-    #     "customer": CustomerEncoder(),
-    #     "automobile": AutomobileVOEncoder(),
-    # }
-
-    # def default(self, obj):
-    #     if isinstance(obj, Sale):
-    #         return {
-    #             "price": obj.price,
-    #             "customer": {
-    #                 "first_name": obj.customer.first_name,
-    #                 "last_name": obj.customer.last_name,
-    #             },
-    #             "salesperson": {
-    #                 "first_name": obj.salesperson.first_name,
-    #                 "last_name": obj.salesperson.last_name,
-    #             },
-    #             "automobile": {
-    #                 "vin": obj.automobile.vin,
-    #             },
-    #         }
-    #     return super().default(obj)
 
 
 
