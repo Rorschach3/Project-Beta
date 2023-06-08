@@ -27,18 +27,6 @@ function Nav() {
               </ul>
             </li>
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Service
-              </a>
-              <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                <li><NavLink className="dropdown-item" aria-current="page" to="service/technician/new">Add A Technician</NavLink></li>
-                <li><NavLink className="dropdown-item" aria-current="page" to="service/technician">List all Technicians</NavLink></li>
-                <li><NavLink className="dropdown-item" aria-current="page" to="service/appointment/new">Create A Service Appointment</NavLink></li>
-                <li><NavLink className="dropdown-item" aria-current="page" to="service/appointment">List all service appointments</NavLink></li>
-                <li><NavLink className="dropdown-item" aria-current="page" to="service/history">Service History</NavLink></li>
-              </ul>
-            </li>
-            <li className="nav-item dropdown">
               <a className="nav-link dropdown-toggle" id="navbarSalesDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Sales
               </a>
@@ -49,6 +37,18 @@ function Nav() {
                 <li><NavLink className="dropdown-item" aria-current="page" to="sales/customer/new">Customer Form</NavLink></li>
                 <li><NavLink className="dropdown-item" aria-current="page" to="sales/salesperson">Salesperson List</NavLink></li>
                 <li><NavLink className="dropdown-item" aria-current="page" to="sales/salesperson/new">Salesperson Form</NavLink></li>
+              </ul>
+            </li>
+            <li className="nav-item dropdown">
+              <a className="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Service
+              </a>
+              <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li><NavLink className="dropdown-item" aria-current="page" to="service/technician/new">Add A Technician</NavLink></li>
+                <li><NavLink className="dropdown-item" aria-current="page" to="service/technician">List all Technicians</NavLink></li>
+                <li><NavLink className="dropdown-item" aria-current="page" to="service/appointment/new">Create A Service Appointment</NavLink></li>
+                <li><NavLink className="dropdown-item" aria-current="page" to="service/appointment">List all service appointments</NavLink></li>
+                <li><NavLink className="dropdown-item" aria-current="page" to="service/history">Service History</NavLink></li>
               </ul>
             </li>
           </ul>
