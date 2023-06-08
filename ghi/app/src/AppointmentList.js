@@ -10,7 +10,7 @@ function AppointmentList () {
 
         if (response.ok) {
             const data = await response.json();
-            setAppointments(data.appointments)
+            setAppointments(data.appointments);
         }
     }
 
@@ -68,9 +68,9 @@ function AppointmentList () {
                         <th className='fs-3'>Status</th>
                         <th className='fs-3'>Date</th>
                         <th className='fs-3'>Time</th>
-                        <th className='fs-3'>VIP Status</th>
+                        <th className='fs-3'>VIP</th>
                         <th className='fs-3'>Technician</th>
-                        <th className='fs-3'>Change Status</th>
+                        <th className='fs-3'>Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -84,8 +84,8 @@ function AppointmentList () {
                                 <td className='fs-4'>{ appointment.vin }</td>
                                 <td className='fs-4'>{ appointment.reason }</td>
                                 <td className='fs-4'>{ appointment.status }</td>
-                                <td className='fs-4'>{ time }</td>
                                 <td className='fs-4'>{ date }</td>
+                                <td className='fs-4'>{ time }</td>
                                 <td className='fs-4'>{ appointment.is_vip ? 'Yes' : 'No' }</td>
                                 <td>
                                     <div className='fs-4'></div>

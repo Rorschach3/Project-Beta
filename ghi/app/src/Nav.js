@@ -27,22 +27,22 @@ function Nav() {
               </ul>
             </li>
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" id="navbarInventoryDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a className="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Service
               </a>
-              <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarInventoryDropdownMenuLink">
-                <li><NavLink className="dropdown-item" aria-current="page" to="service/technician/new">Create A Technician</NavLink></li>
-                <li><NavLink className="dropdown-item" aria-current="page" to="service/technician">Technicians List</NavLink></li>
-                <li><NavLink className="dropdown-item" aria-current="page" to="service/appointment/new">Create A Appointment</NavLink></li>
-                <li><NavLink className="dropdown-item" aria-current="page" to="service/appointment">Appointments List</NavLink></li>
+              <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li><NavLink className="dropdown-item" aria-current="page" to="service/technician/new">Add A Technician</NavLink></li>
+                <li><NavLink className="dropdown-item" aria-current="page" to="service/technician">List all Technicians</NavLink></li>
+                <li><NavLink className="dropdown-item" aria-current="page" to="service/appointment/new">Create A Service Appointment</NavLink></li>
+                <li><NavLink className="dropdown-item" aria-current="page" to="service/appointment">List all service appointments</NavLink></li>
                 <li><NavLink className="dropdown-item" aria-current="page" to="service/history">Service History</NavLink></li>
               </ul>
             </li>
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" id="navbarInventoryDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a className="nav-link dropdown-toggle" id="navbarSalesDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Sales
               </a>
-              <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarInventoryDropdownMenuLink">
+              <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarSalesDarkDropdownMenuLink">
                 <li><NavLink className="dropdown-item" aria-current="page" to="inventory/models/new">Model Form</NavLink></li>
                 <li><NavLink className="dropdown-item" aria-current="page" to="sales/sales">Sales List</NavLink></li>
                 <li><NavLink className="dropdown-item" aria-current="page" to="sales/sales/new">Sales Form</NavLink></li>
