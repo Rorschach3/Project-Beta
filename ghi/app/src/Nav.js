@@ -43,7 +43,6 @@ function Nav() {
                 Sales
               </a>
               <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarSalesDarkDropdownMenuLink">
-                <li><NavLink className="dropdown-item" aria-current="page" to="inventory/models/new">Model Form</NavLink></li>
                 <li><NavLink className="dropdown-item" aria-current="page" to="sales/sales">Sales List</NavLink></li>
                 <li><NavLink className="dropdown-item" aria-current="page" to="sales/sales/new">Sales Form</NavLink></li>
                 <li><NavLink className="dropdown-item" aria-current="page" to="sales/customer">Customer List</NavLink></li>
