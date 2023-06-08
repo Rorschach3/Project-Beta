@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
 
-export default function NewSaleForm({getSales}){
+export default function SalesForm({getSales}){
     const [autoVins, setVins] = useState([]);
-    const [salesPersons, setSalesPersons] = useState([]);
+    const [salespersons, setSalespersons] = useState([]);
     const [customers, setCustomers] = useState([]);
     const [price, setPrice] = useState('');
     const [vin, setVin] = useState('');
-    const [salesPerson, setSalesPerson] = useState('');
+    const [salesperson, setSalesperson] = useState('');
     const [customer, setCustomer] = useState('');
 
     const handleVinChange = (event) => {
@@ -15,9 +15,9 @@ export default function NewSaleForm({getSales}){
         setVin(value);
     }
 
-    const handleSalesPersonChange = (event) => {
+    const handleSalespersonChange = (event) => {
         const value = event.target.value;
-        setSalesPerson(value)
+        setSalesperson(value)
     }
 
     const handleCustomerChange = (event) => {
@@ -29,20 +29,20 @@ export default function NewSaleForm({getSales}){
         const value = event.target.value;
         setPrice(value)
     }
-
+        // Fetches Vin data
     const fetchAllData = async () => {
         const autoResponse = await fetch('http://localhost:8100/api/automobiles/');
         if (autoResponse.ok) {
             const data = await autoResponse.json();
             setVins(data.autos)
         }
-
+        // Fetches salesperson data
         const salesResponse = await fetch('http://localhost:8090/api/salespeople/');
         if (salesResponse.ok) {
             const data = await salesResponse.json();
-            setSalesPersons(data.salespeople)
+            setSalespersons(data.salespeople)
         }
-
+        // Fetches customer data
         const customersResponse = await fetch('http://localhost:8090/api/customers/');
         if (customersResponse.ok) {
             const data = await customersResponse.json();
@@ -51,15 +51,21 @@ export default function NewSaleForm({getSales}){
     }
 
     useEffect (() => {
-        fetchAllData()
-    }, [price])
+        fetchAllData();
+        return () => {
+            setPrice('');
+            setVin('');
+            setSalesperson('');
+            setCustomer('');
+        };
+    }, []);
 
     const handleSubmit = async(event) => {
         event.preventDefault()
         const data = {}
 
         data.automobile = vin
-        data.salesperson = salesPerson
+        data.salesperson = salesperson
         data.customer = customer
         data.price = price
 
@@ -85,7 +91,7 @@ export default function NewSaleForm({getSales}){
             const deleteResponse = await fetch(deleteUrl, fetchDeleteConfig);
             if (deleteResponse.ok) {
                 setPrice('');
-                setSalesPerson('');
+                setSalesperson('');
                 setCustomer('');
                 setVin('');
             }
@@ -112,9 +118,9 @@ export default function NewSaleForm({getSales}){
                                 </select>
                             </div>
                             <div className='form-floating mb-3'>
-                                <select onChange={handleSalesPersonChange} value={salesPerson} id="salesperson" name='salesperson' className='form-select'>
+                                <select onChange={handleSalespersonChange} value={salesperson} id="salesperson" name='salesperson' className='form-select'>
                                     <option value=''>Choose a sales person</option>
-                                    {salesPersons.map(sales => {
+                                    {salespersons.map(sales => {
                                         const fullName = `${sales.first_name} ${sales.last_name}`
                                         return (
                                             <option key={sales.id} value={sales.id}>
