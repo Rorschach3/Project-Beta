@@ -54,7 +54,6 @@ Start up Docker containers
 
 ## Homepage
 ![CarCar Landing Page](images/CarCarLandingPage.png)
-![CarCar Landing Page #2](images/CARCAR_DESIGN.png)
 
 #
 
