@@ -23,7 +23,7 @@ export default function Salesperson() {
             <div className='container overflow-hidden'>
                 <h1>Salespeople</h1>
                 <table className='table table-striped'>
-  ddd                  <thead>
+                  <thead>
                         <tr>
                             <th>Employee ID</th>
                             <th>First Name</th>

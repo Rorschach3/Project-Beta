@@ -33,6 +33,7 @@ class Salesperson(models.Model):
 
 class Sale(models.Model):
     price = models.PositiveIntegerField()
+    
     automobile = models.ForeignKey(
         AutomobileVO,
         related_name="AutombileVO",
@@ -55,4 +56,4 @@ class Sale(models.Model):
     )
 
     def __str__(self):
-        return f"customer: {self.customer} salesperson: {self.salesperson} | Price: ${self.price}"
+        return f"automobile: {self.automobile} customer: {self.customer} salesperson: {self.salesperson} | Price: ${self.price}"
