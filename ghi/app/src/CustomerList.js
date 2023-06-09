@@ -18,13 +18,13 @@ export default function CustomerList ({customers}) {
                         </tr>
                     </thead>
                     <tbody>
-                        {customers.map((customer) => {
+                        {customers && customers.map((customers) => {
                             return (
-                                <tr key={customer.id}>
-                                    <td>{customer.first_name}</td>
-                                    <td>{customer.last_name}</td>
-                                    <td>{customer.phone_number}</td>
-                                    <td>{customer.address}</td>
+                                <tr key={customers.id}>
+                                    <td>{customers.first_name}</td>
+                                    <td>{customers.last_name}</td>
+                                    <td>{customers.phone_number}</td>
+                                    <td>{customers.address}</td>
                                 </tr>
                             )
                         })}

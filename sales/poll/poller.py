@@ -17,15 +17,13 @@ from sales_rest.models import AutomobileVO
 def get_data():
     response = requests.get("http://project-beta-inventory-api-1:8000/api/automobiles")
     content = json.loads(response.content)
-    for car in content['autos']:
-        print(car)
-        AutomobileVO.objects.create(
-            import_href=car['import_href'],
+    for autos in content["autos"]:
+        AutomobileVO.objects.update_or_create(
+            import_href=autos["href"],
             defaults={
-                "color": car['color'],
-                "year": car['year'],
-                "vin": car["vin"],
-            }
+                "vin": autos["vin"],
+                "sold": autos["sold"],
+                }
         )
 
 
@@ -35,14 +33,13 @@ def poll(repeat=True):
         try:
             # Write your polling logic, here
             get_data()
-            pass
         except Exception as e:
             print(e, file=sys.stderr)
 
         if (not repeat):
             break
 
-        time.sleep(6)
+        time.sleep(30)
 
 
 if __name__ == "__main__":
