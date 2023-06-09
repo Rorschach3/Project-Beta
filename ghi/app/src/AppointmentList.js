@@ -78,26 +78,28 @@ function AppointmentList () {
                         const dateTime = new Date(appointment.date_time);
                         const date = dateTime.toLocaleDateString()
                         const time = dateTime.toLocaleTimeString()
-                        return (
-                            <tr className='fw-normal' key={appointment.id}>
-                                <td className='fs-4'>{ appointment.customer }</td>
-                                <td className='fs-4'>{ appointment.vin }</td>
-                                <td className='fs-4'>{ appointment.reason }</td>
-                                <td className='fs-4'>{ appointment.status }</td>
-                                <td className='fs-4'>{ date }</td>
-                                <td className='fs-4'>{ time }</td>
-                                <td className='fs-4'>{ appointment.is_vip ? 'Yes' : 'No' }</td>
-                                <td>
-                                    <div className='fs-4'></div>
-                                    <div>{appointment.technician.first_name}</div>
-                                    <div>{appointment.technician.last_name}</div>
-                                </td>
-                                <td>
-                                    <Link to="" className="btn btn-success btn-sm px-4 gap-3" onClick={() => finishAppointment(appointment.id)}>Finish</Link>
-                                    <Link to="" className="btn btn-danger btn-sm px-4 gap-3" onClick={() => cancelAppointment(appointment.id)}>Cancel</Link>
-                                </td>
-                            </tr>
-                        );
+                        if(appointment.status === "current"){
+                            return (
+                                <tr className='fw-normal' key={appointment.id}>
+                                    <td className='fs-4'>{ appointment.customer }</td>
+                                    <td className='fs-4'>{ appointment.vin }</td>
+                                    <td className='fs-4'>{ appointment.reason }</td>
+                                    <td className='fs-4'>{ appointment.status }</td>
+                                    <td className='fs-4'>{ date }</td>
+                                    <td className='fs-4'>{ time }</td>
+                                    <td className='fs-4'>{ appointment.is_vip ? 'Yes' : 'No' }</td>
+                                    <td>
+                                        <div className='fs-4'></div>
+                                        <div>{appointment.technician.first_name}</div>
+                                        <div>{appointment.technician.last_name}</div>
+                                    </td>
+                                    <td>
+                                        <Link to="" className="btn btn-success btn-sm px-4 gap-3" onClick={() => finishAppointment(appointment.id)}>Finish</Link>
+                                        <Link to="" className="btn btn-danger btn-sm px-4 gap-3" onClick={() => cancelAppointment(appointment.id)}>Cancel</Link>
+                                    </td>
+                                </tr>
+                            );
+                        }
                     })}
                 </tbody>
             </table>
