@@ -32,7 +32,6 @@ function ServiceHistory () {
 
     useEffect(() => {
         fetchData();
-        handleSubmit();
     }, []);
 
     return (
