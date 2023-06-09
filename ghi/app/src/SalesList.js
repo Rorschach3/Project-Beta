@@ -21,6 +21,7 @@ export default function SalesList({sales}) {
                         {sales.map((sales) =>{
                             const fullSalesName = `${sales.salesperson.first_name} ${sales.salesperson.last_name}`
                             const fullCustomerName = `${sales.customer.first_name} ${sales.customer.last_name}`
+                            console.log(`${sales.customer.first_name} ${sales.customer.last_name}`)
                             return (
                                 <tr key={sales.id}>
                                     <td>{sales.salesperson.employee_id}</td>
