@@ -23,7 +23,6 @@ function ServiceHistory () {
         const results = filteredAppointments.filter((appointment) => {
             return appointment.vin === search
         });
-        console.log(results);
         setFilteredAppointments(results);
         }
 
