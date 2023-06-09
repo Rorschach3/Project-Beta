@@ -4,12 +4,12 @@ from django.urls import reverse
 
 # Create your models here.
 class AutomobileVO(models.Model):
-    vin = models.CharField(max_length=17)
+    vin = models.CharField(max_length=17, unique=True, null=True)
     sold = models.BooleanField(default=False)
-    import_href = models.CharField(max_length=100, unique=True, null=True)
+    import_href = models.CharField(max_length=100, null=True)
 
     def __str__(self):
-        return f"VIN:{self.vin}"
+        return f"VIN:{self.vin} Sold:{self.sold}"
 
 
 class Customer(models.Model):
@@ -35,7 +35,7 @@ class Sale(models.Model):
     price = models.PositiveIntegerField()
     automobile = models.ForeignKey(
         AutomobileVO,
-        related_name="sales",
+        related_name="AutombileVO",
         on_delete=models.CASCADE,
         null=True
     )

@@ -2,30 +2,30 @@ import React, { useEffect, useState } from 'react';
 
 
 export default function NewSaleForm({getSales}){
-    const [autoVins, setVins] = useState([]);
-    const [salesPersons, setSalesPersons] = useState([]);
+    const [automobiles, setVins] = useState([]);
+    const [salespersons, setSalespersons] = useState([]);
     const [customers, setCustomers] = useState([]);
     const [price, setPrice] = useState('');
     const [vin, setVin] = useState('');
-    const [salesPerson, setSalesPerson] = useState('');
+    const [salesperson, setSalesperson] = useState('');
     const [customer, setCustomer] = useState('');
 
-    const handleVinChange = (event) => {
+    const handleVin = (event) => {
         const value = event.target.value;
         setVin(value);
     }
 
-    const handleSalesPersonChange = (event) => {
+    const handleSalesperson = (event) => {
         const value = event.target.value;
-        setSalesPerson(value)
+        setSalesperson(value)
     }
 
-    const handleCustomerChange = (event) => {
+    const handleCustomer = (event) => {
         const value = event.target.value;
         setCustomer(value)
     }
 
-    const handlePriceChange = (event) => {
+    const handlePrice = (event) => {
         const value = event.target.value;
         setPrice(value)
     }
@@ -34,13 +34,13 @@ export default function NewSaleForm({getSales}){
         const autoResponse = await fetch('http://localhost:8100/api/automobiles/');
         if (autoResponse.ok) {
             const data = await autoResponse.json();
-            setVins(data.autos)
+            setVins(data.automobile)
         }
 
         const salesResponse = await fetch('http://localhost:8090/api/salespeople/');
         if (salesResponse.ok) {
             const data = await salesResponse.json();
-            setSalesPersons(data.salespeople)
+            setSalespersons(data.salespeople)
         }
 
         const customersResponse = await fetch('http://localhost:8090/api/customers/');
@@ -57,12 +57,10 @@ export default function NewSaleForm({getSales}){
     const handleSubmit = async(event) => {
         event.preventDefault()
         const data = {}
-
         data.automobile = vin
-        data.salesperson = salesPerson
+        data.salesperson = salesperson
         data.customer = customer
         data.price = price
-
         const fetchConfig = {
             method: 'post',
             body: JSON.stringify(data),
@@ -85,7 +83,7 @@ export default function NewSaleForm({getSales}){
             const deleteResponse = await fetch(deleteUrl, fetchDeleteConfig);
             if (deleteResponse.ok) {
                 setPrice('');
-                setSalesPerson('');
+                setSalesperson('');
                 setCustomer('');
                 setVin('');
             }
@@ -99,49 +97,50 @@ export default function NewSaleForm({getSales}){
                     <div className='shadow p-4 mt-4'>
                         <h1>Record a new sale</h1>
                         <form onSubmit={handleSubmit} id="record-sale-form">
-                            <div className='form-floating mb-3'>
-                                <select onChange={handleVinChange} value={vin} id="vin-select" name='vin-select' className='form-select'>
-                                    <option value=''>Choose an automobile VIN</option>
-                                    {autoVins.filter(auto => (!auto.sold)).map(auto => {
-                                        return (
-                                            <option key={auto.id} value={auto.vin}>
-                                                {auto.vin}
-                                            </option>
-                                        )
-                                    })}
-                                </select>
-                            </div>
-                            <div className='form-floating mb-3'>
-                                <select onChange={handleSalesPersonChange} value={salesPerson} id="salesperson" name='salesperson' className='form-select'>
-                                    <option value=''>Choose a sales person</option>
-                                    {salesPersons.map(sales => {
-                                        const fullName = `${sales.first_name} ${sales.last_name}`
-                                        return (
-                                            <option key={sales.id} value={sales.id}>
-                                                {fullName}
-                                            </option>
-                                        )
-                                    })}
-                                </select>
-                            </div>
-                            <div className='form-floating mb-3'>
-                                <select onChange={handleCustomerChange} value={customer} id="customer" name='customer' className='form-select'>
-                                    <option value=''>Choose a customer</option>
-                                    {customers.map(customer => {
-                                        const fullName = `${customer.first_name} ${customer.last_name}`
-                                        return (
-                                            <option key={customer.id} value={customer.id}>
-                                                {fullName}
-                                            </option>
-                                        )
-                                    })}
-                                </select>
-                            </div>
                             <div className="form-floating mb-3">
-                                <input onChange={handlePriceChange} value={price} placeholder="price" required type="text" name="price" id="price" className="form-control" />
-                                <label htmlFor="model">Price</label>
+                                <input value={price} onChange={handlePrice} placeholder="Price" require type="text" name="price" id="price" className="form-control" />
+                                <label htmlFor="price">Price</label>
                             </div>
-                            <button className="btn btn-primary">Create</button>
+
+                            <div className='mb-3'>
+                                <select value={vin} onChange={handleVin} required name="Vin" id="Vin" className="form-select" />
+                                    <option value="">Choose a VIN</option>
+                                    {automobiles.map(vin => {
+                                        return (
+                                            <option value={vin.id} key={vin.id}>
+                                                {vin.vin}
+                                            </option>
+                                        );
+                                    })};
+                            </div>
+
+                        <div className='mb-3'>
+                            <select value={salesperson} onChange={handleSalesperson} required name="salesperson" id="salesperson" className="form-select" />
+                                <option value="">Choose a Salesperson</option>
+                                {salespersons.map(salesperson => {
+                                    return (
+                                        <option value={salesperson.id} key={salesperson.id}>
+                                            {salesperson.first_name} {salesperson.last_name}
+                                        </option>
+                                    );
+                                })}
+                        </div>
+
+
+                        <div className='mb-3'>
+                            <select value={customer} onChange={handleCustomer} required name="customer" id="customer" className="form-select">
+                                <option value="">Choose a Customer</option>
+                                {customers.map(customer => {
+                                    return (
+                                        <option value={customer.id} key={customer.id}>
+                                            {customer.first_name} {customer.last_name}
+                                        </option>
+                                    );
+                                })}
+                            </select>
+                        </div>
+                        <button type="submit" className="btn btn-secondary">Submit</button>
+
                         </form>
                     </div>
                 </div>
