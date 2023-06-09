@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 
 function ManufacturerForm(props) {
+    const [name, setName] = useState('');
+
+    const handlNameChange = (event) => {
+        const value = event.target.value;
+        setName(value)
+    }
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = {};
@@ -20,17 +27,13 @@ function ManufacturerForm(props) {
             setName('');
         }
     }
-    const [name, setName] = useState('');
-        const handlNameChange = (event) => {
-            const value = event.target.value;
-            setName(value)
-        }
+
     return (
         <div className="shadow p-4 mt-4">
-            <h1>Create Manufacturer</h1>
+            <h1>Create a Manufacturer</h1>
             <form onSubmit={handleSubmit} id="create-manufacturer-form">
             <div className="form-floating mb-3">
-                <input onChange={handlNameChange} placeholder="Name" required type="text" name="name" id="name" className="form-control"/>
+                <input value={name} onChange={handlNameChange} placeholder="Name" required type="text" name="name" id="name" className="form-control"/>
                 <label htmlFor="fabric">Name</label>
             </div>
             <button className="btn btn-primary">Create</button>

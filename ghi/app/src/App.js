@@ -11,12 +11,12 @@ import TechnicianForm from './TechnicianForm';
 import TechnicianList from './TechnicianList';
 import AppointmentForm from './AppointmentForm';
 import AppointmentList from './AppointmentList';
-import CustomerList from './CustomerList';
-import CustomerForm from './CustomerForm';
-import Salespeople from './Salespeople';
-import SalespeopleForm from './SalespeopleForm';
-import SalesList from './SalesList';
-import SalesForm from './SalesForm';
+import CustomerList from './sales/CustomerList';
+import CustomerForm from './sales/CustomerForm';
+import Salespeople from './sales/Salespeople';
+import SalespeopleForm from './sales/SalespeopleForm';
+import SalesList from './sales/SalesList';
+import SalesForm from './sales/SalesForm';
 import ServiceHistory from './ServiceHistory';
 
 function App(props) {
