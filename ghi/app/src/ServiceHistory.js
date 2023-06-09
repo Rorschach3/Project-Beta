@@ -5,6 +5,7 @@ function ServiceHistory () {
     const [filteredAppointments, setFilteredAppointments] = useState([]);
 
     const handleSearch = event => {
+        fetchData();
         setSearch(event.target.value);
     }
 
