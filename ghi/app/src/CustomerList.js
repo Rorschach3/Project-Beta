@@ -1,8 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-export default function CustomerList ({customers}) {
+export default function Customer() {
+    const [customers, setCustomers]  = useState([]);
 
-
+    const fetchData = async () => {
+        try {
+            const response = await fetch('http//localhost:8090/api/customers/');
+            if (response.ok) {
+                const data = await response.json();
+                setCustomers(data.customers);
+            }
+        } catch (e) {
+            console.error(e)
+        }
+    }
+    useEffect( () => {
+        fetchData()
+    }, [customers])
 
     return (
         <>
@@ -18,7 +32,8 @@ export default function CustomerList ({customers}) {
                         </tr>
                     </thead>
                     <tbody>
-                        {customers && customers.map((customers) => {
+        
+                        {customers.map((customers) => {
                             return (
                                 <tr key={customers.id}>
                                     <td>{customers.first_name}</td>

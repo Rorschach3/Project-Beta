@@ -5,7 +5,7 @@ export default function Salesperson() {
 
     const fetchData = async () => {
         try {
-            const response = await fetch('http://localhost:8090/api/salespeople')
+            const response = await fetch('http://localhost:8090/api/salespeople/');
             if (response.ok) {
                 const data = await response.json();
                 setSalesperson(data.salesperson);
