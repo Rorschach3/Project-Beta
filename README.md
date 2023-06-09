@@ -399,7 +399,7 @@ Automobile VIN, Salersperson, Customer, Price
 
 # Service Microservice
 
-Kepps track of all service related things to the automobiles, it keeps track of current technicians inside our dealership and also all the service appointments wheter it being past or current. For each technician is assigned a employee id and id to keep track of which tecnician did what service. For each service we keep a record of when it was done, which technician was assigned, the reason, the current status, the vehicle vin, the customer name and their vip status. In order to keep track of VIP statuses we compare the vin inside out inventory with the service appointments data. The technician also has the option to finish and cancel an appointment.
+Kepps track of all service related things to the automobiles, it keeps track of current technicians inside our dealership and also all the service appointments wheter it being past or current. For each technician is assigned a employee id and id to keep track of which tecnician did what service. For each service we keep a record of when it was done, which technician was assigned, the reason, the current status, the vehicle vin, the customer name and their vip status. In order to keep track of VIP statuses we compare the vin inside our Appointment model with the AutomobileVO and if they match, meaning that vin is inside our dealerships inventory making them a VIP. The technician also has the option to finish and cancel an appointment for special occasions.
 
 ## API References For Service
 
@@ -458,6 +458,14 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 			"id": 3
 		}
 	]
+}
+```
+
+**Return Response: Deleting A Technician (id:1)**
+
+```
+{
+	"deleted": true
 }
 ```
 
@@ -556,6 +564,14 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 			}
 		}
 	]
+}
+```
+
+**Return Response: Deleting an Appointment (id:1)**
+
+```
+{
+	"deleted": true
 }
 ```
 
