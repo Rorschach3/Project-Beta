@@ -1,0 +1,7 @@
+{
+    "git.autofetch": true,
+    "workbench.experimental.cloudChanges.autoStore": "onShutdown",
+    "eslint.useESLintClass": true,
+    "editor.unicodeHighlight.includeComments": true,
+    "prettier.resolveGlobalModules": true
+}

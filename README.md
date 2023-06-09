@@ -23,31 +23,36 @@ Then clone the project
   git clone https://gitlab.com/landerosjorge/project-beta.git
 ```
 
-Go to the project directory
+3. Change directories into to the project directory
 
 ```bash
   cd project-beta
 ```
 
-Install database
+4. Create database using Docker command
 
 ```bash
   docker volume create beta-data
 ```
 
-Build the Docker containers
-Wait until the process is completely finished before running the next command.
+5. Build the Docker containers.
+   Wait until this process is completely finished before running the next command.
 
 ```bash
  docker-compose build
 ```
-Start up Docker containers
+
+6. Start up Docker containers
 
 ```bash
  docker-compose up
 ```
 
+7. Open project using your favorite code editor VS Code
 
+```bash
+code .
+```
 
 ## Design
 ![CarCar Design](images/CARCAR.png)
@@ -55,13 +60,21 @@ Start up Docker containers
 ## Homepage
 ![CarCar Landing Page](images/CarCarLandingPage.png)
 
+## Design
+
 #
 
 # Inventory Microservice
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-## API References For Inventory
+### Inventory
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+## API Reference
+
+#### Inventory
 
 ```http
 Automobiles
@@ -75,9 +88,15 @@ Automobiles
 | Update Specific Automobile |  `PUT`   |  `http://localhost:8100/api/automobiles/:vin/` |
 | Delete Specific Automobile |  `DELETE` |  `http://localhost:8100/api/automobiles/:vin/` |
 
+**Return Response:**
+
 ```http
-Manufacturers
+Color, Year, VIN, Vehicle Model ID
 ```
+
+---
+
+***Manufacturers***
 
 | Action         | Request  | Endpoint               |
 | :-----------     | :------- | :--------------------- |
@@ -87,9 +106,15 @@ Manufacturers
 | Update Specific Manufacturer |  `PUT` | `http://localhost:8100/api/manufacturers/:id/` |
 | Delete Specific Manufacturer |  `DELETE`   |  `http://localhost:8100/api/manufacturers/:id/` |
 
+**Return Response:**
+
 ```http
-VehicleModels
+href, ID, Name
 ```
+
+---
+
+***Vehicle Models***
 
 | Action         | Request  | Endpoint               |
 | :-----------  | :------- | :--------------------- |
@@ -99,13 +124,31 @@ VehicleModels
 | Update Specific Vehicle Model |  `PUT`   |  `http://localhost:8100/api/models/:id/` |
 | Delete Specific Vehicle Model |  `DELETE`   |  `http://localhost:8100/api/models/:id/` |
 
-#
+#### Automobile Services
 
 # Sales Microservice
 
+---
+
+### Automobile Services
+
+***Technicians***
+
 The Sales functionality needs to keep track of automobile sales that come from the inventory. A person cannot sell a car that is not listed in the inventory, nor can a person sell a car that has already been sold.
 
-## API References For Sales
+```http
+Appointments
+```
+
+| Action         | Request  | Endpoint               |
+| :-----------     | :------- | :--------------------- |
+| List Appointments |  `GET`   |  `/api/appointments/`   |
+| Create Appointments |  `POST`   |  `/api/appointments`   |
+| Get Appointments |  `GET`   |  `/api/appointments/id/` |
+|Set Appointment status to canceled|`PUT`|`/api/appointments/id/cancel`|
+|Set Appointment status to finished|`PUT`|`/api/appointments/id/finish`|
+
+#### Automobile Sales
 
 ```http
 Salespeople

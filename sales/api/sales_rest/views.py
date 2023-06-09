@@ -32,21 +32,6 @@ class SalespersonEncoder(ModelEncoder):
     ]
 
 
-# class SalesEncoder(ModelEncoder):
-#     model = Sale
-#     properties = [
-#         "salesperson",
-#         "automobile",
-#         "price",
-#         "customer",
-#     ]
-#     encoders = {
-#         "salesperson": SalespersonEncoder(),
-#         "customer": CustomerEncoder(),
-#         "automobile": AutomobileVOEncoder(),
-#     }
-
-
 class SalesEncoder(ModelEncoder):
     model = Sale
     properties = [
@@ -54,6 +39,7 @@ class SalesEncoder(ModelEncoder):
         "customer",
         "salesperson",
         "automobile",
+        "id",
     ]
     encoders = {
         "salesperson": SalespersonEncoder(),
@@ -105,7 +91,7 @@ def api_customer(request, id):
             encoder=CustomerEncoder,
             safe=False,
         )
-    else:
+    else:  # DELETE Request
         count, _ = Customer.objects.filter(id=id).delete()
         return JsonResponse({"deleted": count > 0})
 
@@ -143,12 +129,12 @@ def api_sale(request, id):
             encoder=SalesEncoder,
             safe=False
         )
-    else:
+    else:  # DELETE Request
         count, _ = Sale.objects.filter(id=id).delete()
         return JsonResponse({"delete": count > 0})
 
 
-@require_http_methods(["GET", "POST"])
+@require_http_methods(request_method_list=["GET", "POST"])
 def api_sales(request):
     if request.method == "GET":
         sales = Sale.objects.all()
@@ -157,70 +143,29 @@ def api_sales(request):
             encoder=SalesEncoder
         )
     else:  # POST Request
+        content = json.loads(request.body)
         try:
-            content = json.loads(request.body)
-            sale = Sale.objects.create(**content)
+            autos = AutomobileVO.objects.get(vin=content["automobile"])
+            content["automobile"] = autos
+
+            salespersons = Salesperson.objects.get(id=content["salespersons"])
+            content["salespersons"] = salespersons
+
+            customers = Customer.objects.get(id=content["customers"])
+            content["customers"] = customers
+
+        except AutomobileVO.DoesNotExist or Salesperson.DoesNotExist or Customer.DoesNotExist:
             return JsonResponse(
-                sale,
-                encoder=SalesEncoder,
-                safe=False,
-            )
-        except Sale.DoesNotExist:
-            return JsonResponse(
-                {"message": "Error!"},
+                {"message": "Invalid Information"},
                 status=400,
             )
 
-# class SalesEncoder(ModelEncoder):
-#     model = Sale
-#     properties = [
-#         "price",
-#         "customer",
-#         "salesperson",
-#         "automobile",
-#     ]
-#     encoders = {
-#         "salesperson": SalespersonEncoder(),
-#         "customer": CustomerEncoder(),
-#         "automobile": AutomobileVOEncoder(),
-#     }
-
-
-# class SalesEncoder(ModelEncoder):
-#     model = Sale
-
-#     properties = [
-#         "price",
-#         "customer",
-#         "salesperson",
-#         "automobile",
-#     ]
-
-    # encoders = {
-    #     "salesperson": SalespersonEncoder(),
-    #     "customer": CustomerEncoder(),
-    #     "automobile": AutomobileVOEncoder(),
-    # }
-
-    # def default(self, obj):
-    #     if isinstance(obj, Sale):
-    #         return {
-    #             "price": obj.price,
-    #             "customer": {
-    #                 "first_name": obj.customer.first_name,
-    #                 "last_name": obj.customer.last_name,
-    #             },
-    #             "salesperson": {
-    #                 "first_name": obj.salesperson.first_name,
-    #                 "last_name": obj.salesperson.last_name,
-    #             },
-    #             "automobile": {
-    #                 "vin": obj.automobile.vin,
-    #             },
-    #         }
-    #     return super().default(obj)
-
-
+        sold = Sale.objects.create(**content)
+        return JsonResponse(
+                sold,
+                encoder=SalesEncoder,
+                safe=False
+            )
 
 # @require_http_methods(["GET", "DELETE"])
 # def api_sale(request, id):
