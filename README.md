@@ -469,7 +469,7 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 | :-----------     | :------- | :--------------------- |
 | List Appointments |  `GET`   |  `http://localhost:8080/api/appointments/`   |
 | Create an Appointment |  `POST`   |  `http://localhost:8080/api/appointments/`   |
-| Delete aan Appointment |  `DELETE`   |  `http://localhost:8080/api/appointments/:id/`   |
+| Delete an Appointment |  `DELETE`   |  `http://localhost:8080/api/appointments/:id/`   |
 | Finish Appointment |  `PUT`   |  `http://localhost:8080/api/appointments/:id/finish/`   |
 | Cancel Appointment |  `PUT`   |  `http://localhost:8080/api/appointments/:id/cancel/`   |
 
