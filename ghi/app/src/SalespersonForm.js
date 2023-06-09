@@ -1,11 +1,10 @@
 import React from "react";
 import { useState } from 'react';
 
-export default function CustomerForm() {
+function SalespersonForm(){
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [address, setAddress] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
+    const [employeeId, setEmployeeId] = useState('');
 
 
     const handleFirstName = (event) => {
@@ -18,14 +17,9 @@ export default function CustomerForm() {
         setLastName(value);
     }
 
-    const handleAddress = (event) => {
+    const handleEmployeeId = (event) => {
         const value = event.target.value;
-        setAddress(value);
-    }
-
-    const handlePhoneNumber = (event) => {
-        const value = event.target.value;
-        setPhoneNumber(value);
+        setEmployeeId(value)
     }
 
     async function handleSubmit(event) {
@@ -34,8 +28,7 @@ export default function CustomerForm() {
 
         data.first_name = firstName;
         data.last_name = lastName;
-        data.address = address;
-        data.phone_number = phoneNumber;
+        data.employee_id = employeeId;
 
         const fetchConfig = {
             method: 'post',
@@ -44,25 +37,25 @@ export default function CustomerForm() {
                 'Content-Type': 'application/json'
             },
         }
-        const response = await fetch('http://localhost:8090/api/customers/', fetchConfig)
+        const response = await fetch('http://localhost:8090/api/salespeople/', fetchConfig);
         if (response.ok) {
             await response.json();
 
+            setEmployeeId('');
             setFirstName('');
             setLastName('');
-            setAddress('');
-            setPhoneNumber('');
         }
     }
 
     return (
-        <>
-        <div className="row">
+            <div className="row">
             <div className="offset-3 col-6">
                     <div className="shadow p-4 mt-4 form-control">
-                        <h1>Add a Customer</h1>
-                            <form onSubmit={handleSubmit} id="create-customer-form">
-                                <div className="form-floating mb-3">
+                            <h1>Add a Salesperson</h1>
+                                <form onSubmit={handleSubmit} id="create-employee-form">
+
+
+                            <div className="form-floating mb-3">
                                     <input onChange={handleFirstName} value={firstName} required type="text" name="firstname" id="firstname" className="form-control" />
                                     <label htmlFor="firstname">First Name</label>
                                 </div>
@@ -71,18 +64,14 @@ export default function CustomerForm() {
                                     <label htmlFor="lastname">Last Name</label>
                                 </div>
                                 <div className="form-floating mb-3">
-                                    <input onChange={handleAddress} value={address} required type="text" name="address" id="address" className="form-control" />
-                                    <label htmlFor="address">Address</label>
+                                    <input onChange={handleEmployeeId} value={employeeId} required type="text" name="employeeId" id="employeeId" className="form-control" />
+                                    <label htmlFor="employeeId">Employee Id</label>
                                 </div>
-                                <div className="form-floating mb-3">
-                                    <input onChange={handlePhoneNumber} value={phoneNumber} required type="text" name="phonenumber" id="phonenumber" className="form-control" />
-                                    <label htmlFor="phonenumber">Phone Number</label>
-                                </div>
-                                <button className="btn btn-success btn-lg">Create</button>
-                            </form>
-                        </div>
+                            <button className="btn btn-success btn-lg">Create</button>
+                        </form>
                     </div>
                 </div>
-            </>
-        )
-    };
+            </div>
+    )};
+
+    export default SalespersonForm;

@@ -11,12 +11,12 @@ import TechnicianForm from './TechnicianForm';
 import TechnicianList from './TechnicianList';
 import AppointmentForm from './AppointmentForm';
 import AppointmentList from './AppointmentList';
-import CustomerList from './sales/CustomerList';
-import CustomerForm from './sales/CustomerForm';
-import Salespeople from './sales/Salespeople';
-import SalespeopleForm from './sales/SalespeopleForm';
-import SalesList from './sales/SalesList';
-import SalesForm from './sales/SalesForm';
+import CustomerList from './CustomerList';
+import CustomerForm from './CustomerForm';
+import Salespeople from './Salespeople';
+import SalespersonForm from './SalespersonForm';
+import SalesList from './SalesList';
+import SalesForm from './SalesForm';
 import ServiceHistory from './ServiceHistory';
 
 function App(props) {
@@ -38,9 +38,9 @@ function App(props) {
           <Route path="service/appointment" element={<AppointmentList />} />
           <Route path="service/history" element={<ServiceHistory />} />
           <Route path="sales/customers" element={<CustomerList/>} />
-          <Route path="sales/customers/new" element={<CustomerForm />} />
+          <Route path="sales/customer/new" element={<CustomerForm />} />
           <Route path="sales/salespeople" element={<Salespeople/>} />
-          <Route path="sales/salespeople/new" element={<SalespeopleForm />} />
+          <Route path="sales/salesperson/new" element={<SalespersonForm />} />
           <Route path="sales/sales" element={<SalesList/>} />
           <Route path="sales/sales/new" element={<SalesForm />} />
         </Routes>

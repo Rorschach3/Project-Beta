@@ -39,7 +39,7 @@ def poll(repeat=True):
         if (not repeat):
             break
 
-        time.sleep(10)
+        time.sleep(30)
 
 
 if __name__ == "__main__":

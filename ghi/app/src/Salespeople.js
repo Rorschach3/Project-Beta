@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 
-export default function SalesPeopleList() {
-    const [salesPerson, setSalesPerson] = useState([])
+export default function Salesperson() {
+    const [salesperson, setSalesperson] = useState([])
 
     const fetchData = async () => {
         try {
-            const response = await fetch('http://localhost:8090/api/salespeople/')
+            const response = await fetch('http://localhost:8090/api/salespeople')
             if (response.ok) {
                 const data = await response.json();
-                setSalesPerson(data.salespeople);
+                setSalesperson(data.salesperson);
             }
         } catch (e) {
             console.error(e)
@@ -16,14 +16,14 @@ export default function SalesPeopleList() {
     }
     useEffect( () => {
         fetchData()
-    }, [salesPerson])
+    }, [salesperson])
 
     return (
         <>
             <div className='container overflow-hidden'>
-                <h1>Sales People</h1>
+                <h1>Salespeople</h1>
                 <table className='table table-striped'>
-                    <thead>
+  ddd                  <thead>
                         <tr>
                             <th>Employee ID</th>
                             <th>First Name</th>
@@ -31,12 +31,12 @@ export default function SalesPeopleList() {
                         </tr>
                     </thead>
                     <tbody>
-                        {salesPerson.map((salespeople) =>{
+                        {salesperson.map((salesperson) =>{
                             return (
-                                <tr key={salespeople.id}>
-                                    <td>{salespeople.employee_id}</td>
-                                    <td>{salespeople.first_name}</td>
-                                    <td>{salespeople.last_name}</td>
+                                <tr key={salesperson.id}>
+                                    <td>{salesperson.employee_id}</td>
+                                    <td>{salesperson.first_name}</td>
+                                    <td>{salesperson.last_name}</td>
                                 </tr>
                             )
                         })}

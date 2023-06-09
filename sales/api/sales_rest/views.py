@@ -30,56 +30,6 @@ class SalespersonEncoder(ModelEncoder):
         "last_name",
         "employee_id"
     ]
-    
-
-class SalesDetailEncoder(ModelEncoder):
-    model = Sale
-
-    properties = [
-        "price",
-        "customer",
-        "salesperson",
-        "automobile",
-    ]
-
-    encoders = {
-        "salesperson": SalespersonEncoder(),
-        "customer": CustomerEncoder(),
-        "automobile": AutomobileVOEncoder(),
-    }
-
-    def default(self, obj):
-        if isinstance(obj, Sale):
-            return {
-                "price": obj.price,
-                "customer": {
-                    "first_name": obj.customer.first_name,
-                    "last_name": obj.customer.last_name,
-                },
-                "salesperson": {
-                    "first_name": obj.salesperson.first_name,
-                    "last_name": obj.salesperson.last_name,
-                },
-                "automobile": {
-                    "vin": obj.automobile.vin,
-                },
-            }
-        return super().default(obj)
-
-
-# class SalesEncoder(ModelEncoder):
-#     model = Sale
-#     properties = [
-#         "salesperson",
-#         "automobile",
-#         "price",
-#         "customer",
-#     ]
-#     encoders = {
-#         "salesperson": SalespersonEncoder(),
-#         "customer": CustomerEncoder(),
-#         "automobile": AutomobileVOEncoder(),
-#     }
 
 
 class SalesEncoder(ModelEncoder):
@@ -175,7 +125,7 @@ def api_sale(request, id):
         sale = Sale.objects.get(id=id)
         return JsonResponse(
             sale,
-            encoder=SalesDetailEncoder,
+            encoder=SalesEncoder,
             safe=False
         )
     else:  # DELETE Request
@@ -205,8 +155,6 @@ def api_sales(request):
                 {"message": "Error!"},
                 status=400,
             )
-
-
 
 
 # @require_http_methods(["GET", "DELETE"])
