@@ -5,6 +5,7 @@ function ServiceHistory () {
     const [filteredAppointments, setFilteredAppointments] = useState([]);
 
     const handleSearch = event => {
+        fetchData();
         setSearch(event.target.value);
     }
 
@@ -21,10 +22,14 @@ function ServiceHistory () {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const results = filteredAppointments.filter((appointment) => {
-            return appointment.vin === search
+            if (search === "") {
+                return fetchData();
+            } else {
+                return appointment.vin === search
+            }
         });
         setFilteredAppointments(results);
-        }
+    }
 
     useEffect(() => {
         fetchData();

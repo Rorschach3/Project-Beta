@@ -60,39 +60,13 @@ code .
 ## Homepage
 ![CarCar Landing Page](images/CarCarLandingPage.png)
 
-## Design
-
 #
 
 # Inventory Microservice
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Our Inventory Microservice creates data for both Sales and Service to use with its Automobile. It also keeps track of the manufacturer and model of the certain automobile. When that data gets sent to the other microservices with a poller, its stored as AutomobileVO(a reference to Automobile). We do so to keep on track of the current inventory of cars we have in our dealership.
 
-### Inventory
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-## API Reference
-
-#### Inventory
-
-```http
-Automobiles
-```
-
-| Action         | Request  | Endpoint               |
-| :-----------     | :------- | :--------------------- |
-| List Automobiles |  `GET`   |  `http://localhost:8100/api/automobiles/`   |
-| Create Automobile |  `POST`   |  `http://localhost:8100/api/automobiles/`   |
-| Get Specific Automobile     | `GET`   | `http://localhost:8100/api/automobiles/:vin/`|
-| Update Specific Automobile |  `PUT`   |  `http://localhost:8100/api/automobiles/:vin/` |
-| Delete Specific Automobile |  `DELETE` |  `http://localhost:8100/api/automobiles/:vin/` |
-
-**Return Response:**
-
-```http
-Color, Year, VIN, Vehicle Model ID
-```
+## API References For Inventory
 
 ---
 
@@ -106,10 +80,46 @@ Color, Year, VIN, Vehicle Model ID
 | Update Specific Manufacturer |  `PUT` | `http://localhost:8100/api/manufacturers/:id/` |
 | Delete Specific Manufacturer |  `DELETE`   |  `http://localhost:8100/api/manufacturers/:id/` |
 
-**Return Response:**
+**Body Requred to Create A Manufacturer**
 
-```http
-href, ID, Name
+```
+{
+  "name": "Honda"
+}
+```
+
+**Return Response: Creating A Manufacturer**
+
+```
+{
+  "href": "/api/manufacturers/1/",
+  "id": 1,
+  "name": "Honda"
+}
+```
+
+**Return Response: List Manufacturers**
+
+```
+{
+	"manufacturers": [
+		{
+			"href": "/api/manufacturers/1/",
+			"id": 1,
+			"name": "Honda"
+		},
+		{
+			"href": "/api/manufacturers/2/",
+			"id": 2,
+			"name": "Nissan"
+		},
+		{
+			"href": "/api/manufacturers/3/",
+			"id": 3,
+			"name": "Toyota"
+		}
+	]
+}
 ```
 
 ---
@@ -124,11 +134,190 @@ href, ID, Name
 | Update Specific Vehicle Model |  `PUT`   |  `http://localhost:8100/api/models/:id/` |
 | Delete Specific Vehicle Model |  `DELETE`   |  `http://localhost:8100/api/models/:id/` |
 
-#### Automobile Services
+**Body Requred to Create A Vehicle Model**
 
-# Sales Microservice
+```
+{
+  "name": "S200",
+  "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/HondaS2000-004.jpg/1200px-HondaS2000-004.jpg",
+  "manufacturer_id": 1
+}
+```
+
+**Return Response: Creating A Vehicle Model**
+
+```
+{
+	"href": "/api/models/1/",
+	"id": 1,
+	"name": "S200",
+	"picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/HondaS2000-004.jpg/1200px-HondaS2000-004.jpg",
+	"manufacturer": {
+		"href": "/api/manufacturers/1/",
+		"id": 1,
+		"name": "Honda"
+	}
+}
+```
+
+**Return Response: List Vehicle Models**
+
+```
+{
+	"models": [
+		{
+			"href": "/api/models/1/",
+			"id": 1,
+			"name": "S200",
+			"picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/HondaS2000-004.jpg/1200px-HondaS2000-004.jpg",
+			"manufacturer": {
+				"href": "/api/manufacturers/1/",
+				"id": 1,
+				"name": "Honda"
+			}
+		},
+		{
+			"href": "/api/models/2/",
+			"id": 2,
+			"name": "R34",
+			"picture_url": "https://cars.usnews.com/images/article/202203/129043/001-_Tokumeigakarinoaoshima_-_wc_-_Tuned_Nissan_SKYLINE_GT-R_GF-BNR34_front_Cropped.jpg",
+			"manufacturer": {
+				"href": "/api/manufacturers/2/",
+				"id": 2,
+				"name": "Nissan"
+			}
+		},
+		{
+			"href": "/api/models/3/",
+			"id": 3,
+			"name": "Supra",
+			"picture_url": "https://cdn.motor1.com/images/mgl/PKZQL/s1/1997-toyota-supra-sold-for-176-000-at-auction.jpg",
+			"manufacturer": {
+				"href": "/api/manufacturers/3/",
+				"id": 3,
+				"name": "Toyota"
+			}
+		}
+	]
+}
+```
 
 ---
+
+***Automobiles***
+
+| Action         | Request  | Endpoint               |
+| :-----------     | :------- | :--------------------- |
+| List Automobiles |  `GET`   |  `http://localhost:8100/api/automobiles/`   |
+| Create Automobile |  `POST`   |  `http://localhost:8100/api/automobiles/`   |
+| Get Specific Automobile     | `GET`   | `http://localhost:8100/api/automobiles/:vin/`|
+| Update Specific Automobile |  `PUT`   |  `http://localhost:8100/api/automobiles/:vin/` |
+| Delete Specific Automobile |  `DELETE` |  `http://localhost:8100/api/automobiles/:vin/` |
+
+**Body Requred to Create A Automobile**
+
+```
+{
+  "color": "White",
+  "year": 2000,
+  "vin": "JHMAP11432T2N3BH3",
+  "model_id": 1
+}
+```
+
+**Return Response: Creating A Automobile**
+
+```
+{
+	"href": "/api/automobiles/JHMAP11432T2N3BH3/",
+	"id": 1,
+	"color": "White",
+	"year": 2000,
+	"vin": "JHMAP11432T2N3BH3",
+	"model": {
+		"href": "/api/models/1/",
+		"id": 1,
+		"name": "S200",
+		"picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/HondaS2000-004.jpg/1200px-HondaS2000-004.jpg",
+		"manufacturer": {
+			"href": "/api/manufacturers/1/",
+			"id": 1,
+			"name": "Honda"
+		}
+	},
+	"sold": false
+}
+```
+
+**Return Response: List Automobiles**
+
+```
+{
+	"autos": [
+		{
+			"href": "/api/automobiles/JHMAP11432T2N3BH3/",
+			"id": 1,
+			"color": "White",
+			"year": 2000,
+			"vin": "JHMAP11432T2N3BH3",
+			"model": {
+				"href": "/api/models/1/",
+				"id": 1,
+				"name": "S200",
+				"picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/HondaS2000-004.jpg/1200px-HondaS2000-004.jpg",
+				"manufacturer": {
+					"href": "/api/manufacturers/1/",
+					"id": 1,
+					"name": "Honda"
+				}
+			},
+			"sold": false
+		},
+		{
+			"href": "/api/automobiles/FDJ9011432T2N3BH3/",
+			"id": 2,
+			"color": "White",
+			"year": 1998,
+			"vin": "FDJ9011432T2N3BH3",
+			"model": {
+				"href": "/api/models/2/",
+				"id": 2,
+				"name": "R34",
+				"picture_url": "https://cars.usnews.com/images/article/202203/129043/001-_Tokumeigakarinoaoshima_-_wc_-_Tuned_Nissan_SKYLINE_GT-R_GF-BNR34_front_Cropped.jpg",
+				"manufacturer": {
+					"href": "/api/manufacturers/2/",
+					"id": 2,
+					"name": "Nissan"
+				}
+			},
+			"sold": false
+		},
+		{
+			"href": "/api/automobiles/FDJ9085032T2N3BH3/",
+			"id": 3,
+			"color": "Black",
+			"year": 1997,
+			"vin": "FDJ9085032T2N3BH3",
+			"model": {
+				"href": "/api/models/3/",
+				"id": 3,
+				"name": "Supra",
+				"picture_url": "https://cdn.motor1.com/images/mgl/PKZQL/s1/1997-toyota-supra-sold-for-176-000-at-auction.jpg",
+				"manufacturer": {
+					"href": "/api/manufacturers/3/",
+					"id": 3,
+					"name": "Toyota"
+				}
+			},
+			"sold": false
+		}
+	]
+}
+```
+
+---
+
+# Sales Microservice
 
 ### Automobile Services
 
@@ -210,28 +399,234 @@ Automobile VIN, Salersperson, Customer, Price
 
 # Service Microservice
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Kepps track of all service related things to the automobiles, it keeps track of current technicians inside our dealership and also all the service appointments wheter it being past or current. For each technician is assigned a employee id and id to keep track of which tecnician did what service. For each service we keep a record of when it was done, which technician was assigned, the reason, the current status, the vehicle vin, the customer name and their vip status. In order to keep track of VIP statuses we compare the vin inside our Appointment model with the AutomobileVO and if they match, meaning that vin is inside our dealerships inventory making them a VIP. The technician also has the option to finish and cancel an appointment for special occasions.
 
- ## API References For Service
+## API References For Service
 
-```http
-Technicians
-```
+---
 
-| Action         | Request  | Endpoint               |
-| :-----------     | :------- | :--------------------- |
-| List Technicians |  `GET`   |  `/api/technicians/`   |
-| Create Technician |  `POST`   |  `/api/technicians/`   |
-| Delete Technician | `DELETE` | `/api/technicians/id/`|
-
-```http
-Appointments
-```
+***Technicians***
 
 | Action         | Request  | Endpoint               |
 | :-----------     | :------- | :--------------------- |
-| List Appointments |  `GET`   |  `/api/appointments/`   |
-| Create Appointments |  `POST`   |  `/api/appointments`   |
-| Get Appointments |  `GET`   |  `/api/appointments/id/` |
-|Set Appointment status to canceled|`PUT`|`/api/appointments/id/cancel`|
-|Set Appointment status to finished|`PUT`|`/api/appointments/id/finish`|
+| List technicians |  `GET`   |  `http://localhost:8080/api/technicians/`   |
+| Create a technician |  `POST`   |  `http://localhost:8080/api/technicians/`   |
+| Delete a specific technician |  `DELETE`   |  `http://localhost:8080/api/technicians/:id/`   |
+
+**Body Requred to Create A Technician**
+
+```
+{
+	"first_name": "Jorge",
+	"last_name": "Landeros",
+	"employee_id": "1"
+}
+```
+
+**Return Response: Creating A Technician**
+
+```
+{
+	"first_name": "Jorge",
+	"last_name": "Landeros",
+	"employee_id": "1",
+	"id": 1
+}
+```
+
+**Return Response: List Technicians**
+
+```
+{
+	"technicians": [
+		{
+			"first_name": "Jorge",
+			"last_name": "Landeros",
+			"employee_id": "1",
+			"id": 1
+		},
+		{
+			"first_name": "John",
+			"last_name": "Doe",
+			"employee_id": "2",
+			"id": 2
+		},
+		{
+			"first_name": "Jane",
+			"last_name": "Doe",
+			"employee_id": "3",
+			"id": 3
+		}
+	]
+}
+```
+
+**Return Response: Deleting A Technician (id:1)**
+
+```
+{
+	"deleted": true
+}
+```
+
+---
+
+***Appointments***
+
+| Action         | Request  | Endpoint               |
+| :-----------     | :------- | :--------------------- |
+| List Appointments |  `GET`   |  `http://localhost:8080/api/appointments/`   |
+| Create an Appointment |  `POST`   |  `http://localhost:8080/api/appointments/`   |
+| Delete an Appointment |  `DELETE`   |  `http://localhost:8080/api/appointments/:id/`   |
+| Finish Appointment |  `PUT`   |  `http://localhost:8080/api/appointments/:id/finish/`   |
+| Cancel Appointment |  `PUT`   |  `http://localhost:8080/api/appointments/:id/cancel/`   |
+
+**Body Requred to Create an Appointment**
+
+```
+{
+	"date_time": "2026-06-06T23:29:43+00:00",
+	"reason": "Windshield",
+	"vin": "JHMAP11432T2N3BH3",
+	"customer": "John Doe",
+	"technician": "1"
+}
+```
+
+**Return Response: Creating an Appointment**
+
+```
+{
+	"id": 1,
+	"is_vip": true,
+	"date_time": "2026-06-06T23:29:43+00:00",
+	"reason": "Windshield",
+	"status": "current",
+	"vin": "JHMAP11432T2N3BH3",
+	"customer": "John Doe",
+	"technician": {
+		"first_name": "Jorge",
+		"last_name": "Landeros",
+		"employee_id": "1",
+		"id": 1
+	}
+}
+```
+
+**Return Response: List Appointments**
+
+```
+{
+	"appointments": [
+		{
+			"id": 1,
+			"is_vip": true,
+			"date_time": "2026-06-06T23:29:43+00:00",
+			"reason": "Windshield",
+			"status": "current",
+			"vin": "JHMAP11432T2N3BH3",
+			"customer": "John Doe",
+			"technician": {
+				"first_name": "Jorge",
+				"last_name": "Landeros",
+				"employee_id": "1",
+				"id": 1
+			}
+		},
+		{
+			"id": 2,
+			"is_vip": false,
+			"date_time": "2026-03-02T22:12:55+00:00",
+			"reason": "Engine Failures",
+			"status": "current",
+			"vin": "JHMAP11432T43RF34",
+			"customer": "Alex Grace",
+			"technician": {
+				"first_name": "John",
+				"last_name": "Doe",
+				"employee_id": "2",
+				"id": 2
+			}
+		},
+		{
+			"id": 3,
+			"is_vip": true,
+			"date_time": "2026-11-08T05:30:22+00:00",
+			"reason": "Tire Rotation",
+			"status": "current",
+			"vin": "FDJ9085032T2N3BH3",
+			"customer": "Tom Wood",
+			"technician": {
+				"first_name": "Jane",
+				"last_name": "Doe",
+				"employee_id": "3",
+				"id": 3
+			}
+		}
+	]
+}
+```
+
+**Return Response: Deleting an Appointment (id:1)**
+
+```
+{
+	"deleted": true
+}
+```
+
+**Body Requred to Finish Appointment (id:1)**
+
+```
+{
+	"status": "finished"
+}
+```
+
+**Return Response: Finishing an Appointment**
+
+```
+{
+	"id": 1,
+	"is_vip": true,
+	"date_time": "2026-06-06T23:29:43+00:00",
+	"reason": "Windshield",
+	"status": "finished",
+	"vin": "JHMAP11432T2N3BH3",
+	"customer": "John Doe",
+	"technician": {
+		"first_name": "Jorge",
+		"last_name": "Landeros",
+		"employee_id": "1",
+		"id": 1
+	}
+}
+```
+
+**Body Requred to Cancel Appointment (id:2)**
+
+```
+{
+	"status": "cancelled"
+}
+```
+
+**Return Response: Canceling an Appointment**
+
+```
+{
+	"id": 2,
+	"is_vip": false,
+	"date_time": "2026-03-02T22:12:55+00:00",
+	"reason": "Engine Failures",
+	"status": "cancelled",
+	"vin": "JHMAP11432T43RF34",
+	"customer": "Alex Grace",
+	"technician": {
+		"first_name": "John",
+		"last_name": "Doe",
+		"employee_id": "2",
+		"id": 2
+	}
+}
+```

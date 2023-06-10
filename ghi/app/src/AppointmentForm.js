@@ -45,10 +45,10 @@ function AppointmentForm() {
 
         const appointmentResponse = await fetch(postURL, fetchOptions);
         if (appointmentResponse.ok){
-            setDate('');
+            setCustomer('');
             setReason('');
             setVin('');
-            setCustomer('');
+            setDate('');
             setTechnician('');
         }
     }
@@ -75,8 +75,8 @@ function AppointmentForm() {
                     <h1>Create a service appointment</h1>
                     <form onSubmit={handleSubmit} id="create-appointment-form">
                         <div className="form-floating mb-3">
-                            <input value={dateTime} onChange={handleDate} placeholder="Date Time" required type="datetime-local" name="dateTime" id="dateTime" className="form-control" />
-                            <label htmlFor="dateTime">Date & Time</label>
+                            <input value={customer} onChange={handleCustomer} placeholder="Customer" required type="text" name="customer" id="customer" className="form-control" />
+                            <label htmlFor="customer">Customer</label>
                         </div>
                         <div className="form-floating mb-3">
                             <input value={reason} onChange={handleReason} placeholder="Reason" required type="text" name="reason" id="reason" className="form-control" />
@@ -87,8 +87,8 @@ function AppointmentForm() {
                             <label htmlFor="vin">Vin</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input value={customer} onChange={handleCustomer} placeholder="Customer" required type="text" name="customer" id="customer" className="form-control" />
-                            <label htmlFor="customer">Customer</label>
+                            <input value={dateTime} onChange={handleDate} placeholder="Date Time" required type="datetime-local" name="dateTime" id="dateTime" className="form-control" />
+                            <label htmlFor="dateTime">Date & Time</label>
                         </div>
                         <div className="mb-3">
                             <select value={technician} onChange={handleTechnician} required name="technician" id="technician" className="form-select">
