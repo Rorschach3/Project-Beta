@@ -15,24 +15,25 @@ CarCar, an application for managing aspects of an automobile dealership—specif
 Fork the repository using this link
 `https://gitlab.com/landerosjorge/project-beta`
 
-
-
 Then clone the project
 
 ```bash
   git clone https://gitlab.com/landerosjorge/project-beta.git
+
 ```
 
 3. Change directories into to the project directory
 
 ```bash
   cd project-beta
+
 ```
 
 4. Create database using Docker command
 
 ```bash
   docker volume create beta-data
+
 ```
 
 5. Build the Docker containers.
@@ -40,31 +41,50 @@ Then clone the project
 
 ```bash
  docker-compose build
+
 ```
 
 6. Start up Docker containers
 
 ```bash
  docker-compose up
+
 ```
 
 7. Open project using your favorite code editor VS Code
 
 ```bash
 code .
+
 ```
 
 ## Design
+
 ![CarCar Design](images/CARCAR.png)
 
 ## Homepage
+
 ![CarCar Landing Page](images/CarCarLandingPage.png)
 
-#
+# 
 
 # Inventory Microservice
 
-Our Inventory Microservice creates data for both Sales and Service to use with its Automobile. It also keeps track of the manufacturer and model of the certain automobile. When that data gets sent to the other microservices with a poller, its stored as AutomobileVO(a reference to Automobile). We do so to keep on track of the current inventory of cars we have in our dealership.
+**Overview**
+The Inventory microservice focuses on creating and maintaining data related to the available automobiles. It serves as a centralized system for tracking the inventory and plays a crucial role in supporting both the Sales and Services microservices.
+
+**Functionality**
+The Inventory microservice offers the following key functionalities:
+Inventory Management: It handles the creation, updating, and retrieval of automobile data within the inventory. This includes storing information such as the manufacturer, model, and other relevant details.
+Integration with Sales Microservice: The Inventory microservice collaborates closely with the Sales microservice. It ensures that only cars listed in the inventory can be sold, preventing unauthorized sales of unavailable or sold-out automobiles.
+Integration with Service Microservice: The Inventory microservice also interacts with the Service microservice. It provides the necessary automobile data to support service-related operations and ensures accurate tracking of the current inventory.
+
+**AutomobileVO** Creation: When data is sent from the Inventory microservice to other microservices, such as Sales or Services, a reference known as the AutomobileVO is used. The AutomobileVO contains essential information about the automobiles, including the Vehicle Identification Number (VIN), sold status, and import source. This reference allows efficient communication and synchronization between microservices.
+
+**Dependencies**
+The Inventory microservice relies on the following dependencies:
+Sales Microservice: The Inventory microservice collaborates with the Sales microservice to enforce inventory-related business rules and facilitate the sales process. It ensures that only valid and available cars can be sold.
+Service Microservice: The Inventory microservice integrates with the Service microservice to support service-related operations. It provides the necessary automobile data to enable efficient servicing and maintenance of vehicles.
 
 ## API References For Inventory
 
@@ -82,25 +102,27 @@ Our Inventory Microservice creates data for both Sales and Service to use with i
 
 **Body Required to Create A Manufacturer**
 
-```
+```json
 {
   "name": "Honda"
 }
+
 ```
 
 **Return Response: Creating A Manufacturer**
 
-```
+```json
 {
   "href": "/api/manufacturers/1/",
   "id": 1,
   "name": "Honda"
 }
+
 ```
 
 **Return Response: List Manufacturers**
 
-```
+```json
 {
 	"manufacturers": [
 		{
@@ -120,6 +142,7 @@ Our Inventory Microservice creates data for both Sales and Service to use with i
 		}
 	]
 }
+
 ```
 
 ---
@@ -136,17 +159,18 @@ Our Inventory Microservice creates data for both Sales and Service to use with i
 
 **Body Required to Create A Vehicle Model**
 
-```
+```json
 {
   "name": "S200",
   "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/HondaS2000-004.jpg/1200px-HondaS2000-004.jpg",
   "manufacturer_id": 1
 }
+
 ```
 
 **Return Response: Creating A Vehicle Model**
 
-```
+```json
 {
 	"href": "/api/models/1/",
 	"id": 1,
@@ -158,11 +182,12 @@ Our Inventory Microservice creates data for both Sales and Service to use with i
 		"name": "Honda"
 	}
 }
+
 ```
 
 **Return Response: List Vehicle Models**
 
-```
+```json
 {
 	"models": [
 		{
@@ -200,6 +225,7 @@ Our Inventory Microservice creates data for both Sales and Service to use with i
 		}
 	]
 }
+
 ```
 
 ---
@@ -216,18 +242,19 @@ Our Inventory Microservice creates data for both Sales and Service to use with i
 
 **Body Required to Create A Automobile**
 
-```
+```json
 {
   "color": "White",
   "year": 2000,
   "vin": "JHMAP11432T2N3BH3",
   "model_id": 1
 }
+
 ```
 
 **Return Response: Creating A Automobile**
 
-```
+```json
 {
 	"href": "/api/automobiles/JHMAP11432T2N3BH3/",
 	"id": 1,
@@ -247,11 +274,12 @@ Our Inventory Microservice creates data for both Sales and Service to use with i
 	},
 	"sold": false
 }
+
 ```
 
 **Return Response: List Automobiles**
 
-```
+```json
 {
 	"autos": [
 		{
@@ -313,6 +341,7 @@ Our Inventory Microservice creates data for both Sales and Service to use with i
 		}
 	]
 }
+
 ```
 
 ---
@@ -321,23 +350,21 @@ Our Inventory Microservice creates data for both Sales and Service to use with i
 
 ### Automobile Services
 
-***Technicians***
+**Overview**
+The Sales microservice handles the entire sales lifecycle, from tracking available automobiles to processing sales transactions. It plays a key role in maintaining accurate sales records and enforcing business rules related to car sales.
 
-The Sales functionality needs to keep track of automobile sales that come from the inventory. A person cannot sell a car that is not listed in the inventory, nor can a person sell a car that has already been sold.
+**Dependencies**
+The Sales microservice relies on other microservices and entities to function effectively:
+Inventory Microservice: The Sales microservice depends on the Inventory microservice to access and verify the availability of automobiles for sale. It ensures that only valid and available cars can be sold.
 
-```http
-Appointments
-```
+**Automobile Value Object** (AutomobileVO): The Sales microservice utilizes the AutomobileVO, which contains essential information about the automobiles. This includes the Vehicle Identification Number (VIN), sold status, and import source. The AutomobileVO is also updated automatically through the poller.py file, ensuring accurate and up-to-date information.
+Salesperson and Customer Services: The Sales microservice interacts with the Salesperson and Customer services to associate sales transactions with the respective salespersons and customers. The Salesperson service stores information such as First Name, Last Name, and Employee ID, while the Customer service stores details like First Name, Last Name, Address, and Phone Number.
 
-| Action         | Request  | Endpoint               |
-| :-----------     | :------- | :--------------------- |
-| List Appointments |  `GET`   |  `/api/appointments/`   |
-| Create Appointments |  `POST`   |  `/api/appointments`   |
-| Get Appointments |  `GET`   |  `/api/appointments/id/` |
-|Set Appointment status to canceled|`PUT`|`/api/appointments/id/cancel`|
-|Set Appointment status to finished|`PUT`|`/api/appointments/id/finish`|
-
-#### Automobile Sales
+**Functionality**
+The Sales microservice offers the following key functionalities:
+Sales Transaction Management: It manages the sales transactions, including creating new sales, updating existing sales records, and retrieving sales information.
+Business Rule Enforcement: The Sales microservice enforces specific business rules to maintain data integrity. For example, it ensures that a car cannot be sold if it is not listed in the inventory or has already been sold.
+AutomobileVO Updates: When a new sale is created, the Sales microservice automatically updates the corresponding AutomobileVO's VIN to reflect the sold status. This integration ensures accurate tracking of automobile sales within the Inventory microservice.
 
 ```http
 Salespeople
@@ -345,13 +372,13 @@ Salespeople
 
 | Action       | Request  |Endpoint  |
 | :--------   | :------- | :-------------------------------- |
-| List salespeople | `GET` | `8090/api/salespeople/` |
-| Create salespoeple| `POST` |`809api/salespeople/` |
-| Delete salespeople| `DELETE` | `8090/api/salespeople/id/` |
+| List salespeople | `GET` | `http://localhost:8090/api/salespeople/` |
+| Create salespoeple| `POST` |`http://localhost:8090/api/salespeople/` |
+| Delete salespeople| `DELETE` | `http://localhost:8090/api/salespeople/1/` |
 
-![List Salespeople](images/List Salespeople.png)
-![Create Salespeople](images/Create Salesperson.png)
-![Delete Salespeople](images/Delete Salesperson.png)
+![List Salespeople](images\SalespeopleGet.png)
+![Create Salespeople](images\SalespeoplePost.png)
+![Delete Salespeople](images\SalespeopleDelete.png)
 
 ```http
 return Response:
@@ -364,13 +391,13 @@ Customers
 
 | Action         | Request  | Endpoint               |
 | :-----------     | :------- | :--------------------- |
-| List customers |  `GET`   |  `8090/api/automobiles/`   |
-| Create customer |  `POST`   |  `8090/api/automobiles`   |
-| Delete customer |  `DELETE`   |  `8090/api/automobiles/id/` |
+| List customers |  `GET`   |  `http://localhost:8090/api/customers/`   |
+| Create customer |  `POST`   |  `http://localhost:8090/api/customers/`  |
+| Delete customer |  `DELETE`   |  `http://localhost:8090/api/customers/1/`   |
 
-![List Customers](images/List Customers.png)
-![Create Customer](images/Create Customer.png)
-![Delete Customer](images/Delete Customer.png)
+![List Customers](images\CustomerGet.png)
+![Create Customer](images\CustomerPost.png)
+![Delete Customer](images\CustomerDelete.png)
 
 ```http
 Return Response:
@@ -383,19 +410,20 @@ sales
 
 | Action         | Request  | Endpoint               |
 | :-----------     | :------- | :--------------------- |
-| List sales |  `GET`   |  `8090/api/sales/`   |
-| Record new sale |  `POST`   |  `8090/api/sales/`   |
-| Delete sale |  `DELETE`   |  `8090/api/sales/id/` |
+| List sales |  `GET`   |  `http://localhost:8090/api/sales/`   |
+| Record new sale |  `POST`   |  `http://localhost:8090/api/sales/`    |
+| Delete sale |  `DELETE`   |  `http://localhost:8090/api/sales/1/`  |
 
-![Show Sale](images/Record New Sale.png)
-![Create Sales](images/Create Sales.png)
-![Delete Sale](images/Delete Salepng)
+![Show Sale](images/SalesGet.png)
+![Create Sales](images/SalesPost.png)
+![Delete Sale](images/SalesDeletepng)
 
 ```http
 Return Response:
-Automobile VIN, Salersperson, Customer, Price
+Automobile VIN, Salesperson, Customer, Price
 ```
-#
+
+# 
 
 # Service Microservice
 
@@ -415,28 +443,30 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 
 **Body Required to Create A Technician**
 
-```
+```json
 {
 	"first_name": "Jorge",
 	"last_name": "Landeros",
 	"employee_id": "1"
 }
+
 ```
 
 **Return Response: Creating A Technician**
 
-```
+```json
 {
 	"first_name": "Jorge",
 	"last_name": "Landeros",
 	"employee_id": "1",
 	"id": 1
 }
+
 ```
 
 **Return Response: List Technicians**
 
-```
+```json
 {
 	"technicians": [
 		{
@@ -459,14 +489,16 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 		}
 	]
 }
+
 ```
 
 **Return Response: Deleting A Technician (id:1)**
 
-```
+```sh
 {
 	"deleted": true
 }
+
 ```
 
 ---
@@ -483,7 +515,7 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 
 **Body Required to Create an Appointment**
 
-```
+```json
 {
 	"date_time": "2026-06-06T23:29:43+00:00",
 	"reason": "Windshield",
@@ -491,11 +523,12 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 	"customer": "John Doe",
 	"technician": "1"
 }
+
 ```
 
 **Return Response: Creating an Appointment**
 
-```
+```json
 {
 	"id": 1,
 	"is_vip": true,
@@ -511,11 +544,12 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 		"id": 1
 	}
 }
+
 ```
 
 **Return Response: List Appointments**
 
-```
+```json
 {
 	"appointments": [
 		{
@@ -565,27 +599,30 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 		}
 	]
 }
+
 ```
 
 **Return Response: Deleting an Appointment (id:1)**
 
-```
+```sh
 {
 	"deleted": true
 }
+
 ```
 
 **Body Required to Finish Appointment (id:1)**
 
-```
+```json
 {
 	"status": "finished"
 }
+
 ```
 
 **Return Response: Finishing an Appointment**
 
-```
+```json
 {
 	"id": 1,
 	"is_vip": true,
@@ -601,19 +638,21 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 		"id": 1
 	}
 }
+
 ```
 
 **Body Required to Cancel Appointment (id:2)**
 
-```
+```json
 {
 	"status": "cancelled"
 }
+
 ```
 
 **Return Response: Canceling an Appointment**
 
-```
+```json
 {
 	"id": 2,
 	"is_vip": false,
@@ -629,4 +668,5 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 		"id": 2
 	}
 }
+
 ```

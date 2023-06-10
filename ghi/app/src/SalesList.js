@@ -32,9 +32,7 @@ export default function SalesList() {
                         <tr>
                             <th>Salesperson Emp</th>
                             <th>Salesperson Name</th>
-                            {/* <th>Salesperson Last Name</th> */}
                             <th>Customer Name</th> 
-                            {/* <th>Customer Last Name</th> */}
                             <th>VIN</th>
                             <th>Price</th>
 
