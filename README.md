@@ -80,7 +80,7 @@ Our Inventory Microservice creates data for both Sales and Service to use with i
 | Update Specific Manufacturer |  `PUT` | `http://localhost:8100/api/manufacturers/:id/` |
 | Delete Specific Manufacturer |  `DELETE`   |  `http://localhost:8100/api/manufacturers/:id/` |
 
-**Body Requred to Create A Manufacturer**
+**Body Required to Create A Manufacturer**
 
 ```
 {
@@ -134,7 +134,7 @@ Our Inventory Microservice creates data for both Sales and Service to use with i
 | Update Specific Vehicle Model |  `PUT`   |  `http://localhost:8100/api/models/:id/` |
 | Delete Specific Vehicle Model |  `DELETE`   |  `http://localhost:8100/api/models/:id/` |
 
-**Body Requred to Create A Vehicle Model**
+**Body Required to Create A Vehicle Model**
 
 ```
 {
@@ -214,7 +214,7 @@ Our Inventory Microservice creates data for both Sales and Service to use with i
 | Update Specific Automobile |  `PUT`   |  `http://localhost:8100/api/automobiles/:vin/` |
 | Delete Specific Automobile |  `DELETE` |  `http://localhost:8100/api/automobiles/:vin/` |
 
-**Body Requred to Create A Automobile**
+**Body Required to Create A Automobile**
 
 ```
 {
@@ -413,7 +413,7 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 | Create a technician |  `POST`   |  `http://localhost:8080/api/technicians/`   |
 | Delete a specific technician |  `DELETE`   |  `http://localhost:8080/api/technicians/:id/`   |
 
-**Body Requred to Create A Technician**
+**Body Required to Create A Technician**
 
 ```
 {
@@ -481,7 +481,7 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 | Finish Appointment |  `PUT`   |  `http://localhost:8080/api/appointments/:id/finish/`   |
 | Cancel Appointment |  `PUT`   |  `http://localhost:8080/api/appointments/:id/cancel/`   |
 
-**Body Requred to Create an Appointment**
+**Body Required to Create an Appointment**
 
 ```
 {
@@ -575,7 +575,7 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 }
 ```
 
-**Body Requred to Finish Appointment (id:1)**
+**Body Required to Finish Appointment (id:1)**
 
 ```
 {
@@ -603,7 +603,7 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 }
 ```
 
-**Body Requred to Cancel Appointment (id:2)**
+**Body Required to Cancel Appointment (id:2)**
 
 ```
 {
