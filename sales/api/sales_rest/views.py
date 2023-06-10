@@ -19,7 +19,8 @@ class CustomerEncoder(ModelEncoder):
         "first_name",
         "last_name",
         "address",
-        "phone_number"
+        "phone_number",
+        "id"
     ]
 
 
@@ -28,8 +29,24 @@ class SalespersonEncoder(ModelEncoder):
     properties = [
         "first_name",
         "last_name",
-        "employee_id"
+        "employee_id",
+        "id"
     ]
+
+
+# class SalesEncoder(ModelEncoder):
+#     model = Sale
+#     properties = [
+#         "salesperson",
+#         "automobile",
+#         "price",
+#         "customer",
+#     ]
+#     encoders = {
+#         "salesperson": SalespersonEncoder(),
+#         "customer": CustomerEncoder(),
+#         "automobile": AutomobileVOEncoder(),
+#     }
 
 
 class SalesEncoder(ModelEncoder):
@@ -91,7 +108,7 @@ def api_customer(request, id):
             encoder=CustomerEncoder,
             safe=False,
         )
-    else:  # DELETE Request
+    else:
         count, _ = Customer.objects.filter(id=id).delete()
         return JsonResponse({"deleted": count > 0})
 
@@ -129,12 +146,12 @@ def api_sale(request, id):
             encoder=SalesEncoder,
             safe=False
         )
-    else:  # DELETE Request
+    else:
         count, _ = Sale.objects.filter(id=id).delete()
         return JsonResponse({"delete": count > 0})
 
 
-@require_http_methods(request_method_list=["GET", "POST"])
+@require_http_methods(["GET", "POST"])
 def api_sales(request):
     if request.method == "GET":
         sales = Sale.objects.all()
@@ -143,29 +160,87 @@ def api_sales(request):
             encoder=SalesEncoder
         )
     else:  # POST Request
-        content = json.loads(request.body)
         try:
-            autos = AutomobileVO.objects.get(vin=content["automobile"])
-            content["automobile"] = autos
+            content = json.loads(request.body)
 
-            salespersons = Salesperson.objects.get(id=content["salespersons"])
-            content["salespersons"] = salespersons
+            automobile_data = content.pop("automobile")
+            automobile = AutomobileVO.objects.create(**automobile_data)
 
-            customers = Customer.objects.get(id=content["customers"])
-            content["customers"] = customers
+            customer_data = content.pop("customer")
+            customer = Customer.objects.create(**customer_data)
 
-        except AutomobileVO.DoesNotExist or Salesperson.DoesNotExist or Customer.DoesNotExist:
+            salesperson_data = content.pop("salesperson")
+            salesperson = Salesperson.objects.create(**salesperson_data)
+
+            sale = Sale.objects.create(
+                automobile=automobile,
+                customer=customer,
+                salesperson=salesperson,
+                **content
+            )
+
             return JsonResponse(
-                {"message": "Invalid Information"},
+                sale,
+                encoder=SalesEncoder,
+                safe=False,
+            )
+
+        except Sale.DoesNotExist:
+            return JsonResponse(
+                {"message": "Error!"},
                 status=400,
             )
 
-        sold = Sale.objects.create(**content)
-        return JsonResponse(
-                sold,
-                encoder=SalesEncoder,
-                safe=False
-            )
+# class SalesEncoder(ModelEncoder):
+#     model = Sale
+#     properties = [
+#         "price",
+#         "customer",
+#         "salesperson",
+#         "automobile",
+#     ]
+#     encoders = {
+#         "salesperson": SalespersonEncoder(),
+#         "customer": CustomerEncoder(),
+#         "automobile": AutomobileVOEncoder(),
+#     }
+
+
+# class SalesEncoder(ModelEncoder):
+#     model = Sale
+
+#     properties = [
+#         "price",
+#         "customer",
+#         "salesperson",
+#         "automobile",
+#     ]
+
+    # encoders = {
+    #     "salesperson": SalespersonEncoder(),
+    #     "customer": CustomerEncoder(),
+    #     "automobile": AutomobileVOEncoder(),
+    # }
+
+    # def default(self, obj):
+    #     if isinstance(obj, Sale):
+    #         return {
+    #             "price": obj.price,
+    #             "customer": {
+    #                 "first_name": obj.customer.first_name,
+    #                 "last_name": obj.customer.last_name,
+    #             },
+    #             "salesperson": {
+    #                 "first_name": obj.salesperson.first_name,
+    #                 "last_name": obj.salesperson.last_name,
+    #             },
+    #             "automobile": {
+    #                 "vin": obj.automobile.vin,
+    #             },
+    #         }
+    #     return super().default(obj)
+
+
 
 # @require_http_methods(["GET", "DELETE"])
 # def api_sale(request, id):

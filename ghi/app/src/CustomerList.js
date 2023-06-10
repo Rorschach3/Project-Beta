@@ -5,7 +5,7 @@ export default function Customer() {
 
     const fetchData = async () => {
         try {
-            const response = await fetch('http//localhost:8090/api/customers/');
+            const response = await fetch('http://localhost:8090/api/customers/');
             if (response.ok) {
                 const data = await response.json();
                 setCustomers(data.customers);
@@ -16,7 +16,7 @@ export default function Customer() {
     }
     useEffect( () => {
         fetchData()
-    }, [customers])
+    }, [])
 
     return (
         <>

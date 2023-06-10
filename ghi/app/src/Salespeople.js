@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 
 export default function Salesperson() {
-    const [salesperson, setSalesperson] = useState([])
+    const [salespersons, setSalespersons] = useState([])
 
     const fetchData = async () => {
         try {
             const response = await fetch('http://localhost:8090/api/salespeople/');
             if (response.ok) {
                 const data = await response.json();
-                setSalesperson(data.salesperson);
+                setSalespersons(data.salesperson);
             }
         } catch (e) {
             console.error(e)
@@ -16,7 +16,7 @@ export default function Salesperson() {
     }
     useEffect( () => {
         fetchData()
-    }, [salesperson])
+    }, [salespersons])
 
     return (
         <>
@@ -31,7 +31,7 @@ export default function Salesperson() {
                         </tr>
                     </thead>
                     <tbody>
-                        {salesperson.map((salesperson) =>{
+                        {salespersons.map((salesperson) =>{
                             return (
                                 <tr key={salesperson.id}>
                                     <td>{salesperson.employee_id}</td>
