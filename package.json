@@ -1,7 +1,10 @@
 {
   "dependencies": {
     "bootstrap": "^5.3.0",
-    "mdb-ui-kit": "^6.3.1"
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
+    "mdb-ui-kit": "^6.3.1",
+    "prettier": "^2.8.8"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^5.0.0",
