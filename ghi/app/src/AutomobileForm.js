@@ -92,8 +92,7 @@ function AutoForm() {
                                 })}
                             </select>
                         </div>
-                        <button className="btn btn-primary">Create</button>
-                    </form>
+                        <button className="btn btn-success btn-lg">Create</button>                    </form>
                 </div>
             </div>
         </div>
