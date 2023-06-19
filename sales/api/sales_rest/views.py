@@ -160,36 +160,30 @@ def api_sales(request):
             encoder=SalesEncoder
         )
     else:  # POST Request
+        content = json.loads(request.body)
+
+        salesperson = Salesperson.objects.get(id=content["salesperson"])
+        content["salespersons"] = salesperson
+
+        customer = Customer.objects.get(id=content["customer"])
+        content["customer"] = customer
         try:
-            content = json.loads(request.body)
-
-            automobile_data = content.pop("automobile")
-            automobile = AutomobileVO.objects.create(**automobile_data)
-
-            customer_data = content.pop("customer")
-            customer = Customer.objects.create(**customer_data)
-
-            salesperson_data = content.pop("salesperson")
-            salesperson = Salesperson.objects.create(**salesperson_data)
-
-            sale = Sale.objects.create(
-                automobile=automobile,
-                customer=customer,
-                salesperson=salesperson,
-                **content
-            )
-
+            automobile = AutomobileVO.objects.get(vin=content["automobile"])
+            automobile.sold = True
+            automobile.save()
+            content["automobile"] = automobile
+        except AutomobileVO.DoesNotExist:
             return JsonResponse(
-                sale,
-                encoder=SalesEncoder,
-                safe=False,
-            )
-
-        except Sale.DoesNotExist:
-            return JsonResponse(
-                {"message": "Error!"},
+                {"message": "Invalid Auto Vin"},
                 status=400,
             )
+        sale = Sale.objects.create(**content)
+        return JsonResponse(
+            sale,
+            encoder=SalesEncoder,
+            safe=False,
+        )
+
 
 # class SalesEncoder(ModelEncoder):
 #     model = Sale
@@ -239,7 +233,6 @@ def api_sales(request):
     #             },
     #         }
     #     return super().default(obj)
-
 
 
 # @require_http_methods(["GET", "DELETE"])

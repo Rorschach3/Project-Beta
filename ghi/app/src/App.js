@@ -17,6 +17,7 @@ import Salespeople from './Salespeople';
 import SalespersonForm from './SalespersonForm';
 import SalesList from './SalesList';
 import SalesForm from './SalesForm';
+import SalespersonHistory from './SalespersonHistory';
 import ServiceHistory from './ServiceHistory';
 
 function App(props) {
@@ -43,6 +44,7 @@ function App(props) {
           <Route path="sales/salesperson/new" element={<SalespersonForm />} />
           <Route path="sales/sales" element={<SalesList/>} />
           <Route path="sales/sales/new" element={<SalesForm />} />
+          <Route path="sales/history" element={<SalespersonHistory />} />
         </Routes>
         </div>
     </BrowserRouter>
