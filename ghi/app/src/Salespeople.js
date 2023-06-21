@@ -16,14 +16,14 @@ export default function Salesperson() {
     }
     useEffect( () => {
         fetchData()
-    }, [salespersons])
+    }, [])
 
     return (
         <>
             <div className='container overflow-hidden'>
                 <h1>Salespeople</h1>
                 <table className='table table-striped'>
-                  <thead>
+                    <thead>
                         <tr>
                             <th>Employee ID</th>
                             <th>First Name</th>

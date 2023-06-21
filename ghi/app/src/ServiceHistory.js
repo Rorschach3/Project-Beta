@@ -40,9 +40,9 @@ function ServiceHistory () {
             <h1>Service History</h1>
             <form onSubmit={handleSubmit}>
                 <div className="input-group mb-3">
-                    <input type="search" className="form-control" name="searchInput" placeholder="Search By Vin..." aria-label="Search By Vin..." aria-describedby="submit-button" value={search} onChange={handleSearch}></input>
+                    <input type="search" className="form-control input-outline-success" name="searchInput" placeholder="Search By Vin..." aria-label="Search By Vin..." aria-describedby="submit-button" value={search} onChange={handleSearch}></input>
                     <div className="input-group-append">
-                        <button className="btn btn-outline-secondary" type="submit" id="submit-button">Search</button>
+                        <button className="btn btn-success" type="submit" id="submit-button">Search</button>
                     </div>
                 </div>
             </form>

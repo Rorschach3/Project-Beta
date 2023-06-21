@@ -22,8 +22,8 @@ export default function SalesList() {
 
     return (
         <>
-            {/* const fullSalesName = `${sales.salesperson.first_name} ${sales.salesperson.last_name}`
-            const fullCustomerName = `${sales.customer.first_name} ${sales.customer.last_name}` */}
+            const fullSalesName = `${sales.salesperson.first_name} ${sales.salesperson.last_name}`
+            const fullCustomerName = `${sales.customer.first_name} ${sales.customer.last_name}`
 
             <div className='container overflow-hidden'>
                 <h1>Sales</h1>
