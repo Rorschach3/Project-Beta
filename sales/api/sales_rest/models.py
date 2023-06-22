@@ -37,7 +37,7 @@ class Salesperson(models.Model):
 
 class Sale(models.Model):
     price = models.PositiveIntegerField()
-    
+
     automobile = models.ForeignKey(
         AutomobileVO,
         related_name="AutomobileVO",

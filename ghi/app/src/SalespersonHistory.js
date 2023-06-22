@@ -41,7 +41,7 @@ function SalespersonHistory () {
 
     return (
         <div className='container overflow-hidden'>
-            <h1>Saleperson History</h1>
+            <header>Saleperson History</header>
             <form onChange={handleSalesperson}>
             <div className="mb-3">
                 <select value={salespersons} onChange={handleSalesperson} required name="salesperson" id="salesperson" className="form-select">
