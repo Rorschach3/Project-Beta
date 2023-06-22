@@ -33,6 +33,10 @@ def poll(repeat=True):
         try:
             # Write your polling logic, here
             get_data()
+<<<<<<< HEAD
+=======
+            pass
+>>>>>>> refs/remotes/Master/main
         except Exception as e:
             print(e, file=sys.stderr)
 

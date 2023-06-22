@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 function ManufacturerForm(props) {
+<<<<<<< HEAD
     const [name, setName] = useState('');
 
     const handlNameChange = (event) => {
@@ -8,6 +9,8 @@ function ManufacturerForm(props) {
         setName(value)
     }
 
+=======
+>>>>>>> refs/remotes/Master/main
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = {};
@@ -27,6 +30,7 @@ function ManufacturerForm(props) {
             setName('');
         }
     }
+<<<<<<< HEAD
 
     return (
         <div className="shadow p-4 mt-4">
@@ -34,14 +38,32 @@ function ManufacturerForm(props) {
             <form onSubmit={handleSubmit} id="create-manufacturer-form">
             <div className="form-floating mb-3">
                 <input value={name} onChange={handlNameChange} placeholder="Name" required type="text" name="name" id="name" className="form-control"/>
+=======
+    const [name, setName] = useState('');
+        const handlNameChange = (event) => {
+            const value = event.target.value;
+            setName(value)
+        }
+      return (
+        <div className="shadow p-4 mt-4">
+            <h1>Create Manufacturer</h1>
+            <form onSubmit={handleSubmit} id="create-manufacturer-form">
+            <div className="form-floating mb-3">
+                <input onChange={handlNameChange} placeholder="Name" required type="text" name="name" id="name" className="form-control"/>
+>>>>>>> refs/remotes/Master/main
                 <label htmlFor="fabric">Name</label>
             </div>
             <button className="btn btn-primary">Create</button>
             </form>
         </div>
+<<<<<<< HEAD
         );
     };
 
+=======
+      );}
+      
+>>>>>>> refs/remotes/Master/main
 export default ManufacturerForm;
 
 
@@ -57,3 +79,7 @@ export default ManufacturerForm;
     //         const data = await response.json();
     //         setName(data.name);
     //     }
+<<<<<<< HEAD
+=======
+    
+>>>>>>> refs/remotes/Master/main
