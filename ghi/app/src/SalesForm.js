@@ -4,13 +4,14 @@ import React, { useEffect, useState } from 'react';
 function SalesForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = {};
-    data.automobile = auto;
-    data.salespeople = salespeople;
-    data.customer = customer;
-    data.price = price;
-    const saleUrl = "http://localhost:8090/api/sales/";
-    const fetchConfig = {
+    const data = {
+        automobile: auto,
+        salespeople: salespeople,
+        customer: customer,
+        price: price,
+    };
+        const saleUrl = "http://localhost:8090/api/sales/";
+        const fetchConfig = {
         method: "post",
         body: JSON.stringify(data),
         headers: {
@@ -160,7 +161,7 @@ function SalesForm() {
                         </select>
                     </div>
                     <div className="form-floating mb-3">
-                        <select  value={salespersons} onChange={handleSalesperson} required id="salesperson" name="salesperson" className="form-select">
+                        <select  value={salespeople} onChange={handleSalesperson} required id="salesperson" name="salesperson" className="form-select">
                             <option value="">Choose a salesperson...</option>
                             {salespersons?.map(person => {
                                 return (

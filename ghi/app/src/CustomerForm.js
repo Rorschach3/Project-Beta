@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function CustomerForm() {
     const [firstName, setFirstName] = useState('');
@@ -61,11 +61,11 @@ export default function CustomerForm() {
             <div className="offset-3 col-6">
                     <div className="shadow p-4 mt-4 form-control">
                     <header className="flex justify-between items-center mb-4">
-                        <h1 className="text-2x1">Add a Customer</h1>
+                        <h1 className="texttext-2xl">Add a Customer</h1>
                         </header>
                             <form onSubmit={handleSubmit} id="create-customer-form">
                                 <div className="form-floating mb-3">
-                                    <input onChange={handleFirstName} value={firstName} required type="text" name="firstname" id="firstname" className="bordder-slate-300 rounded px-2 py-1 outline-none focus-within:border-slate-100 form-control" />
+                                    <input onChange={handleFirstName} value={firstName} required type="text" name="firstname" id="firstname" className="form-control" />
                                     <label htmlFor="firstname">First Name</label>
                                 </div>
                                 <div className="form-floating mb-3">

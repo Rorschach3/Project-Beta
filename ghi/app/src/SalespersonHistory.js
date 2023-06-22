@@ -19,7 +19,9 @@ function SalespersonHistory () {
 
         if (response.ok) {
             const data = await response.json();
-            const filteredSales = sales.filter((sale) => sale.salespersons.id === parseInt(salesperson));
+            const filteredSales = data.sales.filter(
+                (sale) => sale.salesperson.id === parseInt(salesperson)
+            );
             setSales(filteredSales);
         }
     }
@@ -44,7 +46,7 @@ function SalespersonHistory () {
             <header>Saleperson History</header>
             <form onChange={handleSalesperson}>
             <div className="mb-3">
-                <select value={salespersons} onChange={handleSalesperson} required name="salesperson" id="salesperson" className="form-select">
+                <select value={salesperson} onChange={handleSalesperson} required name="salesperson" id="salesperson" className="form-select">
                     <option value="">Choose A Salesperson</option>
                     {salespersons.map(person => {
                         return (
