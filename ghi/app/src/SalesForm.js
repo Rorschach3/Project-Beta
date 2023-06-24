@@ -3,13 +3,13 @@ import React, { useEffect, useState } from 'react';
 
 
 function SalesForm() {
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const data = {
-        automobile: auto,
-        salespeople: salespeople,
-        customer: customer,
-        price: price,
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const data = {
+            automobile: auto,
+            salespeople: salespeople,
+            customer: customer,
+            price: price,
     };
         const saleUrl = "http://localhost:8090/api/sales/";
         const fetchConfig = {
@@ -18,9 +18,9 @@ function SalesForm() {
         headers: {
             'Content-Type': 'application/json',
         },
-      }
-      const response = await fetch(saleUrl, fetchConfig);
-      if (response.ok) {
+    }
+    const response = await fetch(saleUrl, fetchConfig);
+    if (response.ok) {
         const newSale = await response.json();
         const carData = {};
         carData.sold = true;
@@ -50,13 +50,13 @@ function SalesForm() {
             setAuto([]);
             setSalespeople([]);
             setCustomer([]);
-            setPrice([]);
+            setPrice("");
         }
         else if (carResponse.ok) {
             const updateCars = cars.filter(object => object.vin !== carVin)
             setCars(updateCars)
             setAuto([]);
-            setSalespersons([]);
+            setSalesperson([]);
             setCustomer([]);
             setPrice("");
             console.error(automobileResponse)
@@ -70,135 +70,118 @@ function SalesForm() {
         }
 
 
+        }
+        else {
+            console.error(response)
+        }
     }
-    else {
-        console.error(response)
-      }
-  }
-  const [cars, setCars] = useState([])
-  const [salespersons, setSalespersons] = useState([])
-  const [customers, setCustomers] = useState([])
-  const [auto, setAuto] = useState([])
-  const [salespeople, setSalespeople] = useState("")
-  const [customer, setCustomer] = useState("")
-  const [price, setPrice] = useState("")
+    const [cars, setCars] = useState([])
+    const [salesperson, setSalesperson] = useState([])
+    const [customers, setCustomers] = useState([])
+    const [auto, setAuto] = useState([])
+    const [salespeople, setSalespeople] = useState([])
+    const [customer, setCustomer] = useState([])
+    const [price, setPrice] = useState("")
 
-
-  // fetches data from the backend, response ok, data is set to the state
-  const fetchCarData = async () => {
-      const response = await fetch("http://localhost:8100/api/automobiles/")
-      if (response.ok) {
-          const data = await response.json()
-          setCars(data.autos)
-      }
-      else {
-          console.error(response)
-      }
-  }
 
     // fetches data from the backend, response ok, data is set to the state
-  const fetchSalespeopleData = async () => {
-      const response = await fetch("http://localhost:8090/api/salespeople/")
-      if (response.ok) {
-          const data = await response.json()
-          setSalespersons(data.salespersons)
-      }
-      else {
-          console.error(response)
-      }
-  }
+    const fetchAllData = async () => {
+        const autoResponse = await fetch('http://localhost:8100/api/automobiles/');
+        if (autoResponse.ok) {
+            const data = await autoResponse.json();
+            setAuto(data.auto)
+        }
 
-  const fetchCustomersData = async () => {
-      const response = await fetch("http://localhost:8090/api/customers/")
-      if (response.ok) {
-          const data = await response.json()
-          setCustomers(data.customers)
-      }
-      else {
-          console.error(response)
-      }
-  }
+        const salesResponse = await fetch('http://localhost:8090/api/salespeople/');
+        if (salesResponse.ok) {
+            const data = await salesResponse.json();
+            setSalespeople(data.salespeople)
+        }
+
+        const customersResponse = await fetch('http://localhost:8090/api/customers/');
+        if (customersResponse.ok) {
+            const data = await customersResponse.json();
+            setCustomer(data.Customer)
+        }
+    }
 
 
-  const handleCar = (event) => {
-    const value = event.target.value;
-    setAuto(value)
-  }
+    const handleCar = (event) => {
+        const value = event.target.value;
+        setCars(value)
+    }
 
-  const handleSalesperson = (event) => {
-    const value = event.target.value;
-    setSalespersons(value)
-  }
+    const handleSalesperson = (event) => {
+        const value = event.target.value;
+        setSalespeople(value)
+    }
 
-  const handleCustomer = (event) => {
-    const value = event.target.value;
-    setCustomer(value)
-  }
+    const handleCustomer = (event) => {
+        const value = event.target.value;
+        setCustomers(value)
+    }
 
-  const handlePrice = (event) => {
-    const value = event.target.value;
-    setPrice(value)
-  }
+    const handlePrice = (event) => {
+        const value = event.target.value;
+        setPrice(value)
+    }
 
-  useEffect(() => {
-    fetchCarData();
-    fetchSalespeopleData();
-    fetchCustomersData();
-  }, [])
+    useEffect(() => {
+        fetchAllData()
+    }, [price])
 
-  return (
-    <div className="row">
-        <div className="offset-3 col-6">
-            <div className="shadow p-4 mt-4">
-                <h1>Record a New Sale</h1>
-                <form onSubmit={handleSubmit}id="create-new-sale">
-                    <div className="form-floating mb-3">
-                        <select  value={auto} onChange={handleCar} required id="vin" name="vin" className="form-select">
-                            <option value="">Choose an automobile VIN...</option>
-                            {cars?.map(car => {
-                                return (
-                                    <option value={car.vin} key={car.id }>
-                                        {car.vin}
-                                    </option>
-                                );
-                            })}
-                        </select>
+    return (
+        <div className="row">
+            <div className="offset-3 col-6">
+                <div className="shadow p-4 mt-4">
+                    <h1>Record a New Sale</h1>
+                    <form onSubmit={handleSubmit}id="create-new-sale">
+                        <div className="form-floating mb-3">
+                            <select onChange={handleCar} value={cars || ''} required id="vin" name="vin" className="form-select">
+                                <option value="">Choose an automobile VIN...</option>
+                                {cars.map(car => {
+                                    return (
+                                        <option value={car.vin} key={car.id }>
+                                            {car.vin}
+                                        </option>
+                                    );
+                                })}
+                            </select>
+                            <div className='form-floating mb-3'>
+                                    <select onChange={handleSalesperson} value={salesperson || ''} id="salesperson" name='salesperson' className='form-select'>
+                                        <option value=''>Choose a salesperson</option>
+                                        {salesperson.map(person => {
+                                            return (
+                                                <option key={person.id} value={person.id}>
+                                                    {person.first_name} {person.last_name}
+                                                </option>
+                                            )
+                                        })}
+                                    </select>
+                                </div>
+                        <div className="form-floating mb-3">
+                            <select value={customers} onChange={handleCustomer} required id="customer" name="customer" className="form-select">
+                                <option value="">Choose a customer...</option>
+                                {customers.map(cust => {
+                                    return (
+                                        <option value={cust.id} key={cust.id }>
+                                            {cust.first_name} {cust.last_name}
+                                        </option>
+                                    );
+                                })}
+                            </select>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <input value={price} onChange={handlePrice} placeholder="Price" required type="number" id="price" name="price" className="form-control"/>
+                            <label htmlFor="price">Price</label>
+                        </div>
+                        <button className="btn btn-success btn-lg">Create</button>
                     </div>
-                    <div className="form-floating mb-3">
-                        <select  value={salespeople} onChange={handleSalesperson} required id="salesperson" name="salesperson" className="form-select">
-                            <option value="">Choose a salesperson...</option>
-                            {salespersons?.map(person => {
-                                console.log(typeof salesperson)
-                                return (
-                                    <option value={person.employee_id} key={person.id }>
-                                        {person.first_name} {person.last_name}
-                                    </option>
-                                );
-                            })}
-                        </select>
-                    </div>
-                    <div className="form-floating mb-3">
-                        <select value={customers} onChange={handleCustomer} required id="customer" name="customer" className="form-select">
-                            <option value="">Choose a customer...</option>
-                            {customers?.map(cust => {
-                                return (
-                                    <option value={cust.id} key={cust.id }>
-                                        {cust.first_name} {cust.last_name}
-                                    </option>
-                                );
-                            })}
-                        </select>
-                    </div>
-                    <div className="form-floating mb-3">
-                        <input value={price} onChange={handlePrice} placeholder="Price" required type="number" id="price" name="price" className="form-control"/>
-                        <label htmlFor="price">Price</label>
-                    </div>
-                    <button className="btn btn-success btn-lg">Create</button>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-  )
-  }
+    )
+    }
 
-  export default SalesForm
+    export default SalesForm

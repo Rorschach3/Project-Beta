@@ -52,13 +52,8 @@ class SalesEncoder(ModelEncoder):
 @require_http_methods(["DELETE"])
 def api_salesperson(request, id):
     if request.method == "DELETE":
-        try:
-            # count, _ = Salesperson.objects.filter(id=id).delete()
-            delete_successful, _ = Salesperson.objects.filter(id=id).delete()
-        except Exception as e:
-            return JsonResponse({'status': False, 'error': str(e)}, status=500)
-
-        return JsonResponse({'status': delete_successful > 0}, status=200)
+        count, _ = Salesperson.objects.filter(id=id).delete()
+        return JsonResponse({"Deleted": count > 0})
 
 
 @require_http_methods(["GET", "POST"])
@@ -69,7 +64,7 @@ def api_salespersons(request):
             {"salespersons": salespersons},
             encoder=SalespersonEncoder,
         )
-    else:  # POST Request
+    else:
         content = json.loads(request.body)
         try:
             salesperson = Salesperson.objects.create(**content)
@@ -80,7 +75,7 @@ def api_salespersons(request):
             )
         except Salesperson.DoesNotExist:
             return JsonResponse(
-                {"message": "Invalid salesperson info"},
+                {"Message": "Invalid Customer Detials"},
                 status=400,
             )
 
@@ -153,5 +148,4 @@ def api_sales(request):
         return JsonResponse(
             sale,
             encoder=SalesEncoder,
-            safe=False,
-        )
+            safe=False,)

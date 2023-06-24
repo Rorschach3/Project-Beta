@@ -50,7 +50,6 @@ MIDDLEWARE = [
 ALLOWED_HOSTS = [
     "localhost",
     "project-beta-inventory-api-1",
-    "project-beta-service-api-1",
 ]
 
 CSRF_TRUSTED_ORIGINS = [

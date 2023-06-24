@@ -19,9 +19,7 @@ function SalespersonHistory () {
 
         if (response.ok) {
             const data = await response.json();
-            const filteredSales = data.sales.filter(
-                (sale) => sale.salesperson.id === parseInt(salesperson)
-            );
+            const filteredSales = sales.filter((sale) => sale.salespersons.id === parseInt(salesperson));
             setSales(filteredSales);
         }
     }
