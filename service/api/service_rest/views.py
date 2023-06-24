@@ -1,10 +1,10 @@
 from django.shortcuts import render
-<<<<<<< HEAD
 from django.http import JsonResponse
 from common.json import ModelEncoder
 from .models import Appointment, Technician, AutomobileVO
 from django.views.decorators.http import require_http_methods
 import json
+
 
 class AutomobileVOEncoder(ModelEncoder):
     model = AutomobileVO
@@ -14,6 +14,7 @@ class AutomobileVOEncoder(ModelEncoder):
         "sold"
     ]
 
+
 class TechnicianEncoder(ModelEncoder):
     model = Technician
     properties = [
@@ -22,6 +23,7 @@ class TechnicianEncoder(ModelEncoder):
         "employee_id",
         "id",
     ]
+
 
 class AppointmentEncoder(ModelEncoder):
     model = Appointment
@@ -63,6 +65,7 @@ def api_list_technicians(request):
                 status=400,
             )
 
+
 @require_http_methods(["DELETE"])
 def api_show_technician(request, id):
     if request.method == "DELETE":
@@ -100,11 +103,13 @@ def api_list_appointments(request):
             safe=False,
         )
 
+
 @require_http_methods(["DELETE"])
 def api_list_appointment(request, id):
     if request.method == "DELETE":
         count, _ = Appointment.objects.filter(id=id).delete()
         return JsonResponse({"deleted": count > 0})
+
 
 @require_http_methods({"PUT"})
 def api__cancel_appointment(request, id):
@@ -117,6 +122,7 @@ def api__cancel_appointment(request, id):
         safe=False
     )
 
+
 @require_http_methods(["PUT"])
 def api_finish_appointment(request, id):
     content = json.loads(request.body)
@@ -127,102 +133,3 @@ def api_finish_appointment(request, id):
         encoder=AppointmentEncoder,
         safe=False
     )
-=======
-from .models import Technician, Appointment, AutomobileVO
-from common.json import ModelEncoder
-from django.views.decorators.http import require_http_methods
-from django.http import JsonResponse
-import json
-
-class TechnicianListEncoder(ModelEncoder):
-    model = Technician
-    properties = [
-        "id",
-    ]
-class TechnicianEncoder(ModelEncoder):
-    model = Technician
-    properties = [
-        "first_name",
-        "last_name",
-        "employee_id",
-        "id",
-    ]
-
-class AutomobileVOEncoder(ModelEncoder):
-    model = AutomobileVO
-    properties = [
-        "import_href",
-        "vin",
-    ]
-
-class AppointmentEncoder(ModelEncoder):
-    model = Appointment
-    properties = [
-        "technician",
-        "status", 
-        "date_time",
-        "reason",
-        "customer",
-        "is_vip",
-        "id",
-        "vin", 
-    ]
-
-    encoders={"technician": TechnicianEncoder()}
-    
-    def get_extra_data(self, obj):
-        if obj.status == "Finished":
-            return {"status": Appointment.Statuses.FINISHED}
-        elif obj.status == "Canceled":
-            return {"status": Appointment.Statuses.CANCELED}
-        else:
-            return {"status": Appointment.Statuses.CREATED}
-
-
-@require_http_methods(["GET", "POST"])
-def technicians(request):
-    if request.method == "GET":
-        technicians = Technician.objects.all()
-        return JsonResponse(
-            {"technicians": technicians},
-            encoder=TechnicianListEncoder,
-            safe=False,
-        )
-    else:
-        content = json.loads(request.body)
-        try:
-            technician = Technician.objects.create(
-                first_name=content["first_name"],
-                last_name=content["last_name"],
-                employee_id=content["employee_id"],
-            )
-            return JsonResponse(
-                {"technician": technician},
-                encoder=TechnicianListEncoder,
-                safe=False,
-            )
-        except:
-            response = JsonResponse(
-                {"message": "Error!!"}
-            )
-            response.status_code = 400
-            return response
-
-
-@require_http_methods(["DELETE"])
-def technician(request, pk):
-    try:
-        technician = Technician.objects.get(id=pk)
-        count, _ = technician.delete()
-        response = JsonResponse(
-            {"deleted": count > 0}
-        )
-        return response
-    except Technician.DoesNotExist:
-        response = JsonResponse(
-            {"message": "Error"}
-        )
-        response.status_code = 404
-        return response
-
->>>>>>> refs/remotes/Master/main
