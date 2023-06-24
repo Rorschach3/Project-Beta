@@ -1,4 +1,5 @@
 from django.urls import path
+<<<<<<< HEAD
 from .views import api_list_technicians, api_show_technician, api_list_appointments, api_list_appointment, api__cancel_appointment, api_finish_appointment
 
 urlpatterns = [
@@ -9,3 +10,11 @@ urlpatterns = [
     path("appointments/<int:id>/cancel/", api__cancel_appointment, name="api_cancel_appointment"),
     path("appointments/<int:id>/finish/", api_finish_appointment, name="api_finish_appointment"),
 ]
+=======
+from .views import technicians, technician
+
+urlpatterns = [
+    path("technicians/", technicians, name="technicians"),
+    path("technicians/<int:pk>", technician, name="technician")
+]
+>>>>>>> refs/remotes/Master/main

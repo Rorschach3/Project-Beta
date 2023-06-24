@@ -5,8 +5,15 @@ from django.urls import reverse
 class Manufacturer(models.Model):
     name = models.CharField(max_length=100, unique=True)
 
+    def get_href(self):
+        return f"/api/manufacturers/{self.id}/"
+    
     def get_api_url(self):
-        return reverse("api_manufacturer", kwargs={"pk": self.id})
+        return {
+            "href": self.get_href(),
+            "id": self.id,
+            "name": self.name
+        }
 
     def __str__(self):
         return self.name

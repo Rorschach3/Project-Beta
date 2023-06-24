@@ -3,5 +3,7 @@
     "workbench.experimental.cloudChanges.autoStore": "onShutdown",
     "eslint.useESLintClass": true,
     "editor.unicodeHighlight.includeComments": true,
-    "prettier.resolveGlobalModules": true
+    "prettier.resolveGlobalModules": true,
+    "ecl.launchConfiguration": "not found",
+    "ecl.targetCluster": {}
 }
