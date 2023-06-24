@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 
+
 function SalesForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -46,17 +47,17 @@ function SalesForm() {
         if (carResponse.ok && automobileResponse.ok) {
             const updateCars = cars.filter(object => object.vin !== carVin)
             setCars(updateCars)
-            setCar("");
-            setSalespeople("");
-            setCustomer("");
-            setPrice("");
+            setAuto([]);
+            setSalespeople([]);
+            setCustomer([]);
+            setPrice([]);
         }
         else if (carResponse.ok) {
             const updateCars = cars.filter(object => object.vin !== carVin)
             setCars(updateCars)
-            setCar("");
-            setSalespersons("");
-            setCustomer("");
+            setAuto([]);
+            setSalespersons([]);
+            setCustomer([]);
             setPrice("");
             console.error(automobileResponse)
         }
@@ -77,11 +78,13 @@ function SalesForm() {
   const [cars, setCars] = useState([])
   const [salespersons, setSalespersons] = useState([])
   const [customers, setCustomers] = useState([])
-  const [auto, setCar] = useState([])
+  const [auto, setAuto] = useState([])
   const [salespeople, setSalespeople] = useState("")
   const [customer, setCustomer] = useState("")
   const [price, setPrice] = useState("")
 
+
+  // fetches data from the backend, response ok, data is set to the state
   const fetchCarData = async () => {
       const response = await fetch("http://localhost:8100/api/automobiles/")
       if (response.ok) {
@@ -93,6 +96,7 @@ function SalesForm() {
       }
   }
 
+    // fetches data from the backend, response ok, data is set to the state
   const fetchSalespeopleData = async () => {
       const response = await fetch("http://localhost:8090/api/salespeople/")
       if (response.ok) {
@@ -118,7 +122,7 @@ function SalesForm() {
 
   const handleCar = (event) => {
     const value = event.target.value;
-    setCar(value)
+    setAuto(value)
   }
 
   const handleSalesperson = (event) => {
@@ -147,7 +151,7 @@ function SalesForm() {
         <div className="offset-3 col-6">
             <div className="shadow p-4 mt-4">
                 <h1>Record a New Sale</h1>
-                <form onSubmit={handleSubmit}  id="create-new-sale">
+                <form onSubmit={handleSubmit}id="create-new-sale">
                     <div className="form-floating mb-3">
                         <select  value={auto} onChange={handleCar} required id="vin" name="vin" className="form-select">
                             <option value="">Choose an automobile VIN...</option>
@@ -164,6 +168,7 @@ function SalesForm() {
                         <select  value={salespeople} onChange={handleSalesperson} required id="salesperson" name="salesperson" className="form-select">
                             <option value="">Choose a salesperson...</option>
                             {salespersons?.map(person => {
+                                console.log(typeof salesperson)
                                 return (
                                     <option value={person.employee_id} key={person.id }>
                                         {person.first_name} {person.last_name}
@@ -173,7 +178,7 @@ function SalesForm() {
                         </select>
                     </div>
                     <div className="form-floating mb-3">
-                        <select value={customer} onChange={handleCustomer} required id="customer" name="customer" className="form-select">
+                        <select value={customers} onChange={handleCustomer} required id="customer" name="customer" className="form-select">
                             <option value="">Choose a customer...</option>
                             {customers?.map(cust => {
                                 return (
