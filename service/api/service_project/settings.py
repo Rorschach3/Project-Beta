@@ -30,13 +30,8 @@ DEBUG = True
 # Application definition
 
 INSTALLED_APPS = [
-<<<<<<< HEAD
     'service_rest.apps.ServiceRestConfig',
     "corsheaders",
-=======
-    "corsheaders",
-    'service_rest.apps.ServiceRestConfig'
->>>>>>> refs/remotes/Master/main
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,11 +41,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-<<<<<<< HEAD
     "corsheaders.middleware.CorsMiddleware",
-=======
-    'corsheaders.middleware.CorsMiddleware',
->>>>>>> refs/remotes/Master/main
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -62,6 +53,7 @@ MIDDLEWARE = [
 ALLOWED_HOSTS = [
     "localhost",
     "project-beta-inventory-api-1",
+    "inventory-api",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
