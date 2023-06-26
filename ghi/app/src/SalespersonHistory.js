@@ -1,26 +1,22 @@
 import { useEffect, useState} from 'react';
 
-// We create three states
 function SalespersonHistory () {
     const [sales, setSales] = useState([]);
     const [salespersons, setSalespersons] = useState([]);
     const [salesperson, setSalesperson] = useState("");
-    // const [selectedSalesperson, setSelectedSalesperson] = useState(null);
 
     const handleSalesperson = event => {
-        const selectedId = event.target.value;
-        setSalesperson(selectedId);
-    };
-
+        fetchData();
+        setSalesperson(event.target.value);
+    }
 
     const fetchData = async () => {
-        const url = 'http://localhost:8090/api/sales/';
+        const url = 'http://localhost:8090/api/sales/'
         const response = await fetch(url);
 
         if (response.ok) {
             const data = await response.json();
-            const filteredSales = sales.filter((sale) => sale.salespersons.id === parseInt(salesperson));
-            setSales(filteredSales);
+            setSales(data.sales)
         }
     }
 
@@ -40,19 +36,19 @@ function SalespersonHistory () {
     }, []);
 
     return (
-        <div className='container overflow-hidden'>
-            <header>Saleperson History</header>
+        <div>
+            <h1>Saleperson History</h1>
             <form onChange={handleSalesperson}>
             <div className="mb-3">
                 <select value={salesperson} onChange={handleSalesperson} required name="salesperson" id="salesperson" className="form-select">
                     <option value="">Choose A Salesperson</option>
-                    {salespersons.map(person => <li>{ person }</li>) }
-                        {/* return (
-                            <option value={person.id} key={person.id}>
-                                {person.first_name}
+                    {salespersons.map(salesperson => {
+                        return (
+                            <option value={salesperson.id} key={salesperson.id}>
+                                {salesperson.first_name}
                             </option>
                         );
-                    })} */}
+                    })}
                 </select>
             </div>
             </form>
@@ -66,17 +62,19 @@ function SalespersonHistory () {
                     </tr>
                 </thead>
                 <tbody>
-                    {sales.map(sale => {
+                    {sales.filter(sale => {
+                        return sale.salesperson.id === salesperson
+                    }).map(sale => {
                         return (
                             <tr className='fw-normal' key={sale.id}>
-                                <td className='fs-3'>{sale.salesperson.employee_id}</td>
-                                <td className='fs-3'>{sale.customer.first_name}</td>
-                                <td className='fs-3'>{sale.automobile.vin}</td>
-                                <td className='fs-3'>{sale.price}</td>
+                                <td className='fs-3'>{ sale.salesperson.first_name }</td>
+                                <td className='fs-3'>{ sale.customer.first_name }</td>
+                                <td className='fs-3'>{ sale.automobile.vin }</td>
+                                <td className='fs-3'>{ sale.price }</td>
                             </tr>
                         );
                     })}
-                    </tbody>
+                </tbody>
             </table>
         </div>
     )

@@ -8,11 +8,11 @@ class AutomobileVO(models.Model):
     vin = models.CharField(max_length=17, unique=True, null=True)
     sold = models.BooleanField(default=False)
 
-    def get_api_url(self):
-        return reverse("api_automobile", kwargs={"VIN:": self.vin})
-
     def __str__(self):
         return f'VIN:{self.vin}'
+
+    def get_api_url(self):
+        return reverse("api_automobile", kwargs={"VIN:": self.vin})
 
 
 class Customer(models.Model):
@@ -35,6 +35,9 @@ class Salesperson(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+    
+    def get_api_url(self):
+        return reverse("api_salespeople", kwargs={"pk": self.pk})
 
 
 class Sale(models.Model):
