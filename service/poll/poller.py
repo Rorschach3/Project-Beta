@@ -8,26 +8,6 @@ sys.path.append("")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "service_project.settings")
 django.setup()
 
-<<<<<<< HEAD
-=======
-# Import models from service_rest, here.
-# from service_rest.models import Something
-from service_rest.models import AutomobileVO
-
-def get_automobiles():
-    response = requests.get(
-        "http://project-beta-inventory-api-1:8000/api/automobiles/")
-
-    if response.ok:
-        content = json.loads(response.content)
-
-        for automobile in content["autos"]:
-            AutomobileVO.objects.update_or_create(
-                import_href=automobile["href"],
-                defaults={"vin": automobile["vin"]}
-            )
-
->>>>>>> refs/remotes/Master/main
 
 # Import models from service_rest, here. Ignore vs-code error hinting
 # from service_rest.models import Something
