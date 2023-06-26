@@ -9,7 +9,7 @@ from django.views.decorators.http import require_http_methods
 # Create your views here.
 class AutomobileVOEncoder(ModelEncoder):
     model = AutomobileVO
-    properties = ["vin", "sold", "import_href", "id"]
+    properties = ["vin", "sold", "import_href"]
 
 
 class CustomerEncoder(ModelEncoder):

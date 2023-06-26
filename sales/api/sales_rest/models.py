@@ -12,7 +12,7 @@ class AutomobileVO(models.Model):
         return reverse("api_automobile", kwargs={"VIN:": self.vin})
 
     def __str__(self):
-        return f'{self.vin}'
+        return f'VIN:{self.vin}'
 
 
 class Customer(models.Model):
@@ -42,24 +42,24 @@ class Sale(models.Model):
 
     automobile = models.ForeignKey(
         AutomobileVO,
-        related_name="automobile",
+        related_name="sales",
         on_delete=models.PROTECT,
         null=True
     )
 
     customer = models.ForeignKey(
         Customer,
-        related_name="customer",
+        related_name="sales",
         on_delete=models.PROTECT,
         null=True,
     )
 
     salesperson = models.ForeignKey(
         Salesperson,
-        related_name="salesperson",
+        related_name="sales",
         on_delete=models.PROTECT,
         null=True
     )
 
     def __str__(self):
-        return f'{self.id}'
+        return f'Sale: {self.id}'
