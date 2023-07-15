@@ -40,7 +40,7 @@ function SalespersonHistory () {
             <h1>Saleperson History</h1>
             <form onChange={handleSalespeople}>
             <div className="mb-3">
-                <select value={salesperson} onChange={handleSalespeople} required name="salesperson" id="salesperson" className="form-select">
+                <select value={salespeople} onChange={handleSalespeople} required name="salesperson" id="salesperson" className="form-select">
                     <option value="">Choose A Salesperson</option>
                     {salespeople.map(salesperson => {
                         return (
@@ -62,18 +62,17 @@ function SalespersonHistory () {
                     </tr>
                 </thead>
                 <tbody>
-                    {sales.filter(sale => {
-                        return sales.id === salesperson
-                    }).map(sale => {
+                    {sales.map((sale) => {
                         return (
-                            <tr className='fw-normal' key={sale.id}>
-                                <td className='fs-3'>{ sale.salesperson.first_name }</td>
-                                <td className='fs-3'>{ sale.customer.first_name }</td>
-                                <td className='fs-3'>{ sale.automobile.vin }</td>
-                                <td className='fs-3'>{ sale.price }</td>
+                            <tr className='fw-normal' key={sale.salesperson.id}>
+                                <td className='fs-3'>{sale.salesperson.first_name}</td>
+                                <td className='fs-3'>{sale.customer.first_name}</td>
+                                <td className='fs-3'>{sale.automobile.vin}</td>
+                                <td className='fs-3'>{sale.price}</td>
                             </tr>
                         );
-                    })}
+                    }
+                )}
                 </tbody>
             </table>
         </div>
