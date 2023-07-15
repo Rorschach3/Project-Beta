@@ -9,7 +9,7 @@ from django.views.decorators.http import require_http_methods
 # Create your views here.
 class AutomobileVOEncoder(ModelEncoder):
     model = AutomobileVO
-    properties = ["vin", "sold", "import_href"]
+    properties = ["vin", "sold", "import_href", "id"]
 
 
 class CustomerEncoder(ModelEncoder):
@@ -50,7 +50,7 @@ class SalesEncoder(ModelEncoder):
 
 
 @require_http_methods(["DELETE"])
-def api_salesperson(request, id):
+def api_delete_salesperson(request, id):
     if request.method == "DELETE":
         count, _ = Salesperson.objects.filter(id=id).delete()
         return JsonResponse({"Deleted": count > 0})
@@ -59,24 +59,35 @@ def api_salesperson(request, id):
 @require_http_methods(["GET", "POST"])
 def api_salespersons(request):
     if request.method == "GET":
-        salespersons = Salesperson.objects.all()
+        salesperson = Salesperson.objects.all()
         return JsonResponse(
-            {"salespersons": salespersons},
+            {"salespeople": salesperson},
             encoder=SalespersonEncoder,
+            safe=False,
         )
-    else:
-        content = json.loads(request.body)
+    elif request.method == "POST":
         try:
-            salesperson = Salesperson.objects.create(**content)
+            content = json.loads(request.body)
+            salespeople = Salesperson.objects.create(**content)
             return JsonResponse(
-                salesperson,
+                {"salespeople": salespeople},
                 encoder=SalespersonEncoder,
                 safe=False,
             )
-        except Salesperson.DoesNotExist:
+        except ValueError as e:
             return JsonResponse(
-                {"Message": "Invalid Customer Detials"},
+                {"message": "Invalid JSON data in the request body: " + str(e)},
                 status=400,
+            )
+        except KeyError as e:
+            return JsonResponse(
+                {"message": "Missing required fields in the request body: " + str(e)},
+                status=400,
+            )
+        except Exception as e:
+            return JsonResponse(
+                {"message": "An error occurred: " + str(e)},
+                status=500,
             )
 
 
@@ -93,20 +104,21 @@ def api_customers(request):
         customers = Customer.objects.all()
         return JsonResponse(
             {"customers": customers},
-            encoder=CustomerEncoder
+            encoder=CustomerEncoder,
+            safe=False,
         )
-    else:  # POST Request
+    else:  # POST request
         content = json.loads(request.body)
         try:
-            customer = Customer.objects.create(**content)
+            customers = Customer.objects.create(**content)
             return JsonResponse(
-                customer,
-                encoder=CustomerEncoder,
-                safe=False,
-            )
+                    customers,
+                    encoder=CustomerEncoder,
+                    safe=False,
+                )
         except Customer.DoesNotExist:
             return JsonResponse(
-                {"message": "Invalid customer info"},
+                {"Message": "Invalid Customer Details"},
                 status=400,
             )
 
@@ -130,7 +142,7 @@ def api_sales(request):
         content = json.loads(request.body)
 
         salesperson = Salesperson.objects.get(id=content["salesperson"])
-        content["salespersons"] = salesperson
+        content["salesperson"] = salesperson
 
         customer = Customer.objects.get(id=content["customer"])
         content["customer"] = customer
@@ -148,4 +160,14 @@ def api_sales(request):
         return JsonResponse(
             sale,
             encoder=SalesEncoder,
-            safe=False,)
+            safe=False,
+        )
+        
+@require_http_methods(["GET"])
+def api_list_autos(request):
+    if request.method == "GET":
+        autos = AutomobileVO.objects.all()
+        return JsonResponse(
+            {"autos": autos},
+            encoder=AutomobileVOEncoder,
+        )

@@ -35,7 +35,7 @@ class Salesperson(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
-    
+
     def get_api_url(self):
         return reverse("api_salespeople", kwargs={"pk": self.pk})
 
@@ -45,7 +45,7 @@ class Sale(models.Model):
 
     automobile = models.ForeignKey(
         AutomobileVO,
-        related_name="sales",
+        related_name="automobiles",
         on_delete=models.PROTECT,
         null=True
     )

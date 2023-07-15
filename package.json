@@ -6,10 +6,12 @@
     "lint-staged": "^13.2.2",
     "mdb-ui-kit": "^6.3.1",
     "prettier": "^2.8.8",
+    "react-scripts": "^5.0.1",
     "react-select": "^5.7.3"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^5.0.0",
     "postcss": "^8.4.24"
-  }
+  },
+  "scripts": { "start": "react-scripts start", "build": "react-scripts --max_old_space_size=4096 build", "test": "react-scripts test", "precommit": "lint-staged" },
 }
