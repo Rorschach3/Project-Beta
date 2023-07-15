@@ -62,7 +62,9 @@ function SalespersonHistory () {
                     </tr>
                 </thead>
                 <tbody>
-                    {sales.map((sale) => {
+                    {sales.filter(sale => {
+                        return sale.salesperson.id == salesperson
+                    }).map(sale => {
                         return (
                             <tr className='fw-normal' key={sale.salesperson.id}>
                                 <td className='fs-3'>{sale.salesperson.first_name}</td>
