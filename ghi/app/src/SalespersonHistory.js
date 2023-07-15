@@ -1,11 +1,11 @@
-import { useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 
 function SalespersonHistory () {
     const [sales, setSales] = useState([]);
-    const [salespersons, setSalespersons] = useState([]);
+    const [salespeople, setSalespeople] = useState([]);
     const [salesperson, setSalesperson] = useState("");
 
-    const handleSalesperson = event => {
+    const handleSalespeople = event => {
         fetchData();
         setSalesperson(event.target.value);
     }
@@ -26,7 +26,7 @@ function SalespersonHistory () {
 
         if (response.ok) {
             const data = await response.json();
-            setSalespersons(data.salespersons)
+            setSalespeople(data.salespeople)
         }
     }
 
@@ -38,11 +38,11 @@ function SalespersonHistory () {
     return (
         <div>
             <h1>Saleperson History</h1>
-            <form onChange={handleSalesperson}>
+            <form onChange={handleSalespeople}>
             <div className="mb-3">
-                <select value={salesperson} onChange={handleSalesperson} required name="salesperson" id="salesperson" className="form-select">
+                <select value={salesperson} onChange={handleSalespeople} required name="salesperson" id="salesperson" className="form-select">
                     <option value="">Choose A Salesperson</option>
-                    {salespersons.map(salesperson => {
+                    {salespeople.map(salesperson => {
                         return (
                             <option value={salesperson.id} key={salesperson.id}>
                                 {salesperson.first_name}
@@ -63,7 +63,7 @@ function SalespersonHistory () {
                 </thead>
                 <tbody>
                     {sales.filter(sale => {
-                        return sale.salesperson.id === salesperson
+                        return sales.id === salesperson
                     }).map(sale => {
                         return (
                             <tr className='fw-normal' key={sale.id}>
@@ -82,3 +82,5 @@ function SalespersonHistory () {
 }
 
 export default SalespersonHistory;
+
+

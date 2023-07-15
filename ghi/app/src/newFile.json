@@ -1,0 +1,50 @@
+{
+    "sales": [
+        {
+            "price": 10000,
+            "customer": {
+                "first_name": "Hugh",
+                "last_name": "Mungus",
+                "address": "1234 Main st",
+                "phone_number": "555-555-5555",
+                "id": 3
+            },
+            "salesperson": {
+                "first_name": "Marge",
+                "last_name": "Simpson",
+                "employee_id": 1,
+                "id": 2
+            },
+            "automobile": {
+                "vin": "111233343889833",
+                "sold": false,
+                "import_href": "/api/sales/111233343889833",
+                "id": 3
+            },
+            "id": 8
+        },
+        {
+            "price": 2500,
+            "customer": {
+                "first_name": "Hugh",
+                "last_name": "Janis",
+                "address": "1234 Elm st",
+                "phone_number": "03237278998",
+                "id": 2
+            },
+            "salesperson": {
+                "first_name": "Homer",
+                "last_name": "Simpson",
+                "employee_id": 4,
+                "id": 1
+            },
+            "automobile": {
+                "vin": "1L3CC5FB2AN120174",
+                "sold": true,
+                "import_href": "/api/sales/1L3CC5FB2AN120174",
+                "id": 2
+            },
+            "id": 9
+        }
+    ]
+}

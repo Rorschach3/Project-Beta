@@ -124,7 +124,7 @@ def api_customers(request):
 
 
 @require_http_methods(["DELETE"])
-def api_sale(request, id):
+def api_delete_sale(request, id):
     if request.method == "DELETE":
         count, _ = Sale.objects.filter(id=id).delete()
         return JsonResponse({"delete": count > 0})
@@ -162,9 +162,10 @@ def api_sales(request):
             encoder=SalesEncoder,
             safe=False,
         )
-        
+
+
 @require_http_methods(["GET"])
-def api_list_autos(request):
+def api_autos(request):
     if request.method == "GET":
         autos = AutomobileVO.objects.all()
         return JsonResponse(
