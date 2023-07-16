@@ -1,70 +1,88 @@
-import React from 'react';
-import { useState} from 'react';
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-function SalesPersonForm() {
-    const [firstName, setFirst] = useState("");
-    const [lastName, setLast] = useState("");
-    const [employeeId, setId] = useState("");
-
-
-    const handleFirst = event => {
-        setFirst(event.target.value);
-    }
-    const handleLast = event => {
-        setLast(event.target.value);
-    }
-    const handleId = event => {
-        setId(event.target.value);
-    }
-
-    const handleSubmit = async event => {
-        event.preventDefault();
-        const data = {};
-        data.first_name = firstName;
-        data.last_name = lastName;
-        data.employee_id = employeeId;
-
-        const postURL = 'http://localhost:8090/api/salespeople/';
-        const fetchOptions = {
-            method: "post",
-            body: JSON.stringify(data),
-            headers: {
-                "Content-Type" : "application/json",
-            },
-        };
-
-        const TechResponse = await fetch(postURL, fetchOptions);
-        if (TechResponse.ok){
-            setFirst('');
-            setLast('');
-            setId('');
-        }
-    }
-
-    return (
-        <div className="row">
-            <div className="offset-3 col-6">
-                <div className="shadow p-4 mt-4">
-                    <h1>Add a SalesPerson</h1>
-                    <form onSubmit={handleSubmit} id="create-salesperson-form">
-                        <div className="form-floating mb-3">
-                            <input value={firstName} onChange={handleFirst} placeholder="First Name" required type="text" name="firstName" id="firstName" className="form-control" />
-                            <label htmlFor="firstName">First Name</label>
-                        </div>
-                        <div className="form-floating mb-3">
-                            <input value={lastName} onChange={handleLast} placeholder="Last Name" required type="text" name="lastName" id="lastName" className="form-control" />
-                            <label htmlFor="lastName">Last Name</label>
-                        </div>
-                        <div className="form-floating mb-3">
-                            <input value={employeeId} onChange={handleId} placeholder="Employee ID" required type="number" name="employeeId" id="employeeId" className="form-control" />
-                            <label htmlFor="employeeId">Employee ID</label>
-                        </div>
-                        <button className="btn btn-primary">Create</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    )
+const SalespersonCreateForm = () => {
+	const [salesPerson, setSalesPerson] = useState('')
+	const [employeeid, setEmployeeid] = useState('')
+	const [errorMessage, setErrorMessage] = useState('')
+	const navigate = useNavigate()
+	const handleSubmit = async (e) => {
+		e.preventDefault()
+		const data = {
+			name: salesPerson,
+			employee_id: employeeid,
+		}
+		const postSalesPerson = 'http://localhost:8090/api/salespersons/'
+		const fetchConfig = {
+			method: 'POST',
+			body: JSON.stringify(data),
+			headers: { 'Content-Type': 'application/json' },
+		}
+		const response = await fetch(postSalesPerson, fetchConfig)
+		if (response.ok) {
+		} else {
+			const error = await response.json()
+			setErrorMessage(error.detail)
+		}
+		// setSalesPerson('');
+		// setEmployeeid('');
+		navigate(`/sales/`)
+	}
+	return (
+		<div className="row">
+			<div className="offset-3 col-6">
+				<div className="shadow p-4 mt-4">
+					<h1>Add a Sales Person</h1>
+					<form onSubmit={handleSubmit} id="create-sales-person-form">
+						<div className="form-floating mb-3">
+							<input
+								onChange={(e) => {
+									setSalesPerson(e.target.value)
+								}}
+								onFocus={() => {
+									setErrorMessage('')
+								}}
+								value={salesPerson}
+								placeholder="Name"
+								required
+								type="text"
+								name="salesperson"
+								id="salesperson"
+								className="form-control"
+							/>
+							<label htmlFor="salesperson">Name</label>
+						</div>
+						<div className="form-floating mb-3">
+							<input
+								onChange={(e) => {
+									setEmployeeid(e.target.value)
+								}}
+								onFocus={() => {
+									setErrorMessage('')
+								}}
+								value={employeeid}
+								placeholder="id"
+								required
+								type="id"
+								name="employeeid"
+								id="employee_id"
+								className="form-control"
+							/>
+							<label htmlFor="employee_id">Employee id</label>
+						</div>
+						<div
+							className={`alert alert-danger mb-4 ms-2 ${
+								errorMessage ? '' : 'd-none'
+							}`}
+							id="error-message">
+							{errorMessage}
+						</div>
+						<button className="btn btn-primary">Create</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	)
 }
 
-export default SalesPersonForm;
+export default SalespersonCreateForm
