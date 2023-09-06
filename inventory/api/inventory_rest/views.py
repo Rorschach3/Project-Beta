@@ -30,9 +30,9 @@ def api_automobiles(request):
                 encoder=AutomobileEncoder,
                 safe=False,
             )
-        except:
+        except KeyError:
             response = JsonResponse(
-                {"message": "Could not create the automobile"}
+                {"message": "Invalid request data. Missing 'model_id'."}
             )
             response.status_code = 400
             return response
@@ -46,24 +46,20 @@ def api_automobile(request, vin):
             return JsonResponse(
                 auto,
                 encoder=AutomobileEncoder,
-                safe=False
+                safe=False,
             )
         except Automobile.DoesNotExist:
-            response = JsonResponse({"message": "Does not exist"})
+            response = JsonResponse({"message": "Automobile does not exist"})
             response.status_code = 404
             return response
     elif request.method == "DELETE":
         try:
             auto = Automobile.objects.get(vin=vin)
             auto.delete()
-            return JsonResponse(
-                auto,
-                encoder=AutomobileEncoder,
-                safe=False,
-            )
+            return JsonResponse({"message": "Automobile deleted"}, status=204)
         except Automobile.DoesNotExist:
-            return JsonResponse({"message": "Does not exist"})
-    else: # PUT
+            return JsonResponse({"message": "Automobile does not exist"})
+    else:  # PUT
         try:
             content = json.loads(request.body)
             auto = Automobile.objects.get(vin=vin)
@@ -79,7 +75,7 @@ def api_automobile(request, vin):
                 safe=False,
             )
         except Automobile.DoesNotExist:
-            response = JsonResponse({"message": "Does not exist"})
+            response = JsonResponse({"message": "Automobile does not exist"})
             response.status_code = 404
             return response
 
@@ -101,7 +97,7 @@ def api_manufacturers(request):
                 encoder=ManufacturerEncoder,
                 safe=False,
             )
-        except:
+        except Manufacturer.DoesNotExist:
             response = JsonResponse(
                 {"message": "Could not create the manufacturer"}
             )
@@ -134,7 +130,7 @@ def api_manufacturer(request, pk):
             )
         except Manufacturer.DoesNotExist:
             return JsonResponse({"message": "Does not exist"})
-    else: # PUT
+    else:   # PUT
         try:
             content = json.loads(request.body)
             manufacturer = Manufacturer.objects.get(id=pk)
@@ -175,7 +171,7 @@ def api_vehicle_models(request):
                 encoder=VehicleModelEncoder,
                 safe=False,
             )
-        except:
+        except VehicleModel.DoesNotExist:
             response = JsonResponse(
                 {"message": "Could not create the vehicle model"}
             )
@@ -208,7 +204,7 @@ def api_vehicle_model(request, pk):
             )
         except VehicleModel.DoesNotExist:
             return JsonResponse({"message": "Does not exist"})
-    else: # PUT
+    else:  # PUT
         try:
             content = json.loads(request.body)
             model = VehicleModel.objects.get(id=pk)

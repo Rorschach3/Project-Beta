@@ -7,12 +7,12 @@ class AutomobileVO(models.Model):
     import_href = models.CharField(max_length=100, null=True, unique=True,)
     vin = models.CharField(max_length=17, unique=True, null=True)
     sold = models.BooleanField(default=False)
-    
+
+    def __str__(self):
+        return f'VIN:{self.vin}'
+
     def get_api_url(self):
         return reverse("api_automobile", kwargs={"VIN:": self.vin})
-    
-    def __str__(self):
-        return f'{self.vin}'
 
 
 class Customer(models.Model):
@@ -23,7 +23,7 @@ class Customer(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
-        
+
     def get_api_url(self):
         return reverse("api_customer", kwargs={"pk": self.pk})
 
@@ -36,30 +36,33 @@ class Salesperson(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
+    def get_api_url(self):
+        return reverse("api_salespeople", kwargs={"pk": self.pk})
+
 
 class Sale(models.Model):
     price = models.PositiveIntegerField()
 
     automobile = models.ForeignKey(
         AutomobileVO,
-        related_name="automobile",
+        related_name="automobiles",
         on_delete=models.PROTECT,
         null=True
     )
 
     customer = models.ForeignKey(
         Customer,
-        related_name="customer",
+        related_name="sales",
         on_delete=models.PROTECT,
         null=True,
     )
 
     salesperson = models.ForeignKey(
         Salesperson,
-        related_name="salesperson",
+        related_name="sales",
         on_delete=models.PROTECT,
         null=True
     )
-    
+
     def __str__(self):
-        return f'{self.id}'
+        return f'Sale: {self.id}'

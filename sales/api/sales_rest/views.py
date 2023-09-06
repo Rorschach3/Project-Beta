@@ -50,7 +50,7 @@ class SalesEncoder(ModelEncoder):
 
 
 @require_http_methods(["DELETE"])
-def api_salesperson(request, id):
+def api_delete_salesperson(request, id):
     if request.method == "DELETE":
         count, _ = Salesperson.objects.filter(id=id).delete()
         return JsonResponse({"Deleted": count > 0})
@@ -80,6 +80,7 @@ def api_salespersons(request):
             )
 
 
+
 @require_http_methods(["DELETE"])
 def api_customer(request, id):
     if request.method == "DELETE":
@@ -93,26 +94,27 @@ def api_customers(request):
         customers = Customer.objects.all()
         return JsonResponse(
             {"customers": customers},
-            encoder=CustomerEncoder
+            encoder=CustomerEncoder,
+            safe=False,
         )
-    else:  # POST Request
+    else:  # POST request
         content = json.loads(request.body)
         try:
-            customer = Customer.objects.create(**content)
+            customers = Customer.objects.create(**content)
             return JsonResponse(
-                customer,
-                encoder=CustomerEncoder,
-                safe=False,
-            )
+                    customers,
+                    encoder=CustomerEncoder,
+                    safe=False,
+                )
         except Customer.DoesNotExist:
             return JsonResponse(
-                {"message": "Invalid customer info"},
+                {"Message": "Invalid Customer Details"},
                 status=400,
             )
 
 
 @require_http_methods(["DELETE"])
-def api_sale(request, id):
+def api_delete_sale(request, id):
     if request.method == "DELETE":
         count, _ = Sale.objects.filter(id=id).delete()
         return JsonResponse({"delete": count > 0})
@@ -130,7 +132,7 @@ def api_sales(request):
         content = json.loads(request.body)
 
         salesperson = Salesperson.objects.get(id=content["salesperson"])
-        content["salespersons"] = salesperson
+        content["salesperson"] = salesperson
 
         customer = Customer.objects.get(id=content["customer"])
         content["customer"] = customer
@@ -148,4 +150,15 @@ def api_sales(request):
         return JsonResponse(
             sale,
             encoder=SalesEncoder,
-            safe=False,)
+            safe=False,
+        )
+
+
+@require_http_methods(["GET"])
+def api_autos(request):
+    if request.method == "GET":
+        autos = AutomobileVO.objects.all()
+        return JsonResponse(
+            {"autos": autos},
+            encoder=AutomobileVOEncoder,
+        )

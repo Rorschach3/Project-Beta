@@ -1,6 +1,5 @@
 # CarCar
 
-<<<<<<< HEAD
 CarCar, an application for managing aspects of an automobile dealership—specifically its inventory, service center, and sales.
 
 ### Team:
@@ -21,6 +20,7 @@ Then clone the project
 ```bash
   git clone https://gitlab.com/landerosjorge/project-beta.git
 
+
 ```
 
 3. Change directories into to the project directory
@@ -28,12 +28,14 @@ Then clone the project
 ```bash
   cd project-beta
 
+
 ```
 
 4. Create database using Docker command
 
 ```bash
   docker volume create beta-data
+
 
 ```
 
@@ -43,12 +45,14 @@ Then clone the project
 ```bash
  docker-compose build
 
+
 ```
 
 6. Start up Docker containers
 
 ```bash
  docker-compose up
+
 
 ```
 
@@ -57,19 +61,22 @@ Then clone the project
 ```bash
 code .
 
+
 ```
+
 =======
 
 CarCar, an application for managing aspects of an automobile dealership—specifically its inventory, service center, and sales.
->>>>>>> refs/remotes/Master/main
+
+> > > > > > > refs/remotes/Master/main
 
 ### Team:
 
 * Daniel Hernandez - Sales
 * Kevin C. - Services
+
 ## Design
 
-<<<<<<< HEAD
 ![CarCar Design](images/CARCAR.png)
 
 ## Homepage
@@ -370,18 +377,17 @@ Inventory Microservice: The Sales microservice depends on the Inventory microser
 **Automobile Value Object** (AutomobileVO): The Sales microservice utilizes the AutomobileVO, which contains essential information about the automobiles. This includes the Vehicle Identification Number (VIN), sold status, and import source. The AutomobileVO is also updated automatically through the poller.py file, ensuring accurate and up-to-date information.
 Salesperson and Customer Services: The Sales microservice interacts with the Salesperson and Customer services to associate sales transactions with the respective salespersons and customers. The Salesperson service stores information such as First Name, Last Name, and Employee ID, while the Customer service stores details like First Name, Last Name, Address, and Phone Number.
 
-**Functionality**
+# **Functionality**
 The Sales microservice offers the following key functionalities:
 Sales Transaction Management: It manages the sales transactions, including creating new sales, updating existing sales records, and retrieving sales information.
 Business Rule Enforcement: The Sales microservice enforces specific business rules to maintain data integrity. For example, it ensures that a car cannot be sold if it is not listed in the inventory or has already been sold.
 AutomobileVO Updates: When a new sale is created, the Sales microservice automatically updates the corresponding AutomobileVO's VIN to reflect the sold status. This integration ensures accurate tracking of automobile sales within the Inventory microservice.
-=======
-![CarCar Excalidraw](images/Excalidraw CarCar.png)
 
+[CarCar Excalidraw](images/Excalidraw CarCar.png)
 
 ## API Reference
 
- Inventory
+Inventory
 
 ```http
 Automobiles
@@ -395,12 +401,9 @@ Automobiles
 | Update Automobile |  `PUT`   |  `8100/api/automobiles/vin/` |
 | Delete Automobile |  `DELETE` |  `8100/api/automobiles/vin/` |
 
-
-
 ```http
 Manufacturers
 ```
-
 
 | Action         | Request  | Endpoint               |
 | :-----------     | :------- | :--------------------- |
@@ -410,11 +413,9 @@ Manufacturers
 | Update Manufacturer |  `PUT` | `8100/api/manufacturers/id/` |
 | Delete Manufacturer |  `DELETE`   |  `8100/api/manufacturers/id/` |
 
-
 ```http
 VehicleModels
 ```
-
 
 | Action         | Request  | Endpoint               |
 | :-----------  | :------- | :--------------------- |
@@ -423,7 +424,6 @@ VehicleModels
 | GET VehicleModel |  `GET`   |  `8100/api/models/id/` |
 | Update VehicleModel |  `PUT`   |  `8100/api/models/id/` |
 | Delete VehicleModel |  `DELETE`   |  `8100/api/models/id/` |
-
 
 Automobile Services
 
@@ -437,11 +437,9 @@ Technicians
 | Create Technician |  `POST`   |  `/api/technicians/`   |
 | Delete Technician | `DELETE` | `/api/technicians/id/`|
 
-
 ```http
 Appointments
 ```
-
 
 | Action         | Request  | Endpoint               |
 | :-----------     | :------- | :--------------------- |
@@ -451,9 +449,9 @@ Appointments
 |Set Appointment status to canceled|`PUT`|`/api/appointments/id/cancel`|
 |Set Appointment status to finished|`PUT`|`/api/appointments/id/finish`|
 
-
 Automobile Sales
->>>>>>> refs/remotes/Master/main
+
+> > > > > > > refs/remotes/Master/main
 
 ```http
 Salespeople
@@ -461,7 +459,6 @@ Salespeople
 
 | Action       | Request  |Endpoint  |
 | :--------   | :------- | :-------------------------------- |
-<<<<<<< HEAD
 | List salespeople | `GET` | `http://localhost:8090/api/salespeople/` |
 | Create salespoeple| `POST` |`http://localhost:8090/api/salespeople/` |
 | Delete salespeople| `DELETE` | `http://localhost:8090/api/salespeople/1/` |
@@ -469,35 +466,18 @@ Salespeople
 ![List Salespeople](images\SalespeopleGet.png)
 ![Create Salespeople](images\SalespeoplePost.png)
 ![Delete Salespeople](images\SalespeopleDelete.png)
-=======
-| List salespeople | `GET` | `8090/api/salespeople/` |
-| Create salespoeple| `POST` |`809api/salespeople/` |
-| Delete salespeople| `DELETE` | `8090/api/salespeople/id/` |
-
-
-
-![List Salespeople](images/List Salespeople.png)
-![Create Salespeople](images/Create Salesperson.png)
-![Delete Salespeople](images/Delete Salesperson.png)
-
->>>>>>> refs/remotes/Master/main
 
 ```http
 return Response:
 "Firsname", "LastName", "Employee ID"
 ```
 
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/Master/main
 ```http
 Customers
 ```
 
 | Action         | Request  | Endpoint               |
 | :-----------     | :------- | :--------------------- |
-<<<<<<< HEAD
 | List customers |  `GET`   |  `http://localhost:8090/api/customers/`   |
 | Create customer |  `POST`   |  `http://localhost:8090/api/customers/`  |
 | Delete customer |  `DELETE`   |  `http://localhost:8090/api/customers/1/`   |
@@ -505,16 +485,6 @@ Customers
 ![List Customers](images\CustomerGet.png)
 ![Create Customer](images\CustomerPost.png)
 ![Delete Customer](images\CustomerDelete.png)
-=======
-| List customers |  `GET`   |  `8090/api/automobiles/`   |
-| Create customer |  `POST`   |  `8090/api/automobiles`   |
-| Delete customer |  `DELETE`   |  `8090/api/automobiles/id/` |
-
-
-![List Customers](images/List Customers.png)
-![Create Customer](images/Create Customer.png)
-![Delete Customer](images/Delete Customer.png)
->>>>>>> refs/remotes/Master/main
 
 ```http
 Return Response:
@@ -527,7 +497,6 @@ sales
 
 | Action         | Request  | Endpoint               |
 | :-----------     | :------- | :--------------------- |
-<<<<<<< HEAD
 | List sales |  `GET`   |  `http://localhost:8090/api/sales/`   |
 | Record new sale |  `POST`   |  `http://localhost:8090/api/sales/`    |
 | Delete sale |  `DELETE`   |  `http://localhost:8090/api/sales/1/`  |
@@ -545,7 +514,7 @@ Automobile VIN, Salesperson, Customer, Price
 
 # Service Microservice
 
-Kepps track of all service related things to the automobiles, it keeps track of current technicians inside our dealership and also all the service appointments wheter it being past or current. For each technician is assigned a employee id and id to keep track of which tecnician did what service. For each service we keep a record of when it was done, which technician was assigned, the reason, the current status, the vehicle vin, the customer name and their vip status. In order to keep track of VIP statuses we compare the vin inside our Appointment model with the AutomobileVO and if they match, meaning that vin is inside our dealerships inventory making them a VIP. The technician also has the option to finish and cancel an appointment for special occasions.
+Service Keeps track of all service related things to the automobiles, it keeps track of current technicians inside our dealership and also all the service appointments wheter it being past or current. For each technician is assigned a employee id and id to keep track of which tecnician did what service. For each service we keep a record of when it was done, which technician was assigned, the reason, the current status, the vehicle vin, the customer name and their vip status. In order to keep track of VIP statuses we compare the vin inside our Appointment model with the AutomobileVO and if they match, meaning that vin is inside our dealerships inventory making them a VIP. The technician also has the option to finish and cancel an appointment for special occasions.
 
 ## API References For Service
 
@@ -616,6 +585,7 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 {
 	"deleted": true
 }
+
 
 ```
 
@@ -727,6 +697,7 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 	"deleted": true
 }
 
+
 ```
 
 **Body Required to Finish Appointment (id:1)**
@@ -787,17 +758,4 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 	}
 }
 
-=======
-| List sales |  `GET`   |  `8090/api/sales/`   |
-| Record new sale |  `POST`   |  `8090/api/sales/`   |
-| Delete sale |  `DELETE`   |  `8090/api/sales/id/` |
-
-![Show Sale](images/Record New Sale.png)
-![Create Sales](images/Create Sales.png)
-![Delete Sale](images/Delete Salepng)
-
-```http
-Return Response:
-Automobile VIN, Salersperson, Customer, Price
->>>>>>> refs/remotes/Master/main
 ```
