@@ -13,7 +13,7 @@ CarCar, an application for managing aspects of an automobile dealership—specif
 **Make sure you have Docker, Git, and Node.js 18.2 or above**
 
 Fork the repository using this link
-`https://gitlab.com/landerosjorge/project-beta`
+`https://github.com/Rorschach3/Project-Beta.git`
 
 Then clone the project
 
@@ -124,6 +124,7 @@ Service Microservice: The Inventory microservice integrates with the Service mic
   "name": "Honda"
 }
 
+
 ```
 
 **Return Response: Creating A Manufacturer**
@@ -134,6 +135,7 @@ Service Microservice: The Inventory microservice integrates with the Service mic
   "id": 1,
   "name": "Honda"
 }
+
 
 ```
 
@@ -160,6 +162,7 @@ Service Microservice: The Inventory microservice integrates with the Service mic
 	]
 }
 
+
 ```
 
 ---
@@ -183,6 +186,7 @@ Service Microservice: The Inventory microservice integrates with the Service mic
   "manufacturer_id": 1
 }
 
+
 ```
 
 **Return Response: Creating A Vehicle Model**
@@ -199,6 +203,7 @@ Service Microservice: The Inventory microservice integrates with the Service mic
 		"name": "Honda"
 	}
 }
+
 
 ```
 
@@ -243,6 +248,7 @@ Service Microservice: The Inventory microservice integrates with the Service mic
 	]
 }
 
+
 ```
 
 ---
@@ -266,6 +272,7 @@ Service Microservice: The Inventory microservice integrates with the Service mic
   "vin": "JHMAP11432T2N3BH3",
   "model_id": 1
 }
+
 
 ```
 
@@ -291,6 +298,7 @@ Service Microservice: The Inventory microservice integrates with the Service mic
 	},
 	"sold": false
 }
+
 
 ```
 
@@ -359,6 +367,7 @@ Service Microservice: The Inventory microservice integrates with the Service mic
 	]
 }
 
+
 ```
 
 ---
@@ -378,6 +387,7 @@ Inventory Microservice: The Sales microservice depends on the Inventory microser
 Salesperson and Customer Services: The Sales microservice interacts with the Salesperson and Customer services to associate sales transactions with the respective salespersons and customers. The Salesperson service stores information such as First Name, Last Name, and Employee ID, while the Customer service stores details like First Name, Last Name, Address, and Phone Number.
 
 # **Functionality**
+
 The Sales microservice offers the following key functionalities:
 Sales Transaction Management: It manages the sales transactions, including creating new sales, updating existing sales records, and retrieving sales information.
 Business Rule Enforcement: The Sales microservice enforces specific business rules to maintain data integrity. For example, it ensures that a car cannot be sold if it is not listed in the inventory or has already been sold.
@@ -391,6 +401,7 @@ Inventory
 
 ```http
 Automobiles
+
 ```
 
 | Action         | Request  | Endpoint               |
@@ -403,6 +414,7 @@ Automobiles
 
 ```http
 Manufacturers
+
 ```
 
 | Action         | Request  | Endpoint               |
@@ -415,6 +427,7 @@ Manufacturers
 
 ```http
 VehicleModels
+
 ```
 
 | Action         | Request  | Endpoint               |
@@ -429,6 +442,7 @@ Automobile Services
 
 ```http
 Technicians
+
 ```
 
 | Action         | Request  | Endpoint               |
@@ -439,6 +453,7 @@ Technicians
 
 ```http
 Appointments
+
 ```
 
 | Action         | Request  | Endpoint               |
@@ -455,6 +470,7 @@ Automobile Sales
 
 ```http
 Salespeople
+
 ```
 
 | Action       | Request  |Endpoint  |
@@ -470,10 +486,12 @@ Salespeople
 ```http
 return Response:
 "Firsname", "LastName", "Employee ID"
+
 ```
 
 ```http
 Customers
+
 ```
 
 | Action         | Request  | Endpoint               |
@@ -489,10 +507,12 @@ Customers
 ```http
 Return Response:
 "First Namne", "Last Name", "Phone Number", "Address"
+
 ```
 
 ```http
 sales
+
 ```
 
 | Action         | Request  | Endpoint               |
@@ -508,6 +528,7 @@ sales
 ```http
 Return Response:
 Automobile VIN, Salesperson, Customer, Price
+
 ```
 
 # 
@@ -537,6 +558,7 @@ Service Keeps track of all service related things to the automobiles, it keeps t
 	"employee_id": "1"
 }
 
+
 ```
 
 **Return Response: Creating A Technician**
@@ -548,6 +570,7 @@ Service Keeps track of all service related things to the automobiles, it keeps t
 	"employee_id": "1",
 	"id": 1
 }
+
 
 ```
 
@@ -576,6 +599,7 @@ Service Keeps track of all service related things to the automobiles, it keeps t
 		}
 	]
 }
+
 
 ```
 
@@ -612,6 +636,7 @@ Service Keeps track of all service related things to the automobiles, it keeps t
 	"technician": "1"
 }
 
+
 ```
 
 **Return Response: Creating an Appointment**
@@ -632,6 +657,7 @@ Service Keeps track of all service related things to the automobiles, it keeps t
 		"id": 1
 	}
 }
+
 
 ```
 
@@ -688,6 +714,7 @@ Service Keeps track of all service related things to the automobiles, it keeps t
 	]
 }
 
+
 ```
 
 **Return Response: Deleting an Appointment (id:1)**
@@ -706,6 +733,7 @@ Service Keeps track of all service related things to the automobiles, it keeps t
 {
 	"status": "finished"
 }
+
 
 ```
 
@@ -728,6 +756,7 @@ Service Keeps track of all service related things to the automobiles, it keeps t
 	}
 }
 
+
 ```
 
 **Body Required to Cancel Appointment (id:2)**
@@ -736,6 +765,7 @@ Service Keeps track of all service related things to the automobiles, it keeps t
 {
 	"status": "cancelled"
 }
+
 
 ```
 
@@ -757,5 +787,6 @@ Service Keeps track of all service related things to the automobiles, it keeps t
 		"id": 2
 	}
 }
+
 
 ```
