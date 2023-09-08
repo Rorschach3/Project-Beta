@@ -15,7 +15,7 @@ def api_automobiles(request):
     if request.method == "GET":
         autos = Automobile.objects.all()
         return JsonResponse(
-            {"autos": [auto.serialize() for auto in autos]},
+            {"autos": autos},
             encoder=AutomobileEncoder,
         )
     else:
@@ -26,7 +26,7 @@ def api_automobiles(request):
             content["model"] = model
             auto = Automobile.objects.create(**content)
             return JsonResponse(
-                auto.serialize(),
+                auto,
                 encoder=AutomobileEncoder,
                 safe=False,
             )
@@ -44,7 +44,7 @@ def api_automobile(request, vin):
         try:
             auto = Automobile.objects.get(vin=vin)
             return JsonResponse(
-                auto.serialize(),
+                auto,
                 encoder=AutomobileEncoder,
                 safe=False,
             )
@@ -70,7 +70,7 @@ def api_automobile(request, vin):
                     setattr(auto, prop, content[prop])
             auto.save()
             return JsonResponse(
-                auto.serialize(),
+                auto,
                 encoder=AutomobileEncoder,
                 safe=False,
             )
@@ -78,7 +78,6 @@ def api_automobile(request, vin):
             response = JsonResponse({"message": "Automobile does not exist"})
             response.status_code = 404
             return response
-
 
 
 @require_http_methods(["GET", "POST"])
