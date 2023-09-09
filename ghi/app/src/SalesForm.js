@@ -140,7 +140,7 @@ function SalesForm() {
                         <div className="form-floating mb-3">
                             <select onChange={handleCar} value={cars || ''} required id="vin" name="vin" className="form-select">
                                 <option value="">Choose an automobile VIN...</option>
-                                {cars.map(car => {
+                                {cars.filter(auto => car.sold === false).map(car => {
                                     return (
                                         <option value={car.vin} key={car.id }>
                                             {car.vin}
