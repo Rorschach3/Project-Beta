@@ -1,9 +1,3 @@
----
-runme:
-  id: 01HGF0M2PN93XH1DVPGVMPN3ZS
-  version: v2.0
----
-
 # CarCar
 
 CarCar, an application for managing aspects of an automobile dealership—specifically its inventory, service center, and sales.
