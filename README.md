@@ -96,14 +96,7 @@ CarCar, an application for managing aspects of an automobile dealership—specif
 
 ## Homepage
 
-<div style="position:relative;width:fit-content;height:fit-content;">
-        <a style="position:absolute;top:20px;right:1rem;opacity:0.8;" href="https://clipchamp.com/watch/hqQH25jCvuc?utm_source=embed&utm_medium=embed&utm_campaign=watch">
-        	<img loading="lazy" style="height:22px;" src="https://clipchamp.com/e.svg" alt="Made with Clipchamp" />
-        </a>
-	<iframe allow="autoplay;" allowfullscreen style="border:none" src="https://clipchamp.com/watch/hqQH25jCvuc/embed" width="640" height="360"></iframe>
-</div>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/E4oKDU_D-rU?si=2aqq7JiXgTi5inJn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+https://github.com/Rorschach3/Project-Beta/assets/42761673/6b6eb9e6-c9d0-4799-a233-65bb644decbc
 
 ![CarCar Landing Page](images/CarCarLandingPage.png)
 
