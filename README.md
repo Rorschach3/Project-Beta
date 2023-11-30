@@ -92,17 +92,18 @@ CarCar, an application for managing aspects of an automobile dealership—specif
 
 ## Design
 
-<<<<<<< HEAD
 ![CarCar Design](images/CARCAR.png)
 
 ## Homepage
 
-   
+<div style="position:relative;width:fit-content;height:fit-content;">
+        <a style="position:absolute;top:20px;right:1rem;opacity:0.8;" href="https://clipchamp.com/watch/hqQH25jCvuc?utm_source=embed&utm_medium=embed&utm_campaign=watch">
+        	<img loading="lazy" style="height:22px;" src="https://clipchamp.com/e.svg" alt="Made with Clipchamp" />
+        </a>
+	<iframe allow="autoplay;" allowfullscreen style="border:none" src="https://clipchamp.com/watch/hqQH25jCvuc/embed" width="640" height="360"></iframe>
+</div>
 
-<video src="images\20230614_192452.mp4" controls title="Video1"></video>
-<video src="images\20230621_150319.mp4" controls title="Video2"></video>
-<video src="images\20230621_145632.mp4" controls title="Video3"></video>
-<video src="images\20230616_175529.mp4" controls title="Video4"></video>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/E4oKDU_D-rU?si=2aqq7JiXgTi5inJn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ![CarCar Landing Page](images/CarCarLandingPage.png)
 
@@ -936,20 +937,3 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 ![Show Sale](images/Record New Sale.png)
 ![Create Sales](images/Create Sales.png)
 ![Delete Sale](images/Delete Salepng)
-
-```http
-Return Response:
-Automobile VIN, Salersperson, Customer, Price
-
-
-
-
-```
-
-```text {"id":"01HGF0M2PN93XH1DVPGS0GEEM3"}
-
-
-
-
-
-```
