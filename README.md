@@ -29,6 +29,7 @@ Then clone the project
 
 
 
+
 ```
 
 3. Change directories into to the project directory
@@ -39,12 +40,14 @@ Then clone the project
 
 
 
+
 ```
 
 4. Create database using Docker command
 
 ```bash {"id":"01HGF0M2PH48Q3F6HPQ3QH4CN3"}
   docker volume create beta-data
+
 
 
 
@@ -60,6 +63,7 @@ Then clone the project
 
 
 
+
 ```
 
 6. Start up Docker containers
@@ -70,12 +74,14 @@ Then clone the project
 
 
 
+
 ```
 
 7. Open project using your favorite code editor VS Code
 
 ```bash {"id":"01HGF0M2PH48Q3F6HPQCA3VBZT"}
 code .
+
 
 
 
@@ -91,7 +97,12 @@ CarCar, an application for managing aspects of an automobile dealership—specif
 
 ## Homepage
 
-<video src="20230614_192452-1.mp4" controls title="Title"></video> <video src="20230616_175529-1.mp4" controls title="Title"></video> <video src="20230621_145632-1.mp4" controls title="Title"></video> <video src="20230621_150319.mp4" controls title="Title"></video>
+   
+
+<video src="images\20230614_192452.mp4" controls title="Video1"></video>
+<video src="images\20230621_150319.mp4" controls title="Video2"></video>
+<video src="images\20230621_145632.mp4" controls title="Video3"></video>
+<video src="images\20230616_175529.mp4" controls title="Video4"></video>
 
 ![CarCar Landing Page](images/CarCarLandingPage.png)
 
@@ -139,6 +150,7 @@ Service Microservice: The Inventory microservice integrates with the Service mic
 
 
 
+
 ```
 
 **Return Response: Creating A Manufacturer**
@@ -149,6 +161,7 @@ Service Microservice: The Inventory microservice integrates with the Service mic
   "id": 1,
   "name": "Honda"
 }
+
 
 
 
@@ -181,6 +194,7 @@ Service Microservice: The Inventory microservice integrates with the Service mic
 
 
 
+
 ```
 
 ---
@@ -207,6 +221,7 @@ Service Microservice: The Inventory microservice integrates with the Service mic
 
 
 
+
 ```
 
 **Return Response: Creating A Vehicle Model**
@@ -223,6 +238,7 @@ Service Microservice: The Inventory microservice integrates with the Service mic
 		"name": "Honda"
 	}
 }
+
 
 
 
@@ -273,6 +289,7 @@ Service Microservice: The Inventory microservice integrates with the Service mic
 
 
 
+
 ```
 
 ---
@@ -296,6 +313,7 @@ Service Microservice: The Inventory microservice integrates with the Service mic
   "vin": "JHMAP11432T2N3BH3",
   "model_id": 1
 }
+
 
 
 
@@ -324,6 +342,7 @@ Service Microservice: The Inventory microservice integrates with the Service mic
 	},
 	"sold": false
 }
+
 
 
 
@@ -398,6 +417,7 @@ Service Microservice: The Inventory microservice integrates with the Service mic
 
 
 
+
 ```
 
 ---
@@ -434,6 +454,7 @@ Automobiles
 
 
 
+
 ```
 
 | Action         | Request  | Endpoint               |
@@ -449,6 +470,7 @@ Manufacturers
 
 
 
+
 ```
 
 | Action         | Request  | Endpoint               |
@@ -461,6 +483,7 @@ Manufacturers
 
 ```http {"id":"01HGF0M2PK5VX3J2K441M5TQ3C"}
 VehicleModels
+
 
 
 
@@ -481,6 +504,7 @@ Technicians
 
 
 
+
 ```
 
 | Action         | Request  | Endpoint               |
@@ -491,6 +515,7 @@ Technicians
 
 ```http {"id":"01HGF0M2PK5VX3J2K446Q2FJ53"}
 Appointments
+
 
 
 
@@ -510,6 +535,7 @@ Automobile Sales
 
 ```http {"id":"01HGF0M2PK5VX3J2K446VYHP8D"}
 Salespeople
+
 
 
 
@@ -542,12 +568,14 @@ return Response:
 
 
 
+
 ```
 
 > > > > > > > refs/remotes/Master/main
 
 ```http {"id":"01HGF0M2PK5VX3J2K44A58NENY"}
 Customers
+
 
 
 
@@ -580,10 +608,12 @@ Return Response:
 
 
 
+
 ```
 
 ```http {"id":"01HGF0M2PK5VX3J2K44EMDJ6YD"}
 sales
+
 
 
 
@@ -602,6 +632,7 @@ sales
 ```http {"id":"01HGF0M2PK5VX3J2K44H9VQ1AM"}
 Return Response:
 Automobile VIN, Salesperson, Customer, Price
+
 
 
 
@@ -637,6 +668,7 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 
 
 
+
 ```
 
 **Return Response: Creating A Technician**
@@ -648,6 +680,7 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 	"employee_id": "1",
 	"id": 1
 }
+
 
 
 
@@ -683,6 +716,7 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 
 
 
+
 ```
 
 **Return Response: Deleting A Technician (id:1)**
@@ -691,6 +725,7 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 {
 	"deleted": true
 }
+
 
 
 
@@ -723,6 +758,7 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 
 
 
+
 ```
 
 **Return Response: Creating an Appointment**
@@ -743,6 +779,7 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 		"id": 1
 	}
 }
+
 
 
 
@@ -805,6 +842,7 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 
 
 
+
 ```
 
 **Return Response: Deleting an Appointment (id:1)**
@@ -817,6 +855,7 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 
 
 
+
 ```
 
 **Body Required to Finish Appointment (id:1)**
@@ -825,6 +864,7 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 {
 	"status": "finished"
 }
+
 
 
 
@@ -853,6 +893,7 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 
 
 
+
 ```
 
 **Body Required to Cancel Appointment (id:2)**
@@ -861,6 +902,7 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 {
 	"status": "cancelled"
 }
+
 
 
 
@@ -901,9 +943,11 @@ Automobile VIN, Salersperson, Customer, Price
 
 
 
+
 ```
 
 ```text {"id":"01HGF0M2PN93XH1DVPGS0GEEM3"}
+
 
 
 
