@@ -9,11 +9,7 @@ class Manufacturer(models.Model):
         return f"/api/manufacturers/{self.id}/"
 
     def get_api_url(self):
-        return {
-            "href": self.get_href(),
-            "id": self.id,
-            "name": self.name
-        }
+        return reverse("api_manufacturer", kwargs={"pk": self.id})
 
     def __str__(self):
         return self.name

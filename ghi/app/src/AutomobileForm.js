@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState} from 'react';
 
-function AutoForm() {
+function AutomobileForm() {
     const [models, setModels] = useState([]);
     const [color, setColor] = useState("");
     const [year, setYear] = useState("");
@@ -66,7 +66,7 @@ function AutoForm() {
         <div className="row">
             <div className="offset-3 col-6">
                 <div className="shadow p-4 mt-4">
-                    <h1>Create a Automobile</h1>
+                    <h1>Create an Automobile</h1>
                     <form onSubmit={handleSubmit} id="create-auto-form">
                         <div className="form-floating mb-3">
                             <input value={color} onChange={handleColor} placeholder="Color" required type="text" name="color" id="color" className="form-control" />
@@ -92,11 +92,12 @@ function AutoForm() {
                                 })}
                             </select>
                         </div>
-                        <button className="btn btn-success btn-lg">Create</button>                    </form>
+                        <button className="btn btn-primary">Create</button>
+                    </form>
                 </div>
             </div>
         </div>
     )
 }
 
-export default AutoForm;
+export default AutomobileForm;

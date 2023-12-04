@@ -1,3 +1,9 @@
+---
+runme:
+  id: 01HGGDZ4XSHMV4P3T4FFH6MS7W
+  version: v2.0
+---
+
 # CarCar
 
 CarCar, an application for managing aspects of an automobile dealership—specifically its inventory, service center, and sales.
@@ -17,24 +23,36 @@ Fork the repository using this link
 
 Then clone the project
 
-```bash
+```bash {"id":"01HGF0M2PH48Q3F6HPPYA2AFF3"}
   git clone https://gitlab.com/landerosjorge/project-beta.git
+
+
+
+
 
 
 ```
 
 3. Change directories into to the project directory
 
-```bash
+```bash {"id":"01HGF0M2PH48Q3F6HPQ20AFJV3"}
   cd project-beta
+
+
+
+
 
 
 ```
 
 4. Create database using Docker command
 
-```bash
+```bash {"id":"01HGF0M2PH48Q3F6HPQ3QH4CN3"}
   docker volume create beta-data
+
+
+
+
 
 
 ```
@@ -42,42 +60,42 @@ Then clone the project
 5. Build the Docker containers.
    Wait until this process is completely finished before running the next command.
 
-```bash
+```bash {"id":"01HGF0M2PH48Q3F6HPQ6EDADSX"}
  docker-compose build
+
+
+
+
 
 
 ```
 
 6. Start up Docker containers
 
-```bash
+```bash {"id":"01HGF0M2PH48Q3F6HPQ8WKE0H9"}
  docker-compose up
+
+
+
+
 
 
 ```
 
 7. Open project using your favorite code editor VS Code
 
-```bash
+```bash {"id":"01HGF0M2PH48Q3F6HPQCA3VBZT"}
 code .
 
 
 ```
 
-=======
-
-CarCar, an application for managing aspects of an automobile dealership—specifically its inventory, service center, and sales.
-
-> > > > > > > refs/remotes/Master/main
-
-### Team:
-
-* Daniel Hernandez - Sales
-* Kevin C. - Services
-
 ## Design
 
 ![CarCar Design](images/CARCAR.png)
+
+### Demo Video
+https://github.com/Rorschach3/Project-Beta/assets/42761673/6b6eb9e6-c9d0-4799-a233-65bb644decbc
 
 ## Homepage
 
@@ -119,17 +137,21 @@ Service Microservice: The Inventory microservice integrates with the Service mic
 
 **Body Required to Create A Manufacturer**
 
-```json
+```json {"id":"01HGF0M2PH48Q3F6HPQFZ0VMQ1"}
 {
   "name": "Honda"
 }
+
+
+
+
 
 
 ```
 
 **Return Response: Creating A Manufacturer**
 
-```json
+```json {"id":"01HGF0M2PJZV3T1T5NC13MFM56"}
 {
   "href": "/api/manufacturers/1/",
   "id": 1,
@@ -137,11 +159,15 @@ Service Microservice: The Inventory microservice integrates with the Service mic
 }
 
 
+
+
+
+
 ```
 
 **Return Response: List Manufacturers**
 
-```json
+```json {"id":"01HGF0M2PJZV3T1T5NC2FNS17T"}
 {
 	"manufacturers": [
 		{
@@ -163,6 +189,10 @@ Service Microservice: The Inventory microservice integrates with the Service mic
 }
 
 
+
+
+
+
 ```
 
 ---
@@ -179,7 +209,7 @@ Service Microservice: The Inventory microservice integrates with the Service mic
 
 **Body Required to Create A Vehicle Model**
 
-```json
+```json {"id":"01HGF0M2PJZV3T1T5NC66WR8RN"}
 {
   "name": "S200",
   "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/HondaS2000-004.jpg/1200px-HondaS2000-004.jpg",
@@ -187,11 +217,15 @@ Service Microservice: The Inventory microservice integrates with the Service mic
 }
 
 
+
+
+
+
 ```
 
 **Return Response: Creating A Vehicle Model**
 
-```json
+```json {"id":"01HGF0M2PJZV3T1T5NC6NYVFG8"}
 {
 	"href": "/api/models/1/",
 	"id": 1,
@@ -205,11 +239,15 @@ Service Microservice: The Inventory microservice integrates with the Service mic
 }
 
 
+
+
+
+
 ```
 
 **Return Response: List Vehicle Models**
 
-```json
+```json {"id":"01HGF0M2PJZV3T1T5NC9WCWMMF"}
 {
 	"models": [
 		{
@@ -249,6 +287,10 @@ Service Microservice: The Inventory microservice integrates with the Service mic
 }
 
 
+
+
+
+
 ```
 
 ---
@@ -265,7 +307,7 @@ Service Microservice: The Inventory microservice integrates with the Service mic
 
 **Body Required to Create A Automobile**
 
-```json
+```json {"id":"01HGF0M2PJZV3T1T5NCDF3E5D3"}
 {
   "color": "White",
   "year": 2000,
@@ -274,11 +316,15 @@ Service Microservice: The Inventory microservice integrates with the Service mic
 }
 
 
+
+
+
+
 ```
 
 **Return Response: Creating A Automobile**
 
-```json
+```json {"id":"01HGF0M2PJZV3T1T5NCFWQ5Y7J"}
 {
 	"href": "/api/automobiles/JHMAP11432T2N3BH3/",
 	"id": 1,
@@ -300,11 +346,15 @@ Service Microservice: The Inventory microservice integrates with the Service mic
 }
 
 
+
+
+
+
 ```
 
 **Return Response: List Automobiles**
 
-```json
+```json {"id":"01HGF0M2PJZV3T1T5NCJ91E1MC"}
 {
 	"autos": [
 		{
@@ -368,6 +418,10 @@ Service Microservice: The Inventory microservice integrates with the Service mic
 }
 
 
+
+
+
+
 ```
 
 ---
@@ -393,14 +447,18 @@ Sales Transaction Management: It manages the sales transactions, including creat
 Business Rule Enforcement: The Sales microservice enforces specific business rules to maintain data integrity. For example, it ensures that a car cannot be sold if it is not listed in the inventory or has already been sold.
 AutomobileVO Updates: When a new sale is created, the Sales microservice automatically updates the corresponding AutomobileVO's VIN to reflect the sold status. This integration ensures accurate tracking of automobile sales within the Inventory microservice.
 
-[CarCar Excalidraw](images/Excalidraw CarCar.png)
+![CarCar Excalidraw](images/excalidraw_CarCar.png)
 
 ## API Reference
 
 Inventory
 
-```http
+```http {"id":"01HGF0M2PK5VX3J2K43YT94XVG"}
 Automobiles
+
+
+
+
 
 ```
 
@@ -412,8 +470,13 @@ Automobiles
 | Update Automobile |  `PUT`   |  `8100/api/automobiles/vin/` |
 | Delete Automobile |  `DELETE` |  `8100/api/automobiles/vin/` |
 
-```http
+```http {"id":"01HGF0M2PK5VX3J2K43ZHNKKQJ"}
 Manufacturers
+
+```
+
+
+
 
 ```
 
@@ -425,8 +488,13 @@ Manufacturers
 | Update Manufacturer |  `PUT` | `8100/api/manufacturers/id/` |
 | Delete Manufacturer |  `DELETE`   |  `8100/api/manufacturers/id/` |
 
-```http
+```http {"id":"01HGF0M2PK5VX3J2K441M5TQ3C"}
 VehicleModels
+
+```
+
+
+
 
 ```
 
@@ -440,8 +508,12 @@ VehicleModels
 
 Automobile Services
 
-```http
+```http {"id":"01HGF0M2PK5VX3J2K4435GQ28A"}
 Technicians
+
+
+
+
 
 ```
 
@@ -451,8 +523,13 @@ Technicians
 | Create Technician |  `POST`   |  `/api/technicians/`   |
 | Delete Technician | `DELETE` | `/api/technicians/id/`|
 
-```http
+```http {"id":"01HGF0M2PK5VX3J2K446Q2FJ53"}
 Appointments
+
+```
+
+
+
 
 ```
 
@@ -468,8 +545,12 @@ Automobile Sales
 
 > > > > > > > refs/remotes/Master/main
 
-```http
+```http {"id":"01HGF0M2PK5VX3J2K446VYHP8D"}
 Salespeople
+
+
+
+
 
 ```
 
@@ -479,7 +560,8 @@ Salespeople
 | Create salespoeple| `POST` |`http://localhost:8090/api/salespeople/` |
 | Delete salespeople| `DELETE` | `http://localhost:8090/api/salespeople/1/` |
 
-![List Salespeople](images\SalespeopleGet.png)
+# ![List Salespeople](images\SalespeopleGet.png)
+
 ![Create Salespeople](images\SalespeoplePost.png)
 ![Delete Salespeople](images\SalespeopleDelete.png)
 
@@ -500,22 +582,28 @@ Customers
 | Create customer |  `POST`   |  `http://localhost:8090/api/customers/`  |
 | Delete customer |  `DELETE`   |  `http://localhost:8090/api/customers/1/`   |
 
-![List Customers](images\CustomerGet.png)
+# ![List Customers](images\CustomerGet.png)
+
 ![Create Customer](images\CustomerPost.png)
 ![Delete Customer](images\CustomerDelete.png)
 
-```http
+```http {"id":"01HGF0M2PK5VX3J2K44DYSE8TS"}
 Return Response:
 "First Namne", "Last Name", "Phone Number", "Address"
 
+
+
+
+
 ```
 
-```http
+```http {"id":"01HGF0M2PK5VX3J2K44EMDJ6YD"}
 sales
 
+
+
 ```
 
-| Action         | Request  | Endpoint               |
 | :-----------     | :------- | :--------------------- |
 | List sales |  `GET`   |  `http://localhost:8090/api/sales/`   |
 | Record new sale |  `POST`   |  `http://localhost:8090/api/sales/`    |
@@ -523,11 +611,15 @@ sales
 
 ![Show Sale](images/SalesGet.png)
 ![Create Sales](images/SalesPost.png)
-![Delete Sale](images/SalesDeletepng)
+![Delete Sale](images/SalesDelete.png)
 
-```http
+```http {"id":"01HGF0M2PK5VX3J2K44H9VQ1AM"}
 Return Response:
 Automobile VIN, Salesperson, Customer, Price
+
+
+
+
 
 ```
 
@@ -551,7 +643,7 @@ Service Keeps track of all service related things to the automobiles, it keeps t
 
 **Body Required to Create A Technician**
 
-```json
+```json {"id":"01HGF0M2PM39JDFDSVED0FTA3G"}
 {
 	"first_name": "Jorge",
 	"last_name": "Landeros",
@@ -559,11 +651,15 @@ Service Keeps track of all service related things to the automobiles, it keeps t
 }
 
 
+
+
+
+
 ```
 
 **Return Response: Creating A Technician**
 
-```json
+```json {"id":"01HGF0M2PM39JDFDSVEGZEYN2S"}
 {
 	"first_name": "Jorge",
 	"last_name": "Landeros",
@@ -572,11 +668,15 @@ Service Keeps track of all service related things to the automobiles, it keeps t
 }
 
 
+
+
+
+
 ```
 
 **Return Response: List Technicians**
 
-```json
+```json {"id":"01HGF0M2PM39JDFDSVEKRTZWQ1"}
 {
 	"technicians": [
 		{
@@ -601,14 +701,22 @@ Service Keeps track of all service related things to the automobiles, it keeps t
 }
 
 
+
+
+
+
 ```
 
 **Return Response: Deleting A Technician (id:1)**
 
-```sh
+```sh {"id":"01HGF0M2PM39JDFDSVEQEQPDKG"}
 {
 	"deleted": true
 }
+
+
+
+
 
 
 ```
@@ -627,7 +735,7 @@ Service Keeps track of all service related things to the automobiles, it keeps t
 
 **Body Required to Create an Appointment**
 
-```json
+```json {"id":"01HGF0M2PM39JDFDSVETD1CZJY"}
 {
 	"date_time": "2026-06-06T23:29:43+00:00",
 	"reason": "Windshield",
@@ -637,11 +745,15 @@ Service Keeps track of all service related things to the automobiles, it keeps t
 }
 
 
+
+
+
+
 ```
 
 **Return Response: Creating an Appointment**
 
-```json
+```json {"id":"01HGF0M2PM39JDFDSVEXE563ZC"}
 {
 	"id": 1,
 	"is_vip": true,
@@ -659,11 +771,15 @@ Service Keeps track of all service related things to the automobiles, it keeps t
 }
 
 
+
+
+
+
 ```
 
 **Return Response: List Appointments**
 
-```json
+```json {"id":"01HGF0M2PM39JDFDSVF19QJP9S"}
 {
 	"appointments": [
 		{
@@ -715,31 +831,43 @@ Service Keeps track of all service related things to the automobiles, it keeps t
 }
 
 
+
+
+
+
 ```
 
 **Return Response: Deleting an Appointment (id:1)**
 
-```sh
+```sh {"id":"01HGF0M2PM39JDFDSVF3NEM5PD"}
 {
 	"deleted": true
 }
+
+
+
+
 
 
 ```
 
 **Body Required to Finish Appointment (id:1)**
 
-```json
+```json {"id":"01HGF0M2PM39JDFDSVF74NCK52"}
 {
 	"status": "finished"
 }
+
+
+
+
 
 
 ```
 
 **Return Response: Finishing an Appointment**
 
-```json
+```json {"id":"01HGF0M2PM39JDFDSVF7S3ANEK"}
 {
 	"id": 1,
 	"is_vip": true,
@@ -757,21 +885,29 @@ Service Keeps track of all service related things to the automobiles, it keeps t
 }
 
 
+
+
+
+
 ```
 
 **Body Required to Cancel Appointment (id:2)**
 
-```json
+```json {"id":"01HGF0M2PM39JDFDSVF94CBXEA"}
 {
 	"status": "cancelled"
 }
+
+
+
+
 
 
 ```
 
 **Return Response: Canceling an Appointment**
 
-```json
+```json {"id":"01HGF0M2PN93XH1DVPGP2D2Q47"}
 {
 	"id": 2,
 	"is_vip": false,
@@ -788,5 +924,15 @@ Service Keeps track of all service related things to the automobiles, it keeps t
 	}
 }
 
-
 ```
+
+
+| Action         | Request  | Endpoint               |
+| :-----------     | :------- | :--------------------- |
+| List sales |  `GET`   |  `8090/api/sales/`   |
+| Record new sale |  `POST`   |  `8090/api/sales/`   |
+| Delete sale |  `DELETE`   |  `8090/api/sales/id/` |
+
+![Show Sale](images/record_New_Sale.png)
+![Create Sales](images/create_Sale.png)
+![Delete Sale](images/delete_Sale.png)
