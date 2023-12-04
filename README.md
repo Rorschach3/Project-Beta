@@ -453,7 +453,7 @@ Sales Transaction Management: It manages the sales transactions, including creat
 Business Rule Enforcement: The Sales microservice enforces specific business rules to maintain data integrity. For example, it ensures that a car cannot be sold if it is not listed in the inventory or has already been sold.
 AutomobileVO Updates: When a new sale is created, the Sales microservice automatically updates the corresponding AutomobileVO's VIN to reflect the sold status. This integration ensures accurate tracking of automobile sales within the Inventory microservice.
 
-![CarCar Excalidraw](images/Excalidraw CarCar.png)
+![CarCar Excalidraw](images/excalidraw_CarCar.png)
 
 ## API Reference
 
@@ -572,9 +572,9 @@ Salespeople
 | Create salespoeple| `POST` |`809api/salespeople/` |
 | Delete salespeople| `DELETE` | `8090/api/salespeople/id/` |
 
-![List Salespeople](images/List Salespeople.png)
-![Create Salespeople](images/Create Salesperson.png)
-![Delete Salespeople](images/Delete Salesperson.png)
+![List Salespeople](images/list_Salespeople.png)
+![Create Salespeople](images/create_Salesperson.png)
+![Delete Salespeople](images/delete_Salesperson.png)
 
 > > > > > > > refs/remotes/Master/main
 
@@ -614,9 +614,9 @@ Customers
 | Create customer |  `POST`   |  `8090/api/automobiles`   |
 | Delete customer |  `DELETE`   |  `8090/api/automobiles/id/` |
 
-![List Customers](images/List Customers.png)
-![Create Customer](images/Create Customer.png)
-![Delete Customer](images/Delete Customer.png)
+![List Customers](images/list_Customers.png)
+![Create Customer](images/create_Customer.png)
+![Delete Customer](images/delete_Customer.png)
 
 > > > > > > > refs/remotes/Master/main
 
@@ -647,7 +647,7 @@ sales
 
 ![Show Sale](images/SalesGet.png)
 ![Create Sales](images/SalesPost.png)
-![Delete Sale](images/SalesDeletepng)
+![Delete Sale](images/SalesDelete.png)
 
 ```http {"id":"01HGF0M2PK5VX3J2K44H9VQ1AM"}
 Return Response:
@@ -960,13 +960,15 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 	}
 }
 
-=======
+```
+
+
+| Action         | Request  | Endpoint               |
+| :-----------     | :------- | :--------------------- |
 | List sales |  `GET`   |  `8090/api/sales/`   |
 | Record new sale |  `POST`   |  `8090/api/sales/`   |
 | Delete sale |  `DELETE`   |  `8090/api/sales/id/` |
 
-![Show Sale](images/Record New Sale.png)
-![Create Sales](images/Create Sales.png)
-![Delete Sale](images/Delete Salepng)
-
-```
+![Show Sale](images/record_New_Sale.png)
+![Create Sales](images/create_Sale.png)
+![Delete Sale](images/delete_Sale.png)
