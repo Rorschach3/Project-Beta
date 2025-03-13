@@ -1,113 +1,113 @@
----
-runme:
-  id: 01HGGDZ4XSHMV4P3T4FFH6MS7W
-  version: v2.0
----
-
 # CarCar
 
-CarCar, an application for managing aspects of an automobile dealership—specifically its inventory, service center, and sales.
+CarCar is an application designed to manage various aspects of an automobile dealership, including inventory management, service operations, and sales.
 
-### Team:
+## Team
+- [Daniel Hernandez](https://gitlab.com/Rorschach3) – Sales Microservice
+- [Jorge Landeros De Santiago](https://gitlab.com/landerosjorge) – Service Microservice
 
-##### * [Daniel Hernandez](https://gitlab.com/Rorschach3)- Sales microservice
+## Installation and Local Run
 
-##### * [Jorge Laderos De Santiago](https://gitlab.com/landerosjorge) - Service microservice
+**Prerequisites:** Ensure Docker, Git, and Node.js (v18.2+) are installed.
 
-## Install and Run Locally
+1. **Fork and Clone Repository**
 
-**Make sure you have Docker, Git, and Node.js 18.2 or above**
-
-Fork the repository using this link
-`https://gitlab.com/landerosjorge/project-beta`
-
-Then clone the project
-
-```bash {"id":"01HGF0M2PH48Q3F6HPPYA2AFF3"}
-  git clone https://gitlab.com/landerosjorge/project-beta.git
-
-
-
-
-
-
+```bash
+git clone https://gitlab.com/landerosjorge/project-beta.git
 ```
 
-3. Change directories into to the project directory
+2. **Navigate to Project Directory**
 
-```bash {"id":"01HGF0M2PH48Q3F6HPQ20AFJV3"}
-  cd project-beta
-
-
-
-
-
-
+```bash
+cd project-beta
 ```
 
-4. Create database using Docker command
+3. **Create Docker Volume for Database**
 
-```bash {"id":"01HGF0M2PH48Q3F6HPQ3QH4CN3"}
-  docker volume create beta-data
-
-
-
-
-
-
+```bash
+docker volume create beta-data
 ```
 
-5. Build the Docker containers.
-   Wait until this process is completely finished before running the next command.
+4. **Build Docker Containers** (wait for completion before next step)
 
-```bash {"id":"01HGF0M2PH48Q3F6HPQ6EDADSX"}
- docker-compose build
-
-
-
-
-
-
+```bash
+docker-compose build
 ```
 
-6. Start up Docker containers
+5. **Start Docker Containers**
 
-```bash {"id":"01HGF0M2PH48Q3F6HPQ8WKE0H9"}
- docker-compose up
-
-
-
-
-
-
+```bash
+docker-compose up
 ```
 
-7. Open project using your favorite code editor VS Code
+6. **Open Project in VS Code**
 
-```bash {"id":"01HGF0M2PH48Q3F6HPQCA3VBZT"}
-code .
-
-
-
-
-
-
+```bash
+open http://localhost:3000
 ```
-
-CarCar, an application for managing aspects of an automobile dealership—specifically its inventory, service center, and sales.
 
 ## Design
-
 ![CarCar Design](images/CARCAR.png)
 
 ### Demo Video
-https://github.com/Rorschach3/Project-Beta/assets/42761673/6b6eb9e6-c9d0-4799-a233-65bb644decbc
+[Watch Demo](https://github.com/Rorschach3/Project-Beta/assets/42761673/6b6eb9e6-c9d0-4799-a233-65bb644decbc)
 
 ## Homepage
-
 ![CarCar Landing Page](images/CarCarLandingPage.png)
 
-# 
+---
+
+# Microservices Overview
+
+Inventory Microservice
+Overview
+
+Handles creation and maintenance of automobile data.
+Provides details like manufacturer, model, year, VIN, color, etc.
+Integrates with Sales microservice to confirm availability.
+Integrates with Service microservice to track service appointments.
+AutomobileVO
+
+Reference object for cross-microservice data.
+Shares VIN, sold status, manufacturer, etc.
+Key Endpoints
+
+Manufacturers
+
+{
+  "autos": [
+    {
+      "href": "/api/automobiles/JHMAP11432T2N3BH3/",
+      "id": 1,
+      "color": "White",
+      "year": 2000,
+      "vin": "JHMAP11432T2N3BH3",
+      "model": {
+        "href": "/api/models/1/",
+        "id": 1,
+        "name": "S200",
+        "picture_url": "https://upload.wikimedia.org/...",
+        "manufacturer": {
+          "href": "/api/manufacturers/1/",
+          "id": 1,
+          "name": "Honda"
+        }
+      },
+      "sold": false
+    },
+    ...
+  ]
+}
+
+---
+
+### Visual Diagrams
+
+![CarCar Excalidraw](images/excalidraw_CarCar.png)
+
+---
+
+Use these endpoints and functionalities to effectively manage dealership operations with CarCar.
 
 # Inventory Microservice
 
@@ -143,37 +143,22 @@ Service Microservice: The Inventory microservice integrates with the Service mic
 
 **Body Required to Create A Manufacturer**
 
-```json {"id":"01HGF0M2PH48Q3F6HPQFZ0VMQ1"}
 {
   "name": "Honda"
 }
 
 
-
-
-
-
-```
-
 **Return Response: Creating A Manufacturer**
 
-```json {"id":"01HGF0M2PJZV3T1T5NC13MFM56"}
 {
   "href": "/api/manufacturers/1/",
   "id": 1,
   "name": "Honda"
 }
 
-
-
-
-
-
-```
-
 **Return Response: List Manufacturers**
 
-```json {"id":"01HGF0M2PJZV3T1T5NC2FNS17T"}
+```
 {
 	"manufacturers": [
 		{
@@ -193,14 +178,7 @@ Service Microservice: The Inventory microservice integrates with the Service mic
 		}
 	]
 }
-
-
-
-
-
-
 ```
-
 ---
 
 ***Vehicle Models***
@@ -215,23 +193,18 @@ Service Microservice: The Inventory microservice integrates with the Service mic
 
 **Body Required to Create A Vehicle Model**
 
-```json {"id":"01HGF0M2PJZV3T1T5NC66WR8RN"}
+```
 {
   "name": "S200",
   "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/HondaS2000-004.jpg/1200px-HondaS2000-004.jpg",
   "manufacturer_id": 1
 }
-
-
-
-
-
-
 ```
 
 **Return Response: Creating A Vehicle Model**
 
-```json {"id":"01HGF0M2PJZV3T1T5NC6NYVFG8"}
+
+```
 {
 	"href": "/api/models/1/",
 	"id": 1,
@@ -243,17 +216,11 @@ Service Microservice: The Inventory microservice integrates with the Service mic
 		"name": "Honda"
 	}
 }
-
-
-
-
-
-
 ```
 
 **Return Response: List Vehicle Models**
 
-```json {"id":"01HGF0M2PJZV3T1T5NC9WCWMMF"}
+```
 {
 	"models": [
 		{
@@ -291,14 +258,7 @@ Service Microservice: The Inventory microservice integrates with the Service mic
 		}
 	]
 }
-
-
-
-
-
-
 ```
-
 ---
 
 ***Automobiles***
@@ -313,7 +273,6 @@ Service Microservice: The Inventory microservice integrates with the Service mic
 
 **Body Required to Create A Automobile**
 
-```json {"id":"01HGF0M2PJZV3T1T5NCDF3E5D3"}
 {
   "color": "White",
   "year": 2000,
@@ -321,16 +280,9 @@ Service Microservice: The Inventory microservice integrates with the Service mic
   "model_id": 1
 }
 
-
-
-
-
-
-```
-
 **Return Response: Creating A Automobile**
 
-```json {"id":"01HGF0M2PJZV3T1T5NCFWQ5Y7J"}
+```
 {
 	"href": "/api/automobiles/JHMAP11432T2N3BH3/",
 	"id": 1,
@@ -350,86 +302,73 @@ Service Microservice: The Inventory microservice integrates with the Service mic
 	},
 	"sold": false
 }
-
-
-
-
-
-
 ```
 
 **Return Response: List Automobiles**
 
-```json {"id":"01HGF0M2PJZV3T1T5NCJ91E1MC"}
-{
-	"autos": [
-		{
-			"href": "/api/automobiles/JHMAP11432T2N3BH3/",
-			"id": 1,
-			"color": "White",
-			"year": 2000,
-			"vin": "JHMAP11432T2N3BH3",
-			"model": {
-				"href": "/api/models/1/",
-				"id": 1,
-				"name": "S200",
-				"picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/HondaS2000-004.jpg/1200px-HondaS2000-004.jpg",
-				"manufacturer": {
-					"href": "/api/manufacturers/1/",
-					"id": 1,
-					"name": "Honda"
-				}
-			},
-			"sold": false
-		},
-		{
-			"href": "/api/automobiles/FDJ9011432T2N3BH3/",
-			"id": 2,
-			"color": "White",
-			"year": 1998,
-			"vin": "FDJ9011432T2N3BH3",
-			"model": {
-				"href": "/api/models/2/",
-				"id": 2,
-				"name": "R34",
-				"picture_url": "https://cars.usnews.com/images/article/202203/129043/001-_Tokumeigakarinoaoshima_-_wc_-_Tuned_Nissan_SKYLINE_GT-R_GF-BNR34_front_Cropped.jpg",
-				"manufacturer": {
-					"href": "/api/manufacturers/2/",
-					"id": 2,
-					"name": "Nissan"
-				}
-			},
-			"sold": false
-		},
-		{
-			"href": "/api/automobiles/FDJ9085032T2N3BH3/",
-			"id": 3,
-			"color": "Black",
-			"year": 1997,
-			"vin": "FDJ9085032T2N3BH3",
-			"model": {
-				"href": "/api/models/3/",
-				"id": 3,
-				"name": "Supra",
-				"picture_url": "https://cdn.motor1.com/images/mgl/PKZQL/s1/1997-toyota-supra-sold-for-176-000-at-auction.jpg",
-				"manufacturer": {
-					"href": "/api/manufacturers/3/",
-					"id": 3,
-					"name": "Toyota"
-				}
-			},
-			"sold": false
-		}
-	]
-}
-
-
-
-
-
-
 ```
-
+{
+		"autos": [
+			{
+				"href": "/api/automobiles/JHMAP11432T2N3BH3/",
+				"id": 1,
+				"color": "White",
+				"year": 2000,
+				"vin": "JHMAP11432T2N3BH3",
+				"model": {
+					"href": "/api/models/1/",
+					"id": 1,
+					"name": "S200",
+					"picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/HondaS2000-004.jpg/1200px-HondaS2000-004.jpg",
+					"manufacturer": {
+						"href": "/api/manufacturers/1/",
+						"id": 1,
+						"name": "Honda"
+					}
+				},
+				"sold": false
+			},
+			{
+				"href": "/api/automobiles/FDJ9011432T2N3BH3/",
+				"id": 2,
+				"color": "White",
+				"year": 1998,
+				"vin": "FDJ9011432T2N3BH3",
+				"model": {
+					"href": "/api/models/2/",
+					"id": 2,
+					"name": "R34",
+					"picture_url": "https://cars.usnews.com/images/article/202203/129043/001-_Tokumeigakarinoaoshima_-_wc_-_Tuned_Nissan_SKYLINE_GT-R_GF-BNR34_front_Cropped.jpg",
+					"manufacturer": {
+						"href": "/api/manufacturers/2/",
+						"id": 2,
+						"name": "Nissan"
+					}
+				},
+				"sold": false
+			},
+			{
+				"href": "/api/automobiles/FDJ9085032T2N3BH3/",
+				"id": 3,
+				"color": "Black",
+				"year": 1997,
+				"vin": "FDJ9085032T2N3BH3",
+				"model": {
+					"href": "/api/models/3/",
+					"id": 3,
+					"name": "Supra",
+					"picture_url": "https://cdn.motor1.com/images/mgl/PKZQL/s1/1997-toyota-supra-sold-for-176-000-at-auction.jpg",
+					"manufacturer": {
+						"href": "/api/manufacturers/3/",
+						"id": 3,
+						"name": "Toyota"
+					}
+				},
+				"sold": false
+			}
+		]
+	}
+```
 ---
 
 # Sales Microservice
@@ -459,14 +398,8 @@ AutomobileVO Updates: When a new sale is created, the Sales microservice automat
 
 Inventory
 
-```http {"id":"01HGF0M2PK5VX3J2K43YT94XVG"}
 Automobiles
 
-
-
-
-
-```
 
 | Action         | Request  | Endpoint               |
 | :-----------     | :------- | :--------------------- |
@@ -476,14 +409,8 @@ Automobiles
 | Update Automobile |  `PUT`   |  `8100/api/automobiles/vin/` |
 | Delete Automobile |  `DELETE` |  `8100/api/automobiles/vin/` |
 
-```http {"id":"01HGF0M2PK5VX3J2K43ZHNKKQJ"}
 Manufacturers
 
-
-
-
-
-```
 
 | Action         | Request  | Endpoint               |
 | :-----------     | :------- | :--------------------- |
@@ -493,14 +420,7 @@ Manufacturers
 | Update Manufacturer |  `PUT` | `8100/api/manufacturers/id/` |
 | Delete Manufacturer |  `DELETE`   |  `8100/api/manufacturers/id/` |
 
-```http {"id":"01HGF0M2PK5VX3J2K441M5TQ3C"}
 VehicleModels
-
-
-
-
-
-```
 
 | Action         | Request  | Endpoint               |
 | :-----------  | :------- | :--------------------- |
@@ -512,14 +432,8 @@ VehicleModels
 
 Automobile Services
 
-```http {"id":"01HGF0M2PK5VX3J2K4435GQ28A"}
 Technicians
 
-
-
-
-
-```
 
 | Action         | Request  | Endpoint               |
 | :-----------     | :------- | :--------------------- |
@@ -527,14 +441,8 @@ Technicians
 | Create Technician |  `POST`   |  `/api/technicians/`   |
 | Delete Technician | `DELETE` | `/api/technicians/id/`|
 
-```http {"id":"01HGF0M2PK5VX3J2K446Q2FJ53"}
 Appointments
 
-
-
-
-
-```
 
 | Action         | Request  | Endpoint               |
 | :-----------     | :------- | :--------------------- |
@@ -546,16 +454,9 @@ Appointments
 
 Automobile Sales
 
-> > > > > > > refs/remotes/Master/main
 
-```http {"id":"01HGF0M2PK5VX3J2K446VYHP8D"}
 Salespeople
 
-
-
-
-
-```
 
 | Action       | Request  |Endpoint  |
 | :--------   | :------- | :-------------------------------- |
@@ -576,28 +477,13 @@ Salespeople
 ![Create Salespeople](images/create_Salesperson.png)
 ![Delete Salespeople](images/delete_Salesperson.png)
 
-> > > > > > > refs/remotes/Master/main
 
-```http {"id":"01HGF0M2PK5VX3J2K449319102"}
 return Response:
 "Firsname", "LastName", "Employee ID"
 
 
-
-
-
-```
-
-> > > > > > > refs/remotes/Master/main
-
-```http {"id":"01HGF0M2PK5VX3J2K44A58NENY"}
 Customers
 
-
-
-
-
-```
 
 | Action         | Request  | Endpoint               |
 | :-----------     | :------- | :--------------------- |
@@ -618,26 +504,13 @@ Customers
 ![Create Customer](images/create_Customer.png)
 ![Delete Customer](images/delete_Customer.png)
 
-> > > > > > > refs/remotes/Master/main
 
-```http {"id":"01HGF0M2PK5VX3J2K44DYSE8TS"}
 Return Response:
 "First Namne", "Last Name", "Phone Number", "Address"
 
 
-
-
-
-```
-
-```http {"id":"01HGF0M2PK5VX3J2K44EMDJ6YD"}
 sales
 
-
-
-
-
-```
 
 | Action         | Request  | Endpoint               |
 | :-----------     | :------- | :--------------------- |
@@ -649,15 +522,9 @@ sales
 ![Create Sales](images/SalesPost.png)
 ![Delete Sale](images/SalesDelete.png)
 
-```http {"id":"01HGF0M2PK5VX3J2K44H9VQ1AM"}
 Return Response:
 Automobile VIN, Salesperson, Customer, Price
 
-
-
-
-
-```
 
 # 
 
@@ -679,7 +546,6 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 
 **Body Required to Create A Technician**
 
-```json {"id":"01HGF0M2PM39JDFDSVED0FTA3G"}
 {
 	"first_name": "Jorge",
 	"last_name": "Landeros",
@@ -687,15 +553,8 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 }
 
 
-
-
-
-
-```
-
 **Return Response: Creating A Technician**
 
-```json {"id":"01HGF0M2PM39JDFDSVEGZEYN2S"}
 {
 	"first_name": "Jorge",
 	"last_name": "Landeros",
@@ -704,15 +563,9 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 }
 
 
-
-
-
-
-```
-
 **Return Response: List Technicians**
 
-```json {"id":"01HGF0M2PM39JDFDSVEKRTZWQ1"}
+```
 {
 	"technicians": [
 		{
@@ -735,27 +588,13 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 		}
 	]
 }
-
-
-
-
-
-
 ```
 
 **Return Response: Deleting A Technician (id:1)**
 
-```sh {"id":"01HGF0M2PM39JDFDSVEQEQPDKG"}
 {
 	"deleted": true
 }
-
-
-
-
-
-
-```
 
 ---
 
@@ -771,7 +610,6 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 
 **Body Required to Create an Appointment**
 
-```json {"id":"01HGF0M2PM39JDFDSVETD1CZJY"}
 {
 	"date_time": "2026-06-06T23:29:43+00:00",
 	"reason": "Windshield",
@@ -781,15 +619,9 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 }
 
 
-
-
-
-
-```
-
 **Return Response: Creating an Appointment**
 
-```json {"id":"01HGF0M2PM39JDFDSVEXE563ZC"}
+```
 {
 	"id": 1,
 	"is_vip": true,
@@ -805,17 +637,15 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 		"id": 1
 	}
 }
-
-
-
-
-
-
 ```
+
+
+
+
 
 **Return Response: List Appointments**
 
-```json {"id":"01HGF0M2PM39JDFDSVF19QJP9S"}
+```
 {
 	"appointments": [
 		{
@@ -865,45 +695,25 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 		}
 	]
 }
-
-
-
-
-
-
 ```
 
 **Return Response: Deleting an Appointment (id:1)**
 
-```sh {"id":"01HGF0M2PM39JDFDSVF3NEM5PD"}
 {
 	"deleted": true
 }
 
 
-
-
-
-
-```
-
 **Body Required to Finish Appointment (id:1)**
 
-```json {"id":"01HGF0M2PM39JDFDSVF74NCK52"}
 {
 	"status": "finished"
 }
 
 
-
-
-
-
-```
-
 **Return Response: Finishing an Appointment**
 
-```json {"id":"01HGF0M2PM39JDFDSVF7S3ANEK"}
+```
 {
 	"id": 1,
 	"is_vip": true,
@@ -919,56 +729,4 @@ Kepps track of all service related things to the automobiles, it keeps track of 
 		"id": 1
 	}
 }
-
-
-
-
-
-
 ```
-
-**Body Required to Cancel Appointment (id:2)**
-
-```json {"id":"01HGF0M2PM39JDFDSVF94CBXEA"}
-{
-	"status": "cancelled"
-}
-
-
-
-
-
-
-```
-
-**Return Response: Canceling an Appointment**
-
-```json {"id":"01HGF0M2PN93XH1DVPGP2D2Q47"}
-{
-	"id": 2,
-	"is_vip": false,
-	"date_time": "2026-03-02T22:12:55+00:00",
-	"reason": "Engine Failures",
-	"status": "cancelled",
-	"vin": "JHMAP11432T43RF34",
-	"customer": "Alex Grace",
-	"technician": {
-		"first_name": "John",
-		"last_name": "Doe",
-		"employee_id": "2",
-		"id": 2
-	}
-}
-
-```
-
-
-| Action         | Request  | Endpoint               |
-| :-----------     | :------- | :--------------------- |
-| List sales |  `GET`   |  `8090/api/sales/`   |
-| Record new sale |  `POST`   |  `8090/api/sales/`   |
-| Delete sale |  `DELETE`   |  `8090/api/sales/id/` |
-
-![Show Sale](images/record_New_Sale.png)
-![Create Sales](images/create_Sale.png)
-![Delete Sale](images/delete_Sale.png)
