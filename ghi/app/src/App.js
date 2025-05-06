@@ -24,8 +24,8 @@ function App(props) {
   return (
 
     <BrowserRouter>
-    <Nav />
-    <div className="container">
+      <Nav />
+      <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="inventory/automobiles" element={<AutosList />} />
@@ -39,17 +39,17 @@ function App(props) {
           <Route path="service/appointment/new" element={<AppointmentForm />} />
           <Route path="service/appointment" element={<AppointmentList />} />
           <Route path="service/history" element={<ServiceHistory />} />
-          <Route path="sales/customer" element={<CustomerList/>} />
+          <Route path="sales/customer" element={<CustomerList />} />
           <Route path="sales/customer/new" element={<CustomerForm />} />
-          <Route path="sales/salespeople" element={<Salespeople/>} />
+          <Route path="sales/salespeople" element={<Salespeople />} />
           <Route path="sales/salesperson/new" element={<SalespersonForm />} />
-          <Route path="sales/sales" element={<SalesList/>} />
+          <Route path="sales/sales" element={<SalesList />} />
           <Route path="sales/sales/new" element={<SalesForm />} />
-          <Route path="sales/history" element={<SalespersonHistory />} />
+          <Route path="/sales/history" element={<SalespersonHistory />} />
         </Routes>
-        </div>
+      </div>
     </BrowserRouter>
   );
 }
 
-  export default App;
+export default App;

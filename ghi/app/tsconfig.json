@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    /* Basic Options */
+    "target": "ESNext",                        /* Use modern JS output */
+    "module": "ESNext",                        /* Keep import/export */
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],  /* Browser + latest ES APIs */
+    "allowJs": false,                          /* Only TS⁄TSX files */
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,                            /* All strict type-checking */
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,                            /* Don’t output compiled files */
+    
+    /* JSX and React */
+    "jsx": "react-jsx",                    
+    /* Project-relative imports */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    },
+
+    /* Optional but recommended */
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUncheckedIndexedAccess": true
+  },
+  "include": [
+    "src",
+    "components",
+    "pages",
+    "app"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build"
+  ]
+}

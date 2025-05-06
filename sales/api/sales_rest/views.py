@@ -50,18 +50,18 @@ class SalesEncoder(ModelEncoder):
 
 
 @require_http_methods(["DELETE"])
-def api_delete_salesperson(request, id):
+def api_delete_salespeople(request, id):
     if request.method == "DELETE":
         count, _ = Salesperson.objects.filter(id=id).delete()
         return JsonResponse({"Deleted": count > 0})
 
 
 @require_http_methods(["GET", "POST"])
-def api_salespersons(request):
+def api_salespeople(request):
     if request.method == "GET":
-        salesperson = Salesperson.objects.all()
+        salespeople = list(Salesperson.objects.all())
         return JsonResponse(
-            {"salespeople": salesperson},
+            {"salespeople": salespeople},
             encoder=SalespersonEncoder,
             safe=False,
         )

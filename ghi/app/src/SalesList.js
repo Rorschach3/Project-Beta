@@ -15,7 +15,7 @@ export default function SalesList() {
             console.error(e)
         }
     }
-    useEffect( () => {
+    useEffect(() => {
         fetchData()
     }, [])
 
@@ -30,17 +30,19 @@ export default function SalesList() {
                 <table className='table table-striped'>
                     <thead>
                         <tr>
-                            <th>Salesperson Emp</th>
-                            <th>Salesperson Name</th>
-                            <th>Customer Name</th> 
+                            <th>Salesman First</th>
+                            <th>Salesman Last</th>
+                            <th>Cust. First</th>
+                            <th>Cust. Last</th>
                             <th>VIN</th>
                             <th>Price</th>
+                            <th></th>
 
                         </tr>
                     </thead>
                     <tbody>
 
-                        {sales.map((sale) =>{
+                        {sales.map((sale) => {
                             return (
                                 <tr key={sale.id}>
                                     <td>{sale.salesperson.first_name}</td>
@@ -56,5 +58,5 @@ export default function SalesList() {
                 </table>
             </div>
         </>
-        )
-    }
+    )
+}

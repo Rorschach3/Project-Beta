@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 import dj_database_url
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -91,8 +92,16 @@ WSGI_APPLICATION = 'inventory_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {}
-DATABASES["default"] = dj_database_url.config()
+DATABASES = {
+    "default": dj_database_url.config(
+        default=os.environ.get(
+            "DATABASE_URL",
+            "postgres://inventory:password@localhost:5432/inventory"
+        ),
+        conn_max_age=600,
+        ssl_require=False,
+    )
+}
 
 
 # Password validation
