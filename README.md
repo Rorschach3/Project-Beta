@@ -1,732 +1,290 @@
-# CarCar
+# CarCar – Dealership Management Platform
 
-CarCar is an application designed to manage various aspects of an automobile dealership, including inventory management, service operations, and sales.
+CarCar is a web application for managing an automobile dealership’s Inventory, Sales, and Service processes. It uses a microservices architecture (each service in Django) and a React frontend.
+
+---
 
 ## Team
-- [Daniel Hernandez](https://gitlab.com/Rorschach3) – Sales Microservice
-- [Jorge Landeros De Santiago](https://gitlab.com/landerosjorge) – Service Microservice
 
-## Installation and Local Run
+* [Daniel Hernandez](https://gitlab.com/Rorschach3)
+* [Jorge Landeros De Santiago](https://gitlab.com/landerosjorge)
 
-**Prerequisites:** Ensure Docker, Git, and Node.js (v18.2+) are installed.
+---
 
-1. **Fork and Clone Repository**
+## Demo & Screenshots
 
-```bash
-git clone https://gitlab.com/landerosjorge/project-beta.git
-```
+**Homepage**
+![CarCar Homepage](https://imgur.com/0C5Xxd7.png)
 
-2. **Navigate to Project Directory**
-
-```bash
-cd project-beta
-```
-
-3. **Create Docker Volume for Database**
-
-```bash
-docker volume create beta-data
-```
-
-4. **Build Docker Containers** (wait for completion before next step)
-
-```bash
-docker-compose build
-```
-
-5. **Start Docker Containers**
-
-```bash
-docker-compose up
-```
-
-6. **Open Project in VS Code**
-
-```bash
-open http://localhost:3000
-```
-
-## Design
+**Design Diagram**
 ![CarCar Design](images/CARCAR.png)
 
-### Demo Video
-[Watch Demo](https://github.com/Rorschach3/Project-Beta/assets/42761673/6b6eb9e6-c9d0-4799-a233-65bb644decbc)
+---
 
-## Homepage
-![CarCar Landing Page](images/CarCarLandingPage.png)
+## Installation & Local Run
+
+**Prerequisites:** Docker & Docker Compose, Node.js v18+, Git
+
+1. **Clone & enter repo**
+
+   ```bash
+   git clone https://gitlab.com/landerosjorge/project-beta.git
+   cd project-beta
+   ```
+
+2. **Create database volume**
+
+   ```bash
+   docker volume create beta-data
+   ```
+
+3. **Build containers**
+
+   ```bash
+   docker-compose build
+   ```
+
+4. **Start services**
+
+   ```bash
+   docker-compose up
+   ```
+
+5. **Open in browser**
+   Visit [http://localhost:3000](http://localhost:3000)
 
 ---
 
-# Microservices Overview
+## Initial Data Setup
 
-Inventory Microservice
-Overview
+On first run, the databases are empty. Create records in this order:
 
-Handles creation and maintenance of automobile data.
-Provides details like manufacturer, model, year, VIN, color, etc.
-Integrates with Sales microservice to confirm availability.
-Integrates with Service microservice to track service appointments.
-AutomobileVO
+1. Manufacturer
+2. Vehicle Model
+3. Automobile
+4. Sales Person
+5. Customer
+6. Sale
+7. Technician
+8. Service Appointment
 
-Reference object for cross-microservice data.
-Shares VIN, sold status, manufacturer, etc.
-Key Endpoints
+---
 
-Manufacturers
+## Microservices Overview
 
+| Service   | Port | Purpose                              |
+| --------- | ---- | ------------------------------------ |
+| Inventory | 8100 | Manage manufacturers, models, autos  |
+| Sales     | 8090 | Manage salespeople, customers, sales |
+| Service   | 8080 | Manage technicians & appointments    |
+
+All services share an AutomobileVO value object to mirror Inventory data.
+
+---
+
+## API Reference
+
+### Inventory API (localhost:8100)
+
+#### Manufacturers
+
+| Action   | Method | Endpoint                   |
+| -------- | ------ | -------------------------- |
+| List     | GET    | `/api/manufacturers/`      |
+| Create   | POST   | `/api/manufacturers/`      |
+| Retrieve | GET    | `/api/manufacturers/{id}/` |
+| Update   | PUT    | `/api/manufacturers/{id}/` |
+| Delete   | DELETE | `/api/manufacturers/{id}/` |
+
+**Create Example**
+Request body:
+
+```json
+{ "name": "Honda" }
+```
+
+Response (list):
+
+```json
 {
-  "autos": [
-    {
-      "href": "/api/automobiles/JHMAP11432T2N3BH3/",
-      "id": 1,
-      "color": "White",
-      "year": 2000,
-      "vin": "JHMAP11432T2N3BH3",
-      "model": {
-        "href": "/api/models/1/",
-        "id": 1,
-        "name": "S200",
-        "picture_url": "https://upload.wikimedia.org/...",
-        "manufacturer": {
-          "href": "/api/manufacturers/1/",
-          "id": 1,
-          "name": "Honda"
-        }
-      },
-      "sold": false
-    },
-    ...
+  "manufacturers": [
+    { "href": "/api/manufacturers/1/", "id": 1, "name": "Honda" }
   ]
 }
-
----
-
-### Visual Diagrams
-
-![CarCar Excalidraw](images/excalidraw_CarCar.png)
-
----
-
-Use these endpoints and functionalities to effectively manage dealership operations with CarCar.
-
-# Inventory Microservice
-
-**Overview**
-The Inventory microservice focuses on creating and maintaining data related to the available automobiles. It serves as a centralized system for tracking the inventory and plays a crucial role in supporting both the Sales and Services microservices.
-
-**Functionality**
-The Inventory microservice offers the following key functionalities:
-Inventory Management: It handles the creation, updating, and retrieval of automobile data within the inventory. This includes storing information such as the manufacturer, model, and other relevant details.
-Integration with Sales Microservice: The Inventory microservice collaborates closely with the Sales microservice. It ensures that only cars listed in the inventory can be sold, preventing unauthorized sales of unavailable or sold-out automobiles.
-Integration with Service Microservice: The Inventory microservice also interacts with the Service microservice. It provides the necessary automobile data to support service-related operations and ensures accurate tracking of the current inventory.
-
-**AutomobileVO** Creation: When data is sent from the Inventory microservice to other microservices, such as Sales or Services, a reference known as the AutomobileVO is used. The AutomobileVO contains essential information about the automobiles, including the Vehicle Identification Number (VIN), sold status, and import source. This reference allows efficient communication and synchronization between microservices.
-
-**Dependencies**
-The Inventory microservice relies on the following dependencies:
-Sales Microservice: The Inventory microservice collaborates with the Sales microservice to enforce inventory-related business rules and facilitate the sales process. It ensures that only valid and available cars can be sold.
-Service Microservice: The Inventory microservice integrates with the Service microservice to support service-related operations. It provides the necessary automobile data to enable efficient servicing and maintenance of vehicles.
-
-## API References For Inventory
-
----
-
-***Manufacturers***
-
-| Action         | Request  | Endpoint               |
-| :-----------     | :------- | :--------------------- |
-| List Manufacturers |  `GET`   |  `http://localhost:8100/api/manufacturers/`   |
-| Create Manufacturer |  `POST`   |  `http://localhost:8100/api/manufacturers/`   |
-| Get Specific Manufacturer |  `GET`   |  `http://localhost:8100/api/manufacturers/:id/` |
-| Update Specific Manufacturer |  `PUT` | `http://localhost:8100/api/manufacturers/:id/` |
-| Delete Specific Manufacturer |  `DELETE`   |  `http://localhost:8100/api/manufacturers/:id/` |
-
-**Body Required to Create A Manufacturer**
-
-{
-  "name": "Honda"
-}
-
-
-**Return Response: Creating A Manufacturer**
-
-{
-  "href": "/api/manufacturers/1/",
-  "id": 1,
-  "name": "Honda"
-}
-
-**Return Response: List Manufacturers**
-
 ```
+
+#### Vehicle Models
+
+| Action   | Method | Endpoint            |
+| -------- | ------ | ------------------- |
+| List     | GET    | `/api/models/`      |
+| Create   | POST   | `/api/models/`      |
+| Retrieve | GET    | `/api/models/{id}/` |
+| Update   | PUT    | `/api/models/{id}/` |
+| Delete   | DELETE | `/api/models/{id}/` |
+
+**Create Example**
+
+```json
 {
-	"manufacturers": [
-		{
-			"href": "/api/manufacturers/1/",
-			"id": 1,
-			"name": "Honda"
-		},
-		{
-			"href": "/api/manufacturers/2/",
-			"id": 2,
-			"name": "Nissan"
-		},
-		{
-			"href": "/api/manufacturers/3/",
-			"id": 3,
-			"name": "Toyota"
-		}
-	]
-}
-```
----
-
-***Vehicle Models***
-
-| Action         | Request  | Endpoint               |
-| :-----------  | :------- | :--------------------- |
-| List Vehicle Models    |  `GET`   |  `http://localhost:8100/api/models/`   |
-| Create Vehicle Model |  `POST`   |  `http://localhost:8100/api/models/`   |
-| GET Specific Vehicle Model |  `GET`   |  `http://localhost:8100/api/models/:id/` |
-| Update Specific Vehicle Model |  `PUT`   |  `http://localhost:8100/api/models/:id/` |
-| Delete Specific Vehicle Model |  `DELETE`   |  `http://localhost:8100/api/models/:id/` |
-
-**Body Required to Create A Vehicle Model**
-
-```
-{
-  "name": "S200",
-  "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/HondaS2000-004.jpg/1200px-HondaS2000-004.jpg",
+  "name": "S2000",
+  "picture_url": "https://upload.wikimedia.org/.../S2000.jpg",
   "manufacturer_id": 1
 }
 ```
 
-**Return Response: Creating A Vehicle Model**
+#### Automobiles
 
+| Action   | Method | Endpoint                  |
+| -------- | ------ | ------------------------- |
+| List     | GET    | `/api/automobiles/`       |
+| Create   | POST   | `/api/automobiles/`       |
+| Retrieve | GET    | `/api/automobiles/{vin}/` |
+| Update   | PUT    | `/api/automobiles/{vin}/` |
+| Delete   | DELETE | `/api/automobiles/{vin}/` |
 
-```
-{
-	"href": "/api/models/1/",
-	"id": 1,
-	"name": "S200",
-	"picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/HondaS2000-004.jpg/1200px-HondaS2000-004.jpg",
-	"manufacturer": {
-		"href": "/api/manufacturers/1/",
-		"id": 1,
-		"name": "Honda"
-	}
-}
-```
+**Create Example**
 
-**Return Response: List Vehicle Models**
-
-```
-{
-	"models": [
-		{
-			"href": "/api/models/1/",
-			"id": 1,
-			"name": "S200",
-			"picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/HondaS2000-004.jpg/1200px-HondaS2000-004.jpg",
-			"manufacturer": {
-				"href": "/api/manufacturers/1/",
-				"id": 1,
-				"name": "Honda"
-			}
-		},
-		{
-			"href": "/api/models/2/",
-			"id": 2,
-			"name": "R34",
-			"picture_url": "https://cars.usnews.com/images/article/202203/129043/001-_Tokumeigakarinoaoshima_-_wc_-_Tuned_Nissan_SKYLINE_GT-R_GF-BNR34_front_Cropped.jpg",
-			"manufacturer": {
-				"href": "/api/manufacturers/2/",
-				"id": 2,
-				"name": "Nissan"
-			}
-		},
-		{
-			"href": "/api/models/3/",
-			"id": 3,
-			"name": "Supra",
-			"picture_url": "https://cdn.motor1.com/images/mgl/PKZQL/s1/1997-toyota-supra-sold-for-176-000-at-auction.jpg",
-			"manufacturer": {
-				"href": "/api/manufacturers/3/",
-				"id": 3,
-				"name": "Toyota"
-			}
-		}
-	]
-}
-```
----
-
-***Automobiles***
-
-| Action         | Request  | Endpoint               |
-| :-----------     | :------- | :--------------------- |
-| List Automobiles |  `GET`   |  `http://localhost:8100/api/automobiles/`   |
-| Create Automobile |  `POST`   |  `http://localhost:8100/api/automobiles/`   |
-| Get Specific Automobile     | `GET`   | `http://localhost:8100/api/automobiles/:vin/`|
-| Update Specific Automobile |  `PUT`   |  `http://localhost:8100/api/automobiles/:vin/` |
-| Delete Specific Automobile |  `DELETE` |  `http://localhost:8100/api/automobiles/:vin/` |
-
-**Body Required to Create A Automobile**
-
+```json
 {
   "color": "White",
   "year": 2000,
   "vin": "JHMAP11432T2N3BH3",
   "model_id": 1
 }
-
-**Return Response: Creating A Automobile**
-
 ```
-{
-	"href": "/api/automobiles/JHMAP11432T2N3BH3/",
-	"id": 1,
-	"color": "White",
-	"year": 2000,
-	"vin": "JHMAP11432T2N3BH3",
-	"model": {
-		"href": "/api/models/1/",
-		"id": 1,
-		"name": "S200",
-		"picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/HondaS2000-004.jpg/1200px-HondaS2000-004.jpg",
-		"manufacturer": {
-			"href": "/api/manufacturers/1/",
-			"id": 1,
-			"name": "Honda"
-		}
-	},
-	"sold": false
-}
-```
-
-**Return Response: List Automobiles**
-
-```
-{
-		"autos": [
-			{
-				"href": "/api/automobiles/JHMAP11432T2N3BH3/",
-				"id": 1,
-				"color": "White",
-				"year": 2000,
-				"vin": "JHMAP11432T2N3BH3",
-				"model": {
-					"href": "/api/models/1/",
-					"id": 1,
-					"name": "S200",
-					"picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/HondaS2000-004.jpg/1200px-HondaS2000-004.jpg",
-					"manufacturer": {
-						"href": "/api/manufacturers/1/",
-						"id": 1,
-						"name": "Honda"
-					}
-				},
-				"sold": false
-			},
-			{
-				"href": "/api/automobiles/FDJ9011432T2N3BH3/",
-				"id": 2,
-				"color": "White",
-				"year": 1998,
-				"vin": "FDJ9011432T2N3BH3",
-				"model": {
-					"href": "/api/models/2/",
-					"id": 2,
-					"name": "R34",
-					"picture_url": "https://cars.usnews.com/images/article/202203/129043/001-_Tokumeigakarinoaoshima_-_wc_-_Tuned_Nissan_SKYLINE_GT-R_GF-BNR34_front_Cropped.jpg",
-					"manufacturer": {
-						"href": "/api/manufacturers/2/",
-						"id": 2,
-						"name": "Nissan"
-					}
-				},
-				"sold": false
-			},
-			{
-				"href": "/api/automobiles/FDJ9085032T2N3BH3/",
-				"id": 3,
-				"color": "Black",
-				"year": 1997,
-				"vin": "FDJ9085032T2N3BH3",
-				"model": {
-					"href": "/api/models/3/",
-					"id": 3,
-					"name": "Supra",
-					"picture_url": "https://cdn.motor1.com/images/mgl/PKZQL/s1/1997-toyota-supra-sold-for-176-000-at-auction.jpg",
-					"manufacturer": {
-						"href": "/api/manufacturers/3/",
-						"id": 3,
-						"name": "Toyota"
-					}
-				},
-				"sold": false
-			}
-		]
-	}
-```
----
-
-# Sales Microservice
-
-### Automobile Services
-
-**Overview**
-The Sales microservice handles the entire sales lifecycle, from tracking available automobiles to processing sales transactions. It plays a key role in maintaining accurate sales records and enforcing business rules related to car sales.
-
-**Dependencies**
-The Sales microservice relies on other microservices and entities to function effectively:
-Inventory Microservice: The Sales microservice depends on the Inventory microservice to access and verify the availability of automobiles for sale. It ensures that only valid and available cars can be sold.
-
-**Automobile Value Object** (AutomobileVO): The Sales microservice utilizes the AutomobileVO, which contains essential information about the automobiles. This includes the Vehicle Identification Number (VIN), sold status, and import source. The AutomobileVO is also updated automatically through the poller.py file, ensuring accurate and up-to-date information.
-Salesperson and Customer Services: The Sales microservice interacts with the Salesperson and Customer services to associate sales transactions with the respective salespersons and customers. The Salesperson service stores information such as First Name, Last Name, and Employee ID, while the Customer service stores details like First Name, Last Name, Address, and Phone Number.
-
-# **Functionality**
-
-The Sales microservice offers the following key functionalities:
-Sales Transaction Management: It manages the sales transactions, including creating new sales, updating existing sales records, and retrieving sales information.
-Business Rule Enforcement: The Sales microservice enforces specific business rules to maintain data integrity. For example, it ensures that a car cannot be sold if it is not listed in the inventory or has already been sold.
-AutomobileVO Updates: When a new sale is created, the Sales microservice automatically updates the corresponding AutomobileVO's VIN to reflect the sold status. This integration ensures accurate tracking of automobile sales within the Inventory microservice.
-
-![CarCar Excalidraw](images/excalidraw_CarCar.png)
-
-## API Reference
-
-Inventory
-
-Automobiles
-
-
-| Action         | Request  | Endpoint               |
-| :-----------     | :------- | :--------------------- |
-| List Automobiles |  `GET`   |  `8100/api/automobiles/`   |
-| Create Automobile |  `POST`   |  `8100/api/automobiles`   |
-| Get Automobile    | `PUT`   | `8100/api/automobiles/vin/`|
-| Update Automobile |  `PUT`   |  `8100/api/automobiles/vin/` |
-| Delete Automobile |  `DELETE` |  `8100/api/automobiles/vin/` |
-
-Manufacturers
-
-
-| Action         | Request  | Endpoint               |
-| :-----------     | :------- | :--------------------- |
-| List Manufacturers |  `GET`   |  `8100/api/manufacturers/`   |
-| Create Manufacturer |  `POST`   |  `8100/api/manufacturers`   |
-| Get Manufacturer |  `GET`   |  `8100/api/manufacturers/id/` |
-| Update Manufacturer |  `PUT` | `8100/api/manufacturers/id/` |
-| Delete Manufacturer |  `DELETE`   |  `8100/api/manufacturers/id/` |
-
-VehicleModels
-
-| Action         | Request  | Endpoint               |
-| :-----------  | :------- | :--------------------- |
-| List VehicleModels    |  `GET`   |  `8100/api/models/`   |
-| Create VehicleModel |  `POST`   |  `8100/api/models`   |
-| GET VehicleModel |  `GET`   |  `8100/api/models/id/` |
-| Update VehicleModel |  `PUT`   |  `8100/api/models/id/` |
-| Delete VehicleModel |  `DELETE`   |  `8100/api/models/id/` |
-
-Automobile Services
-
-Technicians
-
-
-| Action         | Request  | Endpoint               |
-| :-----------     | :------- | :--------------------- |
-| List Technicians |  `GET`   |  `/api/technicians/`   |
-| Create Technician |  `POST`   |  `/api/technicians/`   |
-| Delete Technician | `DELETE` | `/api/technicians/id/`|
-
-Appointments
-
-
-| Action         | Request  | Endpoint               |
-| :-----------     | :------- | :--------------------- |
-| List Appointments |  `GET`   |  `/api/appointments/`   |
-| Create Appointments |  `POST`   |  `/api/appointments`   |
-| Get Appointments |  `GET`   |  `/api/appointments/id/` |
-|Set Appointment status to canceled|`PUT`|`/api/appointments/id/cancel`|
-|Set Appointment status to finished|`PUT`|`/api/appointments/id/finish`|
-
-Automobile Sales
-
-
-Salespeople
-
-
-| Action       | Request  |Endpoint  |
-| :--------   | :------- | :-------------------------------- |
-| List salespeople | `GET` | `http://localhost:8090/api/salespeople/` |
-| Create salespoeple| `POST` |`http://localhost:8090/api/salespeople/` |
-| Delete salespeople| `DELETE` | `http://localhost:8090/api/salespeople/1/` |
-
-# ![List Salespeople](images\SalespeopleGet.png)
-
-![Create Salespeople](images\SalespeoplePost.png)
-![Delete Salespeople](images\SalespeopleDelete.png)
-
-| List salespeople | `GET` | `8090/api/salespeople/` |
-| Create salespoeple| `POST` |`809api/salespeople/` |
-| Delete salespeople| `DELETE` | `8090/api/salespeople/id/` |
-
-![List Salespeople](images/list_Salespeople.png)
-![Create Salespeople](images/create_Salesperson.png)
-![Delete Salespeople](images/delete_Salesperson.png)
-
-
-return Response:
-"Firsname", "LastName", "Employee ID"
-
-
-Customers
-
-
-| Action         | Request  | Endpoint               |
-| :-----------     | :------- | :--------------------- |
-| List customers |  `GET`   |  `http://localhost:8090/api/customers/`   |
-| Create customer |  `POST`   |  `http://localhost:8090/api/customers/`  |
-| Delete customer |  `DELETE`   |  `http://localhost:8090/api/customers/1/`   |
-
-# ![List Customers](images\CustomerGet.png)
-
-![Create Customer](images\CustomerPost.png)
-![Delete Customer](images\CustomerDelete.png)
-
-| List customers |  `GET`   |  `8090/api/automobiles/`   |
-| Create customer |  `POST`   |  `8090/api/automobiles`   |
-| Delete customer |  `DELETE`   |  `8090/api/automobiles/id/` |
-
-![List Customers](images/list_Customers.png)
-![Create Customer](images/create_Customer.png)
-![Delete Customer](images/delete_Customer.png)
-
-
-Return Response:
-"First Namne", "Last Name", "Phone Number", "Address"
-
-
-sales
-
-
-| Action         | Request  | Endpoint               |
-| :-----------     | :------- | :--------------------- |
-| List sales |  `GET`   |  `http://localhost:8090/api/sales/`   |
-| Record new sale |  `POST`   |  `http://localhost:8090/api/sales/`    |
-| Delete sale |  `DELETE`   |  `http://localhost:8090/api/sales/1/`  |
-
-![Show Sale](images/SalesGet.png)
-![Create Sales](images/SalesPost.png)
-![Delete Sale](images/SalesDelete.png)
-
-Return Response:
-Automobile VIN, Salesperson, Customer, Price
-
-
-# 
-
-# Service Microservice
-
-Kepps track of all service related things to the automobiles, it keeps track of current technicians inside our dealership and also all the service appointments wheter it being past or current. For each technician is assigned a employee id and id to keep track of which tecnician did what service. For each service we keep a record of when it was done, which technician was assigned, the reason, the current status, the vehicle vin, the customer name and their vip status. In order to keep track of VIP statuses we compare the vin inside our Appointment model with the AutomobileVO and if they match, meaning that vin is inside our dealerships inventory making them a VIP. The technician also has the option to finish and cancel an appointment for special occasions.
-
-## API References For Service
 
 ---
 
-***Technicians***
+### Sales API (localhost:8090)
 
-| Action         | Request  | Endpoint               |
-| :-----------     | :------- | :--------------------- |
-| List technicians |  `GET`   |  `http://localhost:8080/api/technicians/`   |
-| Create a technician |  `POST`   |  `http://localhost:8080/api/technicians/`   |
-| Delete a specific technician |  `DELETE`   |  `http://localhost:8080/api/technicians/:id/`   |
+#### Salespeople
 
-**Body Required to Create A Technician**
+| Action | Method | Endpoint                 |
+| ------ | ------ | ------------------------ |
+| List   | GET    | `/api/salespeople/`      |
+| Create | POST   | `/api/salespeople/`      |
+| Delete | DELETE | `/api/salespeople/{id}/` |
 
+**Create Example**
+
+```json
 {
-	"first_name": "Jorge",
-	"last_name": "Landeros",
-	"employee_id": "1"
-}
-
-
-**Return Response: Creating A Technician**
-
-{
-	"first_name": "Jorge",
-	"last_name": "Landeros",
-	"employee_id": "1",
-	"id": 1
-}
-
-
-**Return Response: List Technicians**
-
-```
-{
-	"technicians": [
-		{
-			"first_name": "Jorge",
-			"last_name": "Landeros",
-			"employee_id": "1",
-			"id": 1
-		},
-		{
-			"first_name": "John",
-			"last_name": "Doe",
-			"employee_id": "2",
-			"id": 2
-		},
-		{
-			"first_name": "Jane",
-			"last_name": "Doe",
-			"employee_id": "3",
-			"id": 3
-		}
-	]
+  "first_name": "Jane",
+  "last_name": "Doe",
+  "employee_id": 42
 }
 ```
 
-**Return Response: Deleting A Technician (id:1)**
+#### Customers
 
+| Action | Method | Endpoint               |
+| ------ | ------ | ---------------------- |
+| List   | GET    | `/api/customers/`      |
+| Create | POST   | `/api/customers/`      |
+| Delete | DELETE | `/api/customers/{id}/` |
+
+**Create Example**
+
+```json
 {
-	"deleted": true
+  "first_name": "John",
+  "last_name": "Smith",
+  "address": "123 Main St",
+  "phone_number": "555-1234"
 }
+```
+
+#### Sales Records
+
+| Action | Method | Endpoint           |
+| ------ | ------ | ------------------ |
+| List   | GET    | `/api/sales/`      |
+| Create | POST   | `/api/sales/`      |
+| Delete | DELETE | `/api/sales/{id}/` |
+
+**Create Example**
+
+```json
+{
+  "price": 25000,
+  "automobile": "JHMAP11432T2N3BH3",
+  "salesperson": 1,
+  "customer": 1
+}
+```
 
 ---
 
-***Appointments***
+### Service API (localhost:8080)
 
-| Action         | Request  | Endpoint               |
-| :-----------     | :------- | :--------------------- |
-| List Appointments |  `GET`   |  `http://localhost:8080/api/appointments/`   |
-| Create an Appointment |  `POST`   |  `http://localhost:8080/api/appointments/`   |
-| Delete an Appointment |  `DELETE`   |  `http://localhost:8080/api/appointments/:id/`   |
-| Finish Appointment |  `PUT`   |  `http://localhost:8080/api/appointments/:id/finish/`   |
-| Cancel Appointment |  `PUT`   |  `http://localhost:8080/api/appointments/:id/cancel/`   |
+#### Technicians
 
-**Body Required to Create an Appointment**
+| Action | Method | Endpoint                 |
+| ------ | ------ | ------------------------ |
+| List   | GET    | `/api/technicians/`      |
+| Create | POST   | `/api/technicians/`      |
+| Delete | DELETE | `/api/technicians/{id}/` |
 
+**Create Example**
+
+```json
 {
-	"date_time": "2026-06-06T23:29:43+00:00",
-	"reason": "Windshield",
-	"vin": "JHMAP11432T2N3BH3",
-	"customer": "John Doe",
-	"technician": "1"
-}
-
-
-**Return Response: Creating an Appointment**
-
-```
-{
-	"id": 1,
-	"is_vip": true,
-	"date_time": "2026-06-06T23:29:43+00:00",
-	"reason": "Windshield",
-	"status": "current",
-	"vin": "JHMAP11432T2N3BH3",
-	"customer": "John Doe",
-	"technician": {
-		"first_name": "Jorge",
-		"last_name": "Landeros",
-		"employee_id": "1",
-		"id": 1
-	}
+  "first_name": "Jorge",
+  "last_name": "Landeros",
+  "employee_id": 7
 }
 ```
 
+#### Appointments
 
+| Action | Method | Endpoint                         |
+| ------ | ------ | -------------------------------- |
+| List   | GET    | `/api/appointments/`             |
+| Create | POST   | `/api/appointments/`             |
+| Cancel | PUT    | `/api/appointments/{id}/cancel/` |
+| Finish | PUT    | `/api/appointments/{id}/finish/` |
 
+**Create Example**
 
-
-**Return Response: List Appointments**
-
-```
+```json
 {
-	"appointments": [
-		{
-			"id": 1,
-			"is_vip": true,
-			"date_time": "2026-06-06T23:29:43+00:00",
-			"reason": "Windshield",
-			"status": "current",
-			"vin": "JHMAP11432T2N3BH3",
-			"customer": "John Doe",
-			"technician": {
-				"first_name": "Jorge",
-				"last_name": "Landeros",
-				"employee_id": "1",
-				"id": 1
-			}
-		},
-		{
-			"id": 2,
-			"is_vip": false,
-			"date_time": "2026-03-02T22:12:55+00:00",
-			"reason": "Engine Failures",
-			"status": "current",
-			"vin": "JHMAP11432T43RF34",
-			"customer": "Alex Grace",
-			"technician": {
-				"first_name": "John",
-				"last_name": "Doe",
-				"employee_id": "2",
-				"id": 2
-			}
-		},
-		{
-			"id": 3,
-			"is_vip": true,
-			"date_time": "2026-11-08T05:30:22+00:00",
-			"reason": "Tire Rotation",
-			"status": "current",
-			"vin": "FDJ9085032T2N3BH3",
-			"customer": "Tom Wood",
-			"technician": {
-				"first_name": "Jane",
-				"last_name": "Doe",
-				"employee_id": "3",
-				"id": 3
-			}
-		}
-	]
+  "date_time": "2025-05-10T14:30:00",
+  "reason": "Oil change",
+  "vin": "JHMAP11432T2N3BH3",
+  "customer": "John Smith",
+  "technician": 7
 }
 ```
 
-**Return Response: Deleting an Appointment (id:1)**
+---
 
-{
-	"deleted": true
-}
+## Frontend Routes
+
+| Section   | URL                            | React Component         |
+| --------- | ------------------------------ | ----------------------- |
+| Inventory | `/inventory/manufacturers`     | `ManufacturerList`      |
+|           | `/inventory/manufacturers/new` | `ManufacturerForm`      |
+|           | `/inventory/models`            | `ModelsList`            |
+|           | `/inventory/models/new`        | `ModelForm`             |
+|           | `/inventory/automobiles`       | `AutosList`             |
+|           | `/inventory/automobiles/new`   | `AutoForm`              |
+| Sales     | `/sales/salespeople`           | `Salespeople`           |
+|           | `/sales/salesperson/new`       | `SalespersonCreateForm` |
+|           | `/sales/customers`             | `CustomerList`          |
+|           | `/sales/customer/new`          | `CustomerForm`          |
+|           | `/sales/sales`                 | `SalesList`             |
+|           | `/sales/sales/new`             | `SalesForm`             |
+| Service   | `/service/technician`          | `TechnicianList`        |
+|           | `/service/technician/new`      | `TechnicianForm`        |
+|           | `/service/appointment`         | `AppointmentList`       |
+|           | `/service/appointment/new`     | `AppointmentForm`       |
+|           | `/service/history`             | `ServiceHistory`        |
+
+---
 
 
-**Body Required to Finish Appointment (id:1)**
+### Demo Video
+[Watch Demo](https://github.com/Rorschach3/Project-Beta/assets/42761673/6b6eb9e6-c9d0-4799-a233-65bb644decbc)
 
-{
-	"status": "finished"
-}
-
-
-**Return Response: Finishing an Appointment**
-
-```
-{
-	"id": 1,
-	"is_vip": true,
-	"date_time": "2026-06-06T23:29:43+00:00",
-	"reason": "Windshield",
-	"status": "finished",
-	"vin": "JHMAP11432T2N3BH3",
-	"customer": "John Doe",
-	"technician": {
-		"first_name": "Jorge",
-		"last_name": "Landeros",
-		"employee_id": "1",
-		"id": 1
-	}
-}
-```
+For more details or troubleshooting, refer to the project’s source code and documentation. Enjoy using CarCar!
